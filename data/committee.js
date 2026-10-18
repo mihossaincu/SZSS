@@ -9,7 +9,7 @@ export const committeeTop = [
     role: 'সভাপতি (ভারপ্রাপ্ত)',
     roleEn: 'President (In-charge)',
     photo: 'president.jpg',
-    fallback: 'https://placehold.co/340x380/006a4e/ffffff?text=President',
+    fallback: 'https://cu.ac.bd/assets/image/faculty_staff_users/662_NMLM88K8KU.jpg',
     roleClass: '',
   },
   {
@@ -17,7 +17,7 @@ export const committeeTop = [
     role: 'সাধারণ সম্পাদক',
     roleEn: 'General Secretary',
     photo: 'secretary.jpg',
-    fallback: 'https://placehold.co/340x380/f42a41/ffffff?text=Secretary',
+    fallback: 'https://scontent.fcgp3-2.fna.fbcdn.net/v/t39.30808-6/548296479_2508317136234373_7934846951624383816_n.jpg?stp=dst-jpg_tt6&cstp=mx450x459&ctp=s450x459&_nc_cat=108&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeH-y-hMNFcToSzWE7zko15QJblKOBTzbVoluUo4FPNtWlS8eBWmwoXu0uyOgKo9TK8_KrzpDGArVvWHncY2NCC5&_nc_ohc=CVy4EdZi_tcQ7kNvwEbD4u9&_nc_oc=AdrHesKrEzBZRXAox8i-lHqUIEbYDd4OrnqtvDX8XWfe8adC-jOHCiy1F2QGNzG4ELY&_nc_zt=23&_nc_ht=scontent.fcgp3-2.fna&_nc_gid=xUACFL85Z5SgEqSzaj_Cuw&_nc_ss=7b2a8&oh=00_AQOijsAHXCCYDb-aJh-c6GNAUdejNc_ltSWGDOB1LgN2UQ&oe=6ADA9767',
     roleClass: 'member__role--gs',
   },
 ];
@@ -28,7 +28,7 @@ export const committeeList = [
   { pos: 'সহ-সভাপতি', name: 'প্রফেসর ড. মো. মনজুরুল কিবরিয়া', dept: 'প্রাণিবিদ্যা বিভাগ', mobile: '০১৯১১-১৬১৯৯৪' },
   { pos: 'সহ-সভাপতি', name: 'প্রফেসর ড. আ. ন. ম. আবদুল মাবুদ', dept: 'ইসলামিক স্টাডিজ বিভাগ', mobile: '০১৭১১-১৩৯৪৫৮' },
   { pos: 'সহ-সভাপতি', name: 'প্রফেসর ড. মোহাম্মদ বাহারুল কাইয়ুম', dept: 'রাজনীতি বিজ্ঞান বিভাগ', mobile: '০১৭১১-১৮১৮৩৭' },
-  { pos: 'সহ-সভাপতি', name: 'প্রফেসর মোহাম্মদ মঞ্জুর মোর্শেদ', dept: 'পরিসংখ্যান বিভাগ', mobile: '০১৭১১-৬৫২৪৪৫' },
+  { pos: 'সহ-সভাপতি', name: 'প্রফেসর মোহাম্মদ মঞ্জুর মোর্শেদ', dept: 'পরিসংখ্যান বিভাগ', mobile: '০১৭১২-৫৫২৬৬২' },
   { pos: 'সহ-সভাপতি', name: 'জনাব মো. নুরুল ইসলাম', dept: 'মনোবিজ্ঞান বিভাগ', mobile: '০১৭১১-৬০১৭০৫' },
   { pos: 'সহ-সভাপতি', name: 'জনাব মুহাম্মদ যাকারিয়া', dept: 'যোগাযোগ ও সাংবাদিকতা বিভাগ', mobile: '০১৮১৯-৬২১৮৮৬' },
   { pos: 'সহ-সভাপতি', name: 'জনাব আবু তাহের মাষ্টার', dept: 'জীব বিজ্ঞান অনুষদ', mobile: '০১৮১৯-৩৭১৭৯৪' },
