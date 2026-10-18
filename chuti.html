@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ছুটির তালিকা ২০২৬ — চট্টগ্রাম বিশ্ববিদ্যালয়</title>
+<meta name="description" content="চট্টগ্রাম বিশ্ববিদ্যালয়ের ক্লাস ও অফিস ছুটির তালিকা ২০২৬। সৌজন্যে: মোঃ ইমাম হোসাইন, দর্শন বিভাগ।">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#0d6b4f;
+    --green-dark:#064434;
+    --green-light:#e8f5ef;
+    --green-soft:#f0f9f5;
+    --gold:#f0b429;
+    --gold-soft:#fff9e6;
+    --text:#1a2b3c;
+    --text-2:#4a5c6e;
+    --border:#e1e8ee;
+    --bg:#f4f7fa;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{font-size:17px;}
+  body{
+    font-family:'Noto Sans Bengali', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.75;
+    padding:20px 12px 30px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:820px;margin:0 auto;}
+  .back{
+    display:inline-flex;align-items:center;gap:6px;
+    color:var(--text-2);text-decoration:none;
+    font-size:.9rem;font-weight:500;
+    margin-bottom:16px;padding:6px 12px;border-radius:8px;
+    transition:background .2s;
+  }
+  .back:hover{background:var(--green-light);color:var(--green);}
+  .card{
+    background:#fff;border-radius:16px;
+    box-shadow:0 4px 20px rgba(10,40,70,.06);
+    border:1px solid var(--border);overflow:hidden;
+  }
+  .head{
+    padding:32px 24px 26px;text-align:center;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,#fafdfb 0%,#ffffff 100%);
+  }
+  .head-icon{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:56px;height:56px;border-radius:50%;
+    background:var(--green-light);font-size:26px;margin-bottom:12px;
+  }
+  .head h1{
+    font-size:1.5rem;font-weight:700;
+    color:var(--green-dark);letter-spacing:-.2px;line-height:1.4;
+  }
+  .head .sub{margin-top:6px;font-size:.95rem;color:var(--text-2);}
+  .head .badge{
+    display:inline-block;margin-top:14px;
+    background:var(--green);color:#fff;
+    font-size:.82rem;font-weight:600;
+    padding:5px 18px;border-radius:50px;letter-spacing:1.5px;
+  }
+  .actions{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;
+    padding:20px 24px;background:var(--green-soft);
+    border-bottom:1px solid var(--border);
+  }
+  .act-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 16px;border:none;border-radius:10px;
+    font-family:inherit;font-size:.92rem;font-weight:600;
+    cursor:pointer;transition:transform .15s, box-shadow .15s;
+    color:#fff;
+  }
+  .act-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.12);}
+  .act-btn:active{transform:translateY(0);}
+  .btn-save{background:var(--green);}
+  .btn-print{background:var(--green-dark);}
+  .hint{
+    display:flex;align-items:flex-start;gap:10px;
+    margin:20px 24px 0;padding:12px 16px;
+    background:var(--gold-soft);border-left:4px solid var(--gold);
+    border-radius:8px;font-size:.88rem;color:#6b4a00;line-height:1.6;
+  }
+  .hint-ico{font-size:1.1rem;line-height:1.4;flex-shrink:0;}
+  .table-wrap{padding:20px 24px;}
+  table{width:100%;border-collapse:collapse;font-size:.94rem;}
+  thead th{
+    background:var(--green-light);color:var(--green-dark);
+    font-weight:700;padding:12px 14px;text-align:left;
+    font-size:.86rem;border-bottom:2px solid #cfe3da;letter-spacing:.3px;
+  }
+  thead th:first-child{border-radius:8px 0 0 0;}
+  thead th:last-child{border-radius:0 8px 0 0;}
+  .month-row td{
+    background:#f5f9f7;color:var(--green-dark);
+    font-weight:700;font-size:.82rem;letter-spacing:1.2px;
+    text-transform:uppercase;padding:9px 14px;
+    border-top:1px solid var(--border);
+  }
+  tbody td{
+    padding:13px 14px;border-bottom:1px solid var(--border);
+    vertical-align:middle;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:not(.month-row):hover{background:var(--green-soft);}
+  .holiday-name{font-weight:500;}
+  .holiday-date{
+    font-weight:600;color:var(--green);
+    white-space:nowrap;font-size:.9rem;
+  }
+  .tag{
+    display:inline-block;padding:4px 11px;border-radius:20px;
+    font-size:.72rem;font-weight:700;white-space:nowrap;letter-spacing:.2px;
+  }
+  .tag-both{background:#e3f6ec;color:#0d6b45;}
+  .tag-class{background:#e0edff;color:#1a4f96;}
+  .credit{
+    background:var(--green-dark);color:#dff3ea;
+    padding:24px;text-align:center;
+  }
+  .credit-label{
+    font-size:.75rem;letter-spacing:2px;
+    text-transform:uppercase;opacity:.7;margin-bottom:6px;
+  }
+  .credit-name{font-size:1.15rem;font-weight:700;color:#fff;letter-spacing:.3px;}
+  .credit-dept{font-size:.88rem;margin-top:4px;opacity:.9;}
+  .credit-phone{
+    display:inline-block;margin-top:12px;
+    background:var(--gold);color:var(--green-dark);
+    font-weight:700;font-size:.9rem;
+    padding:6px 20px;border-radius:50px;letter-spacing:.5px;
+  }
+  .credit-note{
+    margin-top:16px;padding-top:16px;
+    border-top:1px solid rgba(255,255,255,.15);
+    font-size:.76rem;opacity:.75;line-height:1.7;
+  }
+  .credit-note a{color:#ffd54f;text-decoration:none;}
+  .toast{
+    position:fixed;left:50%;bottom:26px;
+    transform:translate(-50%,90px);
+    background:var(--green-dark);color:#fff;
+    padding:12px 24px;border-radius:50px;
+    font-size:.88rem;font-weight:500;
+    box-shadow:0 10px 26px rgba(0,0,0,.22);
+    opacity:0;transition:.35s;z-index:99;
+    pointer-events:none;white-space:nowrap;
+  }
+  .toast.show{transform:translate(-50%,0);opacity:1;}
+  @media print{
+    body{background:#fff;padding:0;font-size:13px;}
+    .back,.actions,.hint,.toast{display:none !important;}
+    .page{max-width:100%;}
+    .card{box-shadow:none;border:none;border-radius:0;}
+    .head{padding:20px;}
+    .head h1{font-size:18px;}
+    .credit{background:#064434 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    thead th,.tag,.credit-phone{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    tbody td,thead th{padding:8px 10px;}
+  }
+  @media (max-width:600px){
+    html{font-size:16px;}
+    .head{padding:24px 18px 20px;}
+    .head h1{font-size:1.2rem;}
+    .actions{padding:16px 18px;grid-template-columns:1fr;}
+    .hint{margin:16px 18px 0;padding:10px 12px;font-size:.82rem;}
+    .table-wrap{padding:16px 18px;}
+    thead th,tbody td{padding:10px 8px;font-size:.82rem;}
+    .holiday-date{font-size:.8rem;}
+    .tag{font-size:.68rem;padding:3px 8px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <a href="./" class="back">← মূল পাতায় ফিরে যান</a>
+
+  <div class="card" id="capture">
+
+    <div class="head">
+      <div class="head-icon">🎓</div>
+      <h1>চট্টগ্রাম বিশ্ববিদ্যালয়</h1>
+      <div class="sub">ক্লাস ও অফিস ছুটির তালিকা</div>
+      <div class="badge">২০২৬</div>
+    </div>
+
+    <div class="actions">
+      <button class="act-btn btn-save" onclick="downloadImage()">⬇️ ছবি হিসেবে সেভ</button>
+      <button class="act-btn btn-print" onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
+    </div>
+
+    <div class="hint">
+      <span class="hint-ico">📌</span>
+      <span>এই তালিকা সংরক্ষণ করে রাখুন। উপরের বাটন থেকে ছবি বা PDF আকারে সেভ করতে পারবেন — যেকোনো সময় দেখতে পাবেন।</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ছুটির নাম</th>
+            <th>তারিখ</th>
+            <th>প্রযোজ্য</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="month-row"><td colspan="3">ফেব্রুয়ারি ২০২৬</td></tr>
+          <tr>
+            <td class="holiday-name">শব-ই-বরাত</td>
+            <td class="holiday-date">০৪ ফেব্রুয়ারি</td>
+            <td><span class="tag tag-both">ক্লাস ও অফিস</span></td>
+          </tr>
+
+          <tr class="month-row"><td colspan="3">মার্চ ২০২৬</td></tr>
+          <tr>
+            <td class="holiday-name">পবিত্র রমজান, শব-ই-কদর ও ঈদ-উল-ফিতর</td>
+            <td class="holiday-date">০৮ – ২৫ মার্চ</td>
+            <td><span class="tag tag-class">শুধু ক্লাস</span></td>
+          </tr>
+          <tr>
+            <td class="holiday-name">স্বাধীনতা ও জাতীয় দিবস</td>
+            <td class="holiday-date">২৬ মার্চ</td>
+            <td><span class="tag tag-both">ক্লাস ও অফিস</span></td>
+          </tr>
+
+          <tr class="month-row"><td colspan="3">এপ্রিল ২০২৬</td></tr>
+          <tr>
+            <td class="holiday-name">পহেলা বৈশাখ (বাংলা নববর্ষ ১৪৩৩)</td>
+            <td class="holiday-date">১৪ এপ্রিল</td>
+            <td><span class="tag tag-both">ক্লাস ও অফিস</span></td>
+          </tr>
+
+          <tr class="month-row"><td colspan="3">মে – জুন ২০২৬</td></tr>
+          <tr>
+            <td class="holiday-name">পবিত্র ঈদ-উল-আজহা ও গ্রীষ্মকালীন ছুটি</td>
+            <td class="holiday-date">২৪ মে – ০৪ জুন</td>
+            <td><span class="tag tag-both">ক্লাস ও অফিস</span></td>
+          </tr>
+
+          <tr class="month-row"><td colspan="3">আগস্ট ২০২৬</td></tr>
+          <tr>
+            <td class="holiday-name">জুলাই গণঅভ্যুত্থান দিবস</td>
+            <td class="holiday-date">০৫ আগস্ট</td>
+            <td><span class="tag tag-both">ক্লাস ও অফিস</span></td>
+          </tr>
+          <tr>
+            <td class="holiday-name">আখেরি চাহার সোম্বা</td>
+            <td class="holiday-date">১২ আগস্ট</td>
+            <td><span class="tag tag-both">ক্লাস ও অফিস</span></td>
+          </tr>
+          <tr>
+            <td class="holiday-name">ঈদ-ই-মিলাদুন্নবী (সা.)</td>
+            <td class="holiday-date">২৬ আগস্ট</td>
+            <td><span class="tag tag-both">ক্লাস ও অফিস</span></td>
+          </tr>
+
+          <tr class="month-row"><td colspan="3">সেপ্টেম্বর ২০২৬</td></tr>
+          <tr>
+            <td class="holiday-name">ফাতেহা-ই-ইয়াজদাহম</td>
+            <td class="holiday-date">২৩ সেপ্টেম্বর</td>
+            <td><span class="tag tag-both">ক্লাস ও অফিস</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="credit">
+      <div class="credit-label">সৌজন্যে</div>
+      <div class="credit-name">মোঃ ইমাম হোসাইন</div>
+      <div class="credit-dept">দর্শন বিভাগ, চট্টগ্রাম বিশ্ববিদ্যালয়</div>
+      <div class="credit-phone">📞 ০১৮১৫৬৪৩১৫৯</div>
+      <div class="credit-note">
+        তথ্যসূত্র: চট্টগ্রাম বিশ্ববিদ্যালয় প্রশাসনিক বিজ্ঞপ্তি ও সংবাদ প্রতিবেদন।<br>
+        চূড়ান্ত তালিকার জন্য <a href="https://web.cu.ac.bd" target="_blank" rel="noopener">web.cu.ac.bd</a> দেখুন।
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  function toast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._t);
+    t._t = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+  }
+  function downloadImage(){
+    if(typeof html2canvas === 'undefined'){
+      toast('ইন্টারনেট সংযোগ দিন, তারপর আবার চেষ্টা করুন');
+      return;
+    }
+    toast('ছবি তৈরি হচ্ছে...');
+    html2canvas(document.getElementById('capture'), {
+      scale: 2,
+      backgroundColor: '#ffffff',
+      useCORS: true
+    }).then(function(canvas){
+      var a = document.createElement('a');
+      a.download = 'CU_Chuti_2026_Imam_Hossain.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+      toast('✅ ছবি সেভ হয়েছে');
+    }).catch(function(){
+      toast('দুঃখিত, ছবি তৈরি করা যায়নি');
+    });
+  }
+</script>
+</body>
+</html>
