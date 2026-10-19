@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CU Transport Fare Assistant — শহীদ জিয়া স্মৃতি সংসদ</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #059669;
+  --primary-hover: #047857;
+  --primary-light: #d1fae5;
+  --bg-body: #f3f4f6;
+  --surface: #ffffff;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --radius-card: 20px;
+  --radius-input: 12px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 15px rgba(5, 150, 105, 0.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Hind Siliguri', sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; padding-bottom: 40px; }
+
+/* Header */
+.cu-header { background: linear-gradient(135deg, #064e3b 0%, #059669 100%); color: white; padding: 20px 16px 40px; border-radius: 0 0 30px 30px; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
+.cu-header::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none; }
+.cu-header-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+.cu-brand { display: flex; align-items: center; gap: 12px; }
+.cu-brand-icon { font-size: 2rem; background: rgba(255,255,255,0.2); backdrop-filter: blur(5px); border-radius: 14px; padding: 8px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); }
+.cu-brand-text h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; }
+.cu-brand-text p { font-size: 0.85rem; color: #a7f3d0; }
+.cu-badge { background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; gap: 6px; }
+.lang-toggle { background: #fff; color: var(--primary); border: none; padding: 6px 12px; border-radius: 20px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: var(--shadow-sm); transition: transform 0.2s; }
+.lang-toggle:hover { transform: scale(1.05); }
+@media (max-width: 640px) { .cu-header-content { flex-direction: column; text-align: center; gap: 12px; } .cu-badge { display: none; } .cu-header { padding-bottom: 30px; } }
+
+/* Tabs Container */
+.cu-tabs-wrapper { max-width: 1000px; margin: -24px auto 20px; padding: 0 16px; position: relative; z-index: 10; display: flex; justify-content: center; }
+.cu-tabs { background: var(--surface); padding: 6px; border-radius: 30px; display: flex; gap: 4px; box-shadow: var(--shadow-lg); width: 100%; max-width: 400px; }
+.cu-tab { flex: 1; padding: 10px 16px; border: none; background: transparent; border-radius: 24px; font-family: inherit; font-weight: 600; font-size: 0.95rem; color: var(--text-muted); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.cu-tab.active { background: var(--primary); color: white; box-shadow: var(--shadow-sm); }
+
+/* Main Layout */
+.cu-container { max-width: 1000px; margin: 0 auto; padding: 0 16px; display: none; }
+.cu-container.active { display: block; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Grid */
+.cu-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; align-items: start; }
+@media (max-width: 768px) { .cu-grid { grid-template-columns: 1fr; } }
+
+/* Cards */
+.cu-card { background: var(--surface); border-radius: var(--radius-card); padding: 24px; box-shadow: var(--shadow-md); border: 1px solid rgba(255,255,255,0.5); }
+.cu-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.cu-card-title { font-size: 1.15rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
+.cu-tag { background: var(--primary-light); color: var(--primary-hover); font-size: 0.75rem; padding: 4px 10px; border-radius: 8px; font-weight: 700; }
+
+/* Form Fields */
+.cu-field { margin-bottom: 18px; }
+.cu-field label { display: block; font-weight: 600; color: var(--text-main); margin-bottom: 6px; font-size: 0.85rem; }
+.cu-field select, .cu-field input { width: 100%; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-input); font-size: 0.95rem; font-family: inherit; background: #f9fafb; color: var(--text-main); transition: all 0.2s; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; }
+.cu-field select:focus, .cu-field input:focus { outline: none; border-color: var(--primary); background-color: white; box-shadow: 0 0 0 3px var(--primary-light); }
+.cu-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 480px) { .cu-row { grid-template-columns: 1fr; } }
+
+/* Counter */
+.cu-counter { display: flex; align-items: center; border: 1.5px solid var(--border); border-radius: var(--radius-input); overflow: hidden; background: #f9fafb; }
+.cu-counter button { width: 48px; height: 50px; border: none; background: transparent; font-size: 1.4rem; color: var(--primary-hover); cursor: pointer; transition: background 0.2s; font-weight: 600; }
+.cu-counter button:hover { background: #e5e7eb; }
+.cu-counter input { flex: 1; text-align: center; border: none; background: transparent; font-size: 1.1rem; font-weight: 700; padding: 0; border-radius: 0; color: var(--text-main); }
+.cu-counter input:focus { box-shadow: none; }
+
+/* Notice */
+.cu-notice { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 14px 16px; border-radius: 8px; font-size: 0.85rem; color: #92400e; margin-top: 24px; }
+.cu-notice strong { display: block; margin-bottom: 4px; color: #b45309; }
+.cu-notice ul { padding-left: 18px; margin-top: 6px; }
+.cu-notice li { margin-bottom: 4px; line-height: 1.5; }
+
+/* Result Ticket Card */
+.cu-ticket { background: linear-gradient(135deg, #064e3b 0%, #059669 100%); color: white; border-radius: var(--radius-card); padding: 24px; box-shadow: var(--shadow-glow); position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+.cu-ticket::before, .cu-ticket::after { content: ''; position: absolute; width: 20px; height: 20px; background: var(--bg-body); border-radius: 50%; top: 50%; transform: translateY(-50%); }
+.cu-ticket::before { left: -10px; }
+.cu-ticket::after { right: -10px; }
+.cu-ticket-header { text-align: center; border-bottom: 2px dashed rgba(255,255,255,0.2); padding-bottom: 16px; margin-bottom: 16px; }
+.cu-ticket-header h3 { font-size: 1.1rem; font-weight: 600; color: #a7f3d0; margin-bottom: 4px; }
+.cu-ticket-header p { font-size: 1rem; font-weight: 700; }
+.cu-res-item { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 12px; padding: 16px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.2s; }
+.cu-res-item:hover { transform: scale(1.02); }
+.cu-res-item:last-child { margin-bottom: 0; }
+.cu-res-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.cu-res-vehicle { font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 6px; }
+.cu-res-price { font-size: 1.8rem; font-weight: 800; color: #fcd34d; line-height: 1; display: flex; align-items: baseline; gap: 2px; }
+.cu-res-price small { font-size: 0.9rem; font-weight: 600; color: white; }
+.cu-res-details { font-size: 0.75rem; color: #a7f3d0; display: flex; flex-direction: column; gap: 2px; margin-top: 4px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 6px; }
+.cu-res-details span { display: flex; justify-content: space-between; }
+.cu-via-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; margin-left: 6px; color: #fcd34d; }
+
+/* Report Button */
+.cu-btn-report { width: 100%; margin-top: 16px; padding: 14px; border: none; border-radius: 12px; background: linear-gradient(135deg, var(--danger), var(--danger-hover)); color: white; font-weight: 700; font-size: 1rem; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); }
+.cu-btn-report:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(239, 68, 68, 0.5); }
+.cu-btn-report:active { transform: translateY(0); }
+
+.cu-approved-badge { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; font-size: 0.8rem; color: #a7f3d0; font-weight: 600; }
+
+/* Search Table */
+.cu-search-wrap { position: relative; margin-bottom: 16px; }
+.cu-search-wrap input { padding-left: 44px; border-radius: 30px; }
+.cu-search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: var(--text-muted); }
+.cu-table-wrap { overflow: auto; border-radius: var(--radius-input); border: 1px solid var(--border); max-height: 600px; }
+.cu-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.cu-table thead { position: sticky; top: 0; background: #f9fafb; z-index: 10; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.cu-table th { padding: 14px 16px; text-align: left; font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; }
+.cu-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-main); }
+.cu-table tr:nth-child(even) td { background: #f9fafb; }
+.cu-table tr:hover td { background: var(--primary-light); }
+.cu-fare-cell { font-weight: 800; color: var(--primary-hover); text-align: right; }
+.cu-veh-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 6px; font-weight: 600; font-size: 0.8rem; }
+.cu-veh-rickshaw { background: #ede9fe; color: #6d28d9; }
+.cu-veh-ecar { background: #cffafe; color: #0e7490; }
+.cu-veh-cng { background: #d1fae5; color: #047857; }
+
+/* Footer */
+.cu-footer { text-align: center; padding: 30px 16px; margin-top: 40px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); line-height: 1.8; }
+.cu-footer strong { color: var(--text-main); display: block; margin-bottom: 4px; font-size: 0.95rem; }
+
+/* ═══ Modal & Form ═══ */
+.cu-modal { display: none; position: fixed; inset: 0; background: rgba(17,24,39,0.7); backdrop-filter: blur(4px); z-index: 99999; padding: 16px; overflow-y: auto; align-items: center; justify-content: center; }
+.cu-modal.active { display: flex; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.cu-modal-box { background: var(--surface); border-radius: var(--radius-card); max-width: 520px; width: 100%; margin: auto; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: slideUp 0.3s ease; overflow: hidden; }
+.cu-modal-head { padding: 20px 24px; background: #f9fafb; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.cu-modal-head h3 { margin: 0; font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+.cu-modal-close { background: #e5e7eb; border: none; color: var(--text-main); width: 32px; height: 32px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.cu-modal-close:hover { background: #d1d5db; }
+.cu-modal-body { padding: 24px; }
+.cu-note { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 16px; border-radius: 8px; font-size: 0.85rem; color: #1e40af; margin-bottom: 20px; }
+.cu-submit { width: 100%; padding: 14px; border: none; border-radius: var(--radius-input); background: var(--primary); color: white; font-weight: 700; font-size: 1rem; font-family: inherit; cursor: pointer; transition: background 0.2s; margin-top: 12px; }
+.cu-submit:hover { background: var(--primary-hover); }
+.cu-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.cu-status { padding: 12px; border-radius: 10px; margin-top: 12px; text-align: center; font-weight: 600; font-size: 0.9rem; display: none; }
+.cu-status.success { background: #d1fae5; color: #065f46; display: block; }
+.cu-status.error { background: #fee2e2; color: #991b1b; display: block; }
+.cu-status.loading { background: #dbeafe; color: #1e40af; display: block; }
+.cu-hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; display: block; }
+body.modal-open { overflow: hidden; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="cu-header">
+  <div class="cu-header-content">
+    <div class="cu-brand">
+      <div class="cu-brand-icon">🚌</div>
+      <div class="cu-brand-text">
+        <h1 data-i18n="title">CU Ride Fare Calculator | ১নং গেট হতে চ.বি. অভ্যন্তরীণ ভাড়া </h1>
+        <p data-i18n="subtitle">শহীদ জিয়া স্মৃতি সংসদ ভাড়া ক্যালকুলেটর</p>
+      </div>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <button class="lang-toggle" id="langBtn" onclick="toggleLang()">EN</button>
+      <div class="cu-badge">✓ <span data-i18n="badge">অফিসিয়াল তালিকা</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- Tabs -->
+<div class="cu-tabs-wrapper">
+  <div class="cu-tabs">
+    <button class="cu-tab active" onclick="switchTab('calc')" id="tab-calc"><span data-i18n="tabCalc">🧮 ক্যালকুলেটর</span></button>
+    <button class="cu-tab" onclick="switchTab('search')" id="tab-search"><span data-i18n="tabSearch">📋 ভাড়া তালিকা</span></button>
+  </div>
+</div>
+
+<!-- Calculator Tab -->
+<main class="cu-container active" id="content-calc">
+  <div class="cu-grid">
+    
+    <!-- Input Card -->
+    <div class="cu-card">
+      <div class="cu-card-header">
+        <h2 class="cu-card-title" data-i18n="routeSelect">📍 রুট নির্বাচন</h2>
+        <span class="cu-tag">Live</span>
+      </div>
+      
+      <div class="cu-field">
+        <label data-i18n="origin">কোথা থেকে (Origin)</label>
+        <select id="cuOrigin"><option value="" data-i18n="selectOpt">-- নির্বাচন করুন --</option></select>
+      </div>
+      
+      <div class="cu-field">
+        <label data-i18n="dest">কোথায় (Destination)</label>
+        <select id="cuDest"><option value="" data-i18n="selectOpt">-- নির্বাচন করুন --</option></select>
+      </div>
+
+      <div class="cu-row">
+        <div class="cu-field">
+          <label data-i18n="pax">যাত্রী সংখ্যা</label>
+          <div class="cu-counter">
+            <button type="button" onclick="updatePax(-1)">−</button>
+            <input type="number" id="cuPax" value="1" min="1" max="6" readonly>
+            <button type="button" onclick="updatePax(1)">+</button>
+          </div>
+        </div>
+        <div class="cu-field">
+          <label data-i18n="vehicle">যানবাহন</label>
+          <select id="cuVehicleFilter">
+            <option value="all" data-i18n="allVeh">সব যানবাহন</option>
+            <option value="Rickshaw" data-i18n="rickshaw">🛺 রিকশা</option>
+            <option value="E-Car" data-i18n="ecar">🚗 ই-কার</option>
+            <option value="CNG" data-i18n="cng">🛵 সিএনজি</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="cu-notice">
+        <strong data-i18n="noticeTitle">⚠️ ভাড়া নিয়মাবলী (রিকশা):</strong>
+        <ul>
+          <li data-i18n="notice1">১ বা ২ জন যাত্রীর জন্য মূল তালিকাভুক্ত ভাড়া প্রযোজ্য।</li>
+          <li data-i18n="notice2">২ জনের বেশি হলে: ২৫ টাকা পর্যন্ত ভাড়ায় প্রতি অতিরিক্ত ব্যক্তিতে +৫ টাকা।</li>
+          <li data-i18n="notice3">২৫ টাকার বেশি ভাড়ায় প্রতি অতিরিক্ত ব্যক্তিতে +১০ টাকা।</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Result Card -->
+    <div class="cu-ticket">
+      <div class="cu-ticket-header">
+        <h3 id="cuResTitle" data-i18n="fareDetails">ভাড়ার বিবরণ</h3>
+        <p id="cuResRoute" style="font-size: 0.9rem; color: rgba(255,255,255,0.8);" data-i18n="selectRoute">রুট নির্বাচন করুন</p>
+      </div>
+      
+      <div id="cuResContent">
+        <p style="text-align:center;color:#a7f3d0;padding:20px 0;" data-i18n="selectPrompt">অনুগ্রহ করে গন্তব্য নির্বাচন করুন</p>
+      </div>
+      
+      <button class="cu-btn-report" id="cuReportBtn" style="display: none;" onclick="openReport()">
+        ⚠️ <span data-i18n="reportBtn">ভাড়া রিপোর্ট করুন</span>
+      </button>
+
+      <div class="cu-approved-badge" id="cuResFooter" style="display:none;">
+        <span data-i18n="approved">✅ চ.বি. প্রশাসন অনুমোদিত</span>
+        <span>SZSS</span>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Search Tab -->
+<main class="cu-container" id="content-search">
+  <div class="cu-card">
+    <div class="cu-card-header">
+      <h2 class="cu-card-title" data-i18n="fullList">📋 সম্পূর্ণ তালিকা</h2>
+      <span class="cu-tag" id="cuCount">০টি</span>
+    </div>
+    <div class="cu-search-wrap">
+      <span class="cu-search-icon">🔍</span>
+      <input type="text" id="cuSearch" class="cu-field" style="margin:0" placeholder="স্থান বা যানবাহন খুঁজুন..." data-i18n="searchPlaceholder">
+    </div>
+    <div class="cu-table-wrap">
+      <table class="cu-table">
+        <thead>
+          <tr>
+            <th data-i18n="thRoute">রুট (কোথা থেকে ➔ কোথায়)</th>
+            <th data-i18n="thVehicle">যানবাহন</th>
+            <th style="text-align:right" data-i18n="thFare">ভাড়া</th>
+          </tr>
+        </thead>
+        <tbody id="cuTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer class="cu-footer">
+  <strong data-i18n="footerTitle">শহীদ জিয়া স্মৃতি সংসদ, চ.বি. শাখা</strong>
+  <span data-i18n="footerText">নির্মাণ ভাবনা ও বাস্তবায়ন: মোঃ ইমাম হোসাইন, দর্শন বিভাগ, চ.বি.</span>
+</footer>
+
+<!-- ═══ Report Modal ═══ -->
+<div class="cu-modal" id="cuReportModal">
+  <div class="cu-modal-box">
+    <div class="cu-modal-head">
+      <h3 data-i18n="reportTitle">⚠️ ভাড়া রিপোর্ট</h3>
+      <button class="cu-modal-close" onclick="closeReport()">✕</button>
+    </div>
+    <div class="cu-modal-body">
+      <div class="cu-note" data-i18n="reportNote">🔒 আপনার তথ্য গোপন থাকবে। শুধুমাত্র অভিযোগ নিষ্পত্তির জন্য ব্যবহৃত হবে।</div>
+      <form id="cuReportForm">
+        <div class="cu-field"><label data-i18n="repName">আপনার নাম *</label><input type="text" name="reporterName" required></div>
+        <div class="cu-field"><label data-i18n="repPhone">আপনার মোবাইল (ঐচ্ছিক)</label><input type="tel" name="reporterPhone"></div>
+        <div class="cu-row">
+          <div class="cu-field"><label data-i18n="repOrigin">কোথা থেকে *</label><input type="text" name="origin" id="repOrigin" required></div>
+          <div class="cu-field"><label data-i18n="repDest">কোথায় *</label><input type="text" name="destination" id="repDest" required></div>
+        </div>
+        <div class="cu-row">
+          <div class="cu-field">
+            <label data-i18n="repVehicle">যানবাহন *</label>
+            <select name="vehicle" id="repVehicle" required>
+              <option value="" data-i18n="selectOpt">-- নির্বাচন --</option>
+              <option value="রিকশা" data-i18n="rickshaw">🛺 রিকশা</option>
+              <option value="ই-কার" data-i18n="ecar">🚗 ই-কার</option>
+              <option value="সিএনজি" data-i18n="cng">🛵 সিএনজি</option>
+            </select>
+          </div>
+          <div class="cu-field"><label data-i18n="repVehNum">গাড়ির নাম্বার</label><input type="text" name="vehicleNumber" placeholder="চট্ট-১১-XXXX"></div>
+        </div>
+        <div class="cu-row">
+          <div class="cu-field"><label data-i18n="repOfficial">নির্ধারিত ভাড়া (৳) *</label><input type="number" name="officialFare" id="repOfficialFare" required></div>
+          <div class="cu-field"><label data-i18n="repDemanded">দাবিকৃত ভাড়া (৳) *</label><input type="number" name="demandedFare" required></div>
+        </div>
+        <div class="cu-field"><label data-i18n="repTime">ঘটনার সময় *</label><input type="datetime-local" name="incidentTime" id="repTime" required></div>
+        <div class="cu-field">
+          <label data-i18n="repWeather">আবহাওয়া *</label>
+          <select name="weather" required>
+            <option value="" data-i18n="selectOpt">-- নির্বাচন --</option>
+            <option value="রোদ" data-i18n="wSun">☀️ রোদ</option>
+            <option value="মেঘলা" data-i18n="wCloud">⛅ মেঘলা</option>
+            <option value="বৃষ্টি" data-i18n="wRain">🌧️ বৃষ্টি</option>
+            <option value="ঝড়" data-i18n="wStorm">⛈️ ঝড়/বজ্রপাত</option>
+            <option value="কুয়াশা" data-i18n="wFog">🌫️ কুয়াশা</option>
+            <option value="রাত" data-i18n="wNight">🌙 রাত</option>
+          </select>
+        </div>
+        <div class="cu-field"><label data-i18n="repDriver">চালকের নাম *</label><input type="text" name="driverName" required></div>
+        <div class="cu-field"><label data-i18n="repDriverPhone">চালকের মোবাইল (ঐচ্ছিক)</label><input type="tel" name="driverPhone"></div>
+        <div class="cu-field">
+          <label data-i18n="repPhoto">চালকের ছবি (ঐচ্ছিক)</label>
+          <input type="file" name="driverPhoto" accept="image/*" id="cuPhotoInput" style="padding:10px">
+          <span class="cu-hint" data-i18n="photoHint">ছবি অটো-কম্প্রেস হবে</span>
+          <img id="cuPhotoPreview" style="display:none;max-width:100px;margin-top:8px;border-radius:8px;border:1px solid var(--border);">
+        </div>
+        <div class="cu-field">
+          <label data-i18n="repDesc">বিবরণ</label>
+          <textarea name="description" rows="3" style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-input);font-family:inherit;resize:vertical;background:#f9fafb"></textarea>
+        </div>
+        <button type="submit" class="cu-submit" id="cuSubmitBtn" data-i18n="submitBtn">📩 রিপোর্ট জমা দিন</button>
+        <div class="cu-status" id="cuReportStatus"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══ i18n Translations ═══ */
+const i18n = {
+  bn: {
+    title: "চট্টগ্রাম বিশ্ববিদ্যালয়", subtitle: "শহীদ জিয়া স্মৃতি সংসদ ভাড়া ক্যালকুলেটর", badge: "অফিসিয়াল তালিকা",
+    tabCalc: "🧮 ক্যালকুলেটর", tabSearch: "📋 ভাড়া তালিকা", routeSelect: "📍 রুট নির্বাচন",
+    origin: "কোথা থেকে (Origin)", dest: "কোথায় (Destination)", selectOpt: "-- নির্বাচন করুন --",
+    pax: "যাত্রী সংখ্যা", vehicle: "যানবাহন", allVeh: "সব যানবাহন", rickshaw: "🛺 রিকশা", ecar: "🚗 ই-কার", cng: "🛵 সিএনজি",
+    noticeTitle: "⚠️ ভাড়া নিয়মাবলী (রিকশা):",
+    notice1: "১ বা ২ জন যাত্রীর জন্য মূল তালিকাভুক্ত ভাড়া প্রযোজ্য।",
+    notice2: "২ জনের বেশি হলে: ২৫ টাকা পর্যন্ত ভাড়ায় প্রতি অতিরিক্ত ব্যক্তিতে +৫ টাকা।",
+    notice3: "২৫ টাকার বেশি ভাড়ায় প্রতি অতিরিক্ত ব্যক্তিতে +১০ টাকা।",
+    fareDetails: "ভাড়ার বিবরণ", selectRoute: "রুট নির্বাচন করুন", selectPrompt: "অনুগ্রহ করে গন্তব্য নির্বাচন করুন",
+    reportBtn: "ভাড়া রিপোর্ট করুন", approved: "✅ চ.বি. প্রশাসন অনুমোদিত",
+    fullList: "📋 সম্পূর্ণ তালিকা", searchPlaceholder: "স্থান বা যানবাহন খুঁজুন...",
+    thRoute: "রুট (কোথা থেকে ➔ কোথায়)", thVehicle: "যানবাহন", thFare: "ভাড়া",
+    footerTitle: "শহীদ জিয়া স্মৃতি সংসদ, চ.বি. শাখা", footerText: "নির্মাণ ভাবনা ও বাস্তবায়ন: মোঃ ইমাম হোসাইন, দর্শন বিভাগ, চ.বি.",
+    reportTitle: "⚠️ ভাড়া রিপোর্ট", reportNote: "🔒 আপনার তথ্য গোপন থাকবে। শুধুমাত্র অভিযোগ নিষ্পত্তির জন্য ব্যবহৃত হবে।",
+    repName: "আপনার নাম *", repPhone: "আপনার মোবাইল (ঐচ্ছিক)", repOrigin: "কোথা থেকে *", repDest: "কোথায় *",
+    repVehicle: "যানবাহন *", repVehNum: "গাড়ির নাম্বার", repOfficial: "নির্ধারিত ভাড়া (৳) *", repDemanded: "দাবিকৃত ভাড়া (৳) *",
+    repTime: "ঘটনার সময় *", repWeather: "আবহাওয়া *", wSun: "☀️ রোদ", wCloud: "⛅ মেঘলা", wRain: "🌧️ বৃষ্টি", wStorm: "⛈️ ঝড়/বজ্রপাত", wFog: "🌫️ কুয়াশা", wNight: "🌙 রাত",
+    repDriver: "চালকের নাম *", repDriverPhone: "চালকের মোবাইল (ঐচ্ছিক)", repPhoto: "চালকের ছবি (ঐচ্ছিক)", photoHint: "ছবি অটো-কম্প্রেস হবে", repDesc: "বিবরণ",
+    submitBtn: "📩 রিপোর্ট জমা দিন", baseFare: "বেস ভাড়া", surcharge: "অতিরিক্ত যাত্রী", total: "মোট ভাড়া", perPerson: "জনপ্রতি", notFound: "❌ এই রুটের তথ্য পাওয়া যায়নি",
+    via: "ভায়া", direct: "সরাসরি"
+  },
+  en: {
+    title: "University of Chittagong", subtitle: "Shahid Zia Smriti Sangsad Fare Calculator", badge: "Official List",
+    tabCalc: "🧮 Calculator", tabSearch: "📋 Fare List", routeSelect: "📍 Select Route",
+    origin: "From (Origin)", dest: "To (Destination)", selectOpt: "-- Select --",
+    pax: "Passengers", vehicle: "Vehicle", allVeh: "All Vehicles", rickshaw: "🛺 Rickshaw", ecar: "🚗 E-Car", cng: "🛵 CNG",
+    noticeTitle: "⚠️ Surcharge Rules (Rickshaw):",
+    notice1: "Base fare applies for 1 or 2 passengers.",
+    notice2: "More than 2: For fares up to 25 Tk, +5 Tk per extra person.",
+    notice3: "For fares above 25 Tk, +10 Tk per extra person.",
+    fareDetails: "Fare Details", selectRoute: "Select a route", selectPrompt: "Please select origin and destination",
+    reportBtn: "Report Overcharging", approved: "✅ Shahid Zia Smriti Sangsad Approved",
+    fullList: "📋 Full Fare List", searchPlaceholder: "Search place or vehicle...",
+    thRoute: "Route (From ➔ To)", thVehicle: "Vehicle", thFare: "Fare",
+    footerTitle: "Shahid Zia Smriti Sangsad, CU Branch", footerText: "Concept & Developed by: Md. Imam Hossain, Dept. of Philosophy, CU",
+    reportTitle: "⚠️ Fare Report", reportNote: "🔒 Your information will be kept confidential.",
+    repName: "Your Name *", repPhone: "Your Mobile (Optional)", repOrigin: "From *", repDest: "To *",
+    repVehicle: "Vehicle *", repVehNum: "Vehicle Number", repOfficial: "Official Fare (৳) *", repDemanded: "Demanded Fare (৳) *",
+    repTime: "Incident Time *", repWeather: "Weather *", wSun: "☀️ Sunny", wCloud: "⛅ Cloudy", wRain: "🌧️ Rainy", wStorm: "⛈️ Stormy", wFog: "🌫️ Foggy", wNight: "🌙 Night",
+    repDriver: "Driver Name *", repDriverPhone: "Driver Mobile (Optional)", repPhoto: "Driver Photo (Optional)", photoHint: "Image auto-compresses", repDesc: "Description",
+    submitBtn: "📩 Submit Report", baseFare: "Base Fare", surcharge: "Extra Passengers", total: "Total Fare", perPerson: "per person", notFound: "❌ No fare data found for this route",
+    via: "via", direct: "Direct"
+  }
+};
+
+let currentLang = 'bn';
+let paxCount = 1;
+let lastCalcData = null;
+
+/* ═══ Language Toggle ═══ */
+function toggleLang() {
+  currentLang = currentLang === 'bn' ? 'en' : 'bn';
+  document.getElementById('langBtn').innerText = currentLang === 'bn' ? 'EN' : 'BN';
+  updateLanguage();
+  calculateFare(); 
+  if(document.getElementById('content-search').classList.contains('active')) renderTable();
+}
+
+function updateLanguage() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[currentLang][key]) {
+      if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
+        el.placeholder = i18n[currentLang][key];
+      } else {
+        el.innerText = i18n[currentLang][key];
+      }
+    }
+  });
+}
+
+/* ═══ Config & Data ═══ */
+const CU_CONFIG = { formspreeId: "YOUR_FORMSPREE_ID", whatsappNumber: "8801700000000" };
+
+const CU_FARES = [
+  {"o":"২ নং গেইট","d":["৩ নং গোডাউন","সমাজবিজ্ঞান","শহীদ মিনার"],"v":"Rickshaw","f":20},
+  {"o":"২ নং গেইট","d":["পুরাতন কলা","প্রশাসনিক ভবন","লাইব্রেরি","চাকসু","আব্দুর রব হল","প্রক্টর অফিস"],"v":"Rickshaw","f":25},
+  {"o":"২ নং গেইট","d":["শহীদ ফরহাদ হল","অতীশ দীপংকর হল"],"v":"Rickshaw","f":30},
+  {"o":"২ নং গেইট","d":["মেরিন সাইন্স","সাইন্স (পশ্চিম)","জীববিজ্ঞান"],"v":"Rickshaw","f":30},
+  {"o":"২ নং গেইট","d":["প্রীতিলতা হল","শামসুন নাহার হল","বিজয়-২৪ হল"],"v":"Rickshaw","f":25},
+  {"o":"২ নং গেইট","d":["ফয়জুন্নেসা হল","খালেদা জিয়া হল (উপরে)"],"v":"Rickshaw","f":30},
+  {"o":"২ নং গেইট","d":["বোটানিক্যাল গার্ডেন"],"v":"Rickshaw","f":40},
+  {"o":"২ নং গেইট","d":["দক্ষিণ ক্যাম্পাস মসজিদ","নিপবন স্কুল"],"v":"Rickshaw","f":20},
+  {"o":"২ নং গেইট","d":["খেলার মাঠ","প্রকৌশল দপ্তর"],"v":"Rickshaw","f":20},
+  {"o":"২ নং গেইট","d":["এ.এফ রহমান হল"],"v":"Rickshaw","f":15},
+  {"o":"২ নং গেইট","d":["আলাওল হল"],"v":"Rickshaw","f":10},
+  {"o":"২ নং গেইট","d":["জিরো পয়েন্ট"],"v":"E-Car","f":7},
+  {"o":"২ নং গেইট","d":["সোহরাওয়ার্দী হল"],"v":"E-Car","f":5},
+  {"o":"২ নং গেইট","d":["শহীদ মিনার"],"v":"E-Car","f":10},
+  {"o":"শহীদ ফরহাদ হোসেন হল","d":["জিরো পয়েন্ট"],"v":"Rickshaw","f":25},
+  {"o":"শহীদ ফরহাদ হোসেন হল","d":["জিরো পয়েন্ট"],"v":"E-Car","f":8},
+  {"o":"শহীদ ফরহাদ হোসেন হল","d":["২ নং গেইট"],"v":"Rickshaw","f":30},
+  {"o":"শহীদ ফরহাদ হোসেন হল","d":["সোহরাওয়ার্দী হল"],"v":"Rickshaw","f":20},
+  {"o":"শহীদ ফরহাদ হোসেন হল","d":["শহীদ মিনার"],"v":"Rickshaw","f":15},
+  {"o":"শহীদ ফরহাদ হোসেন হল","d":["শহীদ মিনার"],"v":"E-Car","f":5},
+  {"o":"শহীদ ফরহাদ হোসেন হল","d":["চাকসু"],"v":"Rickshaw","f":20},
+  {"o":"শহীদ ফরহাদ হোসেন হল","d":["সাইন্স ফ্যাকাল্টি পূর্ব"],"v":"Rickshaw","f":20},
+  {"o":"শহীদ ফরহাদ হোসেন হল","d":["বায়োলজি ফ্যাকাল্টি"],"v":"Rickshaw","f":25},
+  {"o":"শহীদ ফরহাদ হোসেন হল","d":["বায়োলজি ফ্যাকাল্টি"],"v":"E-Car","f":8},
+  {"o":"শহীদ ফরহাদ হোসেন হল","d":["মেরিন সাইন্স"],"v":"Rickshaw","f":25},
+  {"o":"জিরো পয়েন্ট","d":["২ নং গেইট"],"v":"Rickshaw","f":15},
+  {"o":"জিরো পয়েন্ট","d":["২ নং গেইট"],"v":"E-Car","f":7},
+  {"o":"জিরো পয়েন্ট","d":["শহীদ মিনার"],"v":"Rickshaw","f":10},
+  {"o":"জিরো পয়েন্ট","d":["শহীদ মিনার"],"v":"E-Car","f":5},
+  {"o":"জিরো পয়েন্ট","d":["চাকসু","বিজ্ঞান (পূর্ব)"],"v":"Rickshaw","f":15},
+  {"o":"জিরো পয়েন্ট","d":["চাকসু","বিজ্ঞান (পূর্ব)"],"v":"E-Car","f":7},
+  {"o":"জিরো পয়েন্ট","d":["জীববিজ্ঞান"],"v":"Rickshaw","f":25},
+  {"o":"জিরো পয়েন্ট","d":["জীববিজ্ঞান"],"v":"E-Car","f":8},
+  {"o":"জিরো পয়েন্ট","d":["জীববিজ্ঞান"],"v":"CNG","f":8},
+  {"o":"জিরো পয়েন্ট","d":["বিজ্ঞান (পশ্চিম)","মেরিন সাইন্স"],"v":"Rickshaw","f":20},
+  {"o":"জিরো পয়েন্ট","d":["বিজ্ঞান (পশ্চিম)","মেরিন সাইন্স"],"v":"E-Car","f":8},
+  {"o":"জিরো পয়েন্ট","d":["গ্রীন হাউজ"],"v":"Rickshaw","f":30},
+  {"o":"জিরো পয়েন্ট","d":["গ্রীন হাউজ"],"v":"E-Car","f":7},
+  {"o":"জিরো পয়েন্ট","d":["আব্দুর রব হল"],"v":"Rickshaw","f":15},
+  {"o":"জিরো পয়েন্ট","d":["আব্দুর রব হল"],"v":"E-Car","f":5},
+  {"o":"জিরো পয়েন্ট","d":["প্রশাসনিক ভবন"],"v":"Rickshaw","f":15},
+  {"o":"জিরো পয়েন্ট","d":["নতুন কলা (পশ্চিম)"],"v":"Rickshaw","f":20},
+  {"o":"জিরো পয়েন্ট","d":["ফরহাদ","অতীশ দীপংকর হল"],"v":"Rickshaw","f":25},
+  {"o":"জিরো পয়েন্ট","d":["ফরহাদ","অতীশ দীপংকর হল"],"v":"E-Car","f":8},
+  {"o":"জিরো পয়েন্ট","d":["খালেদা জিয়া (উপরে)","ফয়জুন্নেসা"],"v":"Rickshaw","f":20},
+  {"o":"জিরো পয়েন্ট","d":["খালেদা জিয়া (উপরে)","ফয়জুন্নেসা"],"v":"E-Car","f":5},
+  {"o":"জিরো পয়েন্ট","d":["বোটানিক্যাল গার্ডেন"],"v":"Rickshaw","f":30},
+  {"o":"জিরো পয়েন্ট","d":["ফরেস্ট্রি"],"v":"Rickshaw","f":20},
+  {"o":"জিরো পয়েন্ট","d":["ফরেস্ট্রি"],"v":"E-Car","f":8},
+  {"o":"জিরো পয়েন্ট","d":["সাউথ ক্যাম্পাস মসজিদ"],"v":"Rickshaw","f":10},
+  {"o":"জিরো পয়েন্ট","d":["টিচার্স কোয়ার্টার (১-৫)"],"v":"Rickshaw","f":20},
+  {"o":"জিরো পয়েন্ট","d":["মেডিকেল","আইন অনুষদ"],"v":"Rickshaw","f":30},
+  {"o":"জিরো পয়েন্ট","d":["সেন্ট্রাল ফিল্ড","জিমনেসিয়াম"],"v":"Rickshaw","f":20},
+  {"o":"জিরো পয়েন্ট","d":["সেন্ট্রাল ফিল্ড","জিমনেসিয়াম"],"v":"E-Car","f":10},
+  {"o":"জিরো পয়েন্ট","d":["উত্তর ক্যাম্পাস মসজিদ"],"v":"Rickshaw","f":30},
+  {"o":"জিরো পয়েন্ট","d":["সমাজবিজ্ঞান","এফ আর","আলাওল"],"v":"Rickshaw","f":15},
+  {"o":"জিরো পয়েন্ট","d":["সমাজবিজ্ঞান","এফ আর","আলাওল"],"v":"E-Car","f":5},
+  {"o":"জিরো পয়েন্ট","d":["সোহরাওয়ার্দী হল"],"v":"Rickshaw","f":10},
+  {"o":"জিরো পয়েন্ট","d":["কেন্দ্রীয় মসজিদ"],"v":"Rickshaw","f":10},
+  {"o":"জিরো পয়েন্ট","d":["কেন্দ্রীয় মসজিদ"],"v":"E-Car","f":5},
+  {"o":"জিরো পয়েন্ট","d":["১ নং গেইট"],"v":"Rickshaw","f":30},
+  {"o":"জিরো পয়েন্ট","d":["১ নং গেইট"],"v":"CNG","f":7},
+  {"o":"জিরো পয়েন্ট","d":["রেইল গেইট"],"v":"Rickshaw","f":20},
+  {"o":"জিরো পয়েন্ট","d":["পানছড়ি কুল (টার্ফ)"],"v":"Rickshaw","f":15},
+  {"o":"জিরো পয়েন্ট","d":["মদন ফকির মাজার"],"v":"Rickshaw","f":10},
+  {"o":"জিরো পয়েন্ট","d":["দোলা স্মরণী"],"v":"E-Car","f":5},
+  {"o":"জিরো পয়েন্ট","d":["প্রীতিলতা হল"],"v":"E-Car","f":5},
+  {"o":"জিরো পয়েন্ট","d":["লাইব্রেরী"],"v":"E-Car","f":5},
+  {"o":"বায়োলজি অনুষদ","d":["দক্ষিণ ক্যাম্পাস মসজিদ"],"v":"Rickshaw","f":30},
+  {"o":"বায়োলজি অনুষদ","d":["গ্রীন হাউজ"],"v":"Rickshaw","f":35},
+  {"o":"বায়োলজি অনুষদ","d":["শামসুন নাহার হল","প্রীতিলতা হল"],"v":"Rickshaw","f":25},
+  {"o":"বায়োলজি অনুষদ","d":["নবাব ফয়জুন্নেসা হল"],"v":"Rickshaw","f":30},
+  {"o":"বায়োলজি অনুষদ","d":["নবাব ফয়জুন্নেসা হল"],"v":"E-Car","f":8},
+  {"o":"বায়োলজি অনুষদ","d":["শহীদ আব্দুর রব হল"],"v":"Rickshaw","f":25},
+  {"o":"বায়োলজি অনুষদ","d":["শহীদ ফরহাদ হোসেন হল","অতীশ দীপংকর হল"],"v":"Rickshaw","f":30},
+  {"o":"বায়োলজি অনুষদ","d":["সোহরাওয়ার্দী হল মোড়"],"v":"Rickshaw","f":25},
+  {"o":"বায়োলজি অনুষদ","d":["সেন্ট্রাল ফিল্ড"],"v":"Rickshaw","f":35},
+  {"o":"বায়োলজি অনুষদ","d":["লেডিস হল"],"v":"E-Car","f":7},
+  {"o":"বায়োলজি অনুষদ","d":["জিরো পয়েন্ট"],"v":"E-Car","f":8},
+  {"o":"বায়োলজি অনুষদ","d":["শহীদ মিনার"],"v":"E-Car","f":5},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["জিরো পয়েন্ট"],"v":"Rickshaw","f":15},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["সোহরাওয়ার্দী মোড়"],"v":"Rickshaw","f":15},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["চাকসু"],"v":"Rickshaw","f":10},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["শহীদ ফরহাদ হল"],"v":"Rickshaw","f":10},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["অতীশ দীপংকর"],"v":"Rickshaw","f":10},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["শহীদ মিনার"],"v":"Rickshaw","f":10},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["বিজয় ২৪ হল"],"v":"Rickshaw","f":10},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["শামসুননাহার হল"],"v":"Rickshaw","f":10},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["প্রীতিলতা হল"],"v":"Rickshaw","f":10},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["নবাব ফয়জুন্নেসা হল"],"v":"Rickshaw","f":15},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["বেগম খালেদা জিয়া হল"],"v":"Rickshaw","f":15},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["২ নং গেইট"],"v":"Rickshaw","f":25},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["সাউথ ক্যাম্পাস মসজিদ"],"v":"Rickshaw","f":25},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["নীপবন স্কুল"],"v":"Rickshaw","f":25},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["ফরেস্ট্রি"],"v":"Rickshaw","f":35},
+  {"o":"শহীদ হৃদয় তরুয়া ভবন","d":["(১-৫) নং বিল্ডিং"],"v":"Rickshaw","f":35},
+  {"o":"প্রীতিলতা হল","d":["চাকসু","সাইন্স ফ্যাকাল্টি"],"v":"Rickshaw","f":15},
+  {"o":"প্রীতিলতা হল","d":["চাকসু","সাইন্স ফ্যাকাল্টি"],"v":"E-Car","f":5},
+  {"o":"প্রীতিলতা হল","d":["জিরো পয়েন্ট","শহীদ তরুয়া ভবন"],"v":"Rickshaw","f":15},
+  {"o":"প্রীতিলতা হল","d":["জিরো পয়েন্ট","শহীদ তরুয়া ভবন"],"v":"E-Car","f":5},
+  {"o":"প্রীতিলতা হল","d":["জীববিজ্ঞান অনুষদ","২ নং গেইট"],"v":"Rickshaw","f":25},
+  {"o":"প্রীতিলতা হল","d":["মেরিন সাইন্স","বায়োলজি ফ্যাকাল্টি"],"v":"Rickshaw","f":20},
+  {"o":"প্রীতিলতা হল","d":["মেরিন সাইন্স","বায়োলজি ফ্যাকাল্টি"],"v":"E-Car","f":7},
+  {"o":"প্রীতিলতা হল","d":["রেজিস্ট্রার ভবন","পুরাতন কলা"],"v":"Rickshaw","f":10},
+  {"o":"প্রীতিলতা হল","d":["সমাজবিজ্ঞান অনুষদ"],"v":"Rickshaw","f":10},
+  {"o":"প্রীতিলতা হল","d":["সাউথ ক্যাম্পাস মসজিদ","নীপবন স্কুল"],"v":"Rickshaw","f":20},
+  {"o":"প্রীতিলতা হল","d":["ফরেস্ট্রি"],"v":"Rickshaw","f":30},
+  {"o":"প্রীতিলতা হল","d":["সেন্ট্রাল ফিল্ড","বোটানিক্যাল গার্ডেন"],"v":"Rickshaw","f":25},
+  {"o":"বেগম খালেদা জিয়া হল","d":["চাকসু","বিজ্ঞান অনুষদ"],"v":"Rickshaw","f":20},
+  {"o":"বেগম খালেদা জিয়া হল","d":["চাকসু","বিজ্ঞান অনুষদ"],"v":"E-Car","f":5},
+  {"o":"বেগম খালেদা জিয়া হল","d":["মেরিন সাইন্স ফ্যাকাল্টি"],"v":"Rickshaw","f":25},
+  {"o":"বেগম খালেদা জিয়া হল","d":["জীববিজ্ঞান অনুষদ"],"v":"Rickshaw","f":30},
+  {"o":"বেগম খালেদা জিয়া হল","d":["জীববিজ্ঞান অনুষদ"],"v":"E-Car","f":7},
+  {"o":"বেগম খালেদা জিয়া হল","d":["জিরো পয়েন্ট"],"v":"Rickshaw","f":20},
+  {"o":"বেগম খালেদা জিয়া হল","d":["জিরো পয়েন্ট"],"v":"E-Car","f":5},
+  {"o":"বেগম খালেদা জিয়া হল","d":["শহীদ তরুয়া ভবন"],"v":"Rickshaw","f":20},
+  {"o":"বেগম খালেদা জিয়া হল","d":["রেজিস্ট্রার ভবন","পুরাতন কলা"],"v":"Rickshaw","f":15},
+  {"o":"বেগম খালেদা জিয়া হল","d":["সমাজবিজ্ঞান অনুষদ"],"v":"Rickshaw","f":15},
+  {"o":"বেগম খালেদা জিয়া হল","d":["সাউথ ক্যাম্পাস","নীপবন স্কুল"],"v":"Rickshaw","f":20},
+  {"o":"বেগম খালেদা জিয়া হল","d":["ফরেস্ট্রি","সেন্ট্রাল ফিল্ড"],"v":"Rickshaw","f":30},
+  {"o":"বিজ্ঞান অনুষদ","d":["জিরো পয়েন্ট"],"v":"Rickshaw","f":15},
+  {"o":"বিজ্ঞান অনুষদ","d":["জিরো পয়েন্ট"],"v":"E-Car","f":7},
+  {"o":"বিজ্ঞান অনুষদ","d":["জিরো পয়েন্ট"],"v":"CNG","f":7},
+  {"o":"বিজ্ঞান অনুষদ","d":["২ নং গেইট"],"v":"Rickshaw","f":30},
+  {"o":"বিজ্ঞান অনুষদ","d":["আমানত হল","সোহরাওয়ার্দী মোড়","ফয়জুন্নেসা","খালেদা জিয়া","ফরহাদ হল","অতীশ দীপংকর"],"v":"Rickshaw","f":20},
+  {"o":"বিজ্ঞান অনুষদ","d":["প্রীতিলতা হল","বিজয় ২৪ হল","শামসুননাহার হল"],"v":"Rickshaw","f":15},
+  {"o":"বিজ্ঞান অনুষদ","d":["শহীদ মিনার"],"v":"Rickshaw","f":10},
+  {"o":"বিজ্ঞান অনুষদ","d":["শহীদ মিনার"],"v":"E-Car","f":5},
+  {"o":"বিজ্ঞান অনুষদ","d":["ফরেস্ট্রি","১ নং গেইট রেল ক্রসিং"],"v":"Rickshaw","f":35},
+  {"o":"বিজ্ঞান অনুষদ","d":["সাউথ ক্যাম্পাস মসজিদ"],"v":"Rickshaw","f":25},
+  {"o":"বিজ্ঞান অনুষদ","d":["সেন্ট্রাল ফিল্ড","নীপবন স্কুল"],"v":"Rickshaw","f":25},
+  {"o":"বিজ্ঞান অনুষদ","d":["সরাসরি ১ নং গেইট"],"v":"Rickshaw","f":45},
+  {"o":"বিজ্ঞান অনুষদ","d":["১ নং গেইট"],"v":"CNG","f":14},
+  {"o":"বিজ্ঞান অনুষদ","d":["লেডিস হল"],"v":"E-Car","f":5},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["চাকসু","সাইন্স ফ্যাকাল্টি"],"v":"Rickshaw","f":15},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["চাকসু","সাইন্স ফ্যাকাল্টি"],"v":"E-Car","f":5},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["জিরো পয়েন্ট","শহীদ তরুয়া ভবন"],"v":"Rickshaw","f":15},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["জিরো পয়েন্ট","শহীদ তরুয়া ভবন"],"v":"E-Car","f":5},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["জীববিজ্ঞান অনুষদ","২ নং গেইট"],"v":"Rickshaw","f":25},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["মেরিন সাইন্স","বায়োলজি ফ্যাকাল্টি"],"v":"Rickshaw","f":20},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["মেরিন সাইন্স","বায়োলজি ফ্যাকাল্টি"],"v":"E-Car","f":7},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["রেজিস্ট্রার ভবন","পুরাতন কলা"],"v":"Rickshaw","f":10},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["সমাজবিজ্ঞান অনুষদ"],"v":"Rickshaw","f":10},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["সাউথ ক্যাম্পাস মসজিদ","নীপবন স্কুল"],"v":"Rickshaw","f":20},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["ফরেস্ট্রি"],"v":"Rickshaw","f":30},
+  {"o":"বিজয় ২৪ / শামসুন নাহার হল","d":["সেন্ট্রাল ফিল্ড","বোটানিক্যাল গার্ডেন"],"v":"Rickshaw","f":25},
+  {"o":"সোহরাওয়ার্দী হল","d":["জিরো পয়েন্ট","২নং গেইট"],"v":"Rickshaw","f":10},
+  {"o":"সোহরাওয়ার্দী হল","d":["জিরো পয়েন্ট","২নং গেইট"],"v":"E-Car","f":5},
+  {"o":"সোহরাওয়ার্দী হল","d":["শহীদ মিনার","সমাজবিজ্ঞান মেইন গেইট"],"v":"Rickshaw","f":15},
+  {"o":"সোহরাওয়ার্দী হল","d":["শহীদ মিনার","সমাজবিজ্ঞান মেইন গেইট"],"v":"E-Car","f":5},
+  {"o":"সোহরাওয়ার্দী হল","d":["সমাজবিজ্ঞান পূর্ব গেইট"],"v":"Rickshaw","f":10},
+  {"o":"সোহরাওয়ার্দী হল","d":["নতুন কলা ফ্যাকাল্টি"],"v":"Rickshaw","f":15},
+  {"o":"সোহরাওয়ার্দী হল","d":["প্রশাসনিক ভবন"],"v":"Rickshaw","f":15},
+  {"o":"সোহরাওয়ার্দী হল","d":["চাকসু","সাইন্স ফ্যাকাল্টি পূর্ব গেইট"],"v":"Rickshaw","f":20},
+  {"o":"সোহরাওয়ার্দী হল","d":["মেরিন সাইন্স","বায়োলজি ফ্যাকাল্টি"],"v":"Rickshaw","f":25},
+  {"o":"সোহরাওয়ার্দী হল","d":["শহীদ ফরহাদ হোসেন হল"],"v":"E-Car","f":8},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["চাকসু","বিজ্ঞান অনুষদ"],"v":"Rickshaw","f":20},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["চাকসু","বিজ্ঞান অনুষদ"],"v":"E-Car","f":5},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["মেরিন সাইন্স ফ্যাকাল্টি"],"v":"Rickshaw","f":25},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["মেরিন সাইন্স ফ্যাকাল্টি"],"v":"E-Car","f":7},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["জীববিজ্ঞান অনুষদ"],"v":"Rickshaw","f":30},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["জীববিজ্ঞান অনুষদ"],"v":"E-Car","f":7},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["জিরো পয়েন্ট"],"v":"Rickshaw","f":20},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["জিরো পয়েন্ট"],"v":"E-Car","f":5},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["শহীদ তরুয়া ভবন"],"v":"Rickshaw","f":20},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["রেজিস্ট্রার ভবন","পুরাতন কলা"],"v":"Rickshaw","f":15},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["সমাজবিজ্ঞান অনুষদ"],"v":"Rickshaw","f":15},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["সাউথ ক্যাম্পাস","নীপবন স্কুল"],"v":"Rickshaw","f":20},
+  {"o":"নবাব ফয়জুন্নেসা হল","d":["ফরেস্ট্রি","সেন্ট্রাল ফিল্ড"],"v":"Rickshaw","f":30},
+  {"o":"চাকসু","d":["ফয়জুন্নেসা","বেগম খালেদা জিয়া হল"],"v":"Rickshaw","f":20},
+  {"o":"চাকসু","d":["ফয়জুন্নেসা","বেগম খালেদা জিয়া হল"],"v":"E-Car","f":5},
+  {"o":"চাকসু","d":["আলাওল","এফ রহমান হল"],"v":"Rickshaw","f":20},
+  {"o":"চাকসু","d":["সেন্ট্রাল ফিল্ড"],"v":"Rickshaw","f":25},
+  {"o":"চাকসু","d":["শহীদ ফরহাদ হোসেন হল","অতীশ দীপংকর হল"],"v":"Rickshaw","f":20},
+  {"o":"চাকসু","d":["ফরেস্ট্রি"],"v":"Rickshaw","f":35},
+  {"o":"চাকসু","d":["দক্ষিণ ক্যাম্পাস মসজিদ"],"v":"Rickshaw","f":30},
+  {"o":"চাকসু","d":["১ নং গেইট"],"v":"Rickshaw","f":45},
+  {"o":"চাকসু","d":["১ নং গেইট"],"v":"CNG","f":14},
+  {"o":"চাকসু","d":["শাহ আমানত হল"],"v":"Rickshaw","f":20},
+  {"o":"চাকসু","d":["জিরো পয়েন্ট"],"v":"E-Car","f":7},
+  {"o":"চাকসু","d":["জিরো পয়েন্ট"],"v":"CNG","f":7},
+  {"o":"চাকসু","d":["খালেদা জিয়া হল","প্রীতিলতা হল"],"v":"E-Car","f":5}
+];
+
+/* ═══ Hubs for Fallback ═══ */
+const HUBS = ['জিরো পয়েন্ট', 'চাকসু', '২ নং গেইট', '১ নং গেইট', 'শহীদ মিনার'];
+
+function getFare(origin, dest, vehicle) {
+  const match = CU_FARES.find(x => 
+    x.v === vehicle && 
+    ((x.o === origin && x.d.includes(dest)) || (x.o === dest && x.d.includes(origin)))
+  );
+  return match ? match.f : null;
+}
+
+/* ═══ Helpers ═══ */
+function getLocations() {
+  const s = new Set();
+  CU_FARES.forEach(x => { s.add(x.o); x.d.forEach(d => s.add(d)); });
+  HUBS.forEach(h => s.add(h));
+  return Array.from(s).sort((a, b) => a.localeCompare(b, 'bn'));
+}
+
+function initDropdowns() {
+  const locs = getLocations();
+  const oSel = document.getElementById('cuOrigin');
+  const dSel = document.getElementById('cuDest');
+  locs.forEach(l => {
+    oSel.add(new Option(l, l));
+    dSel.add(new Option(l, l));
+  });
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.cu-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.cu-container').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('content-' + tab).classList.add('active');
+  if(tab === 'search') renderTable();
+}
+
+function updatePax(val) {
+  paxCount = Math.max(1, Math.min(6, paxCount + val));
+  document.getElementById('cuPax').value = paxCount;
+  calculateFare();
+}
+
+/* ═══ Fare Calculation Logic with Smart Fallback ═══ */
+function calculateFare() {
+  const o = document.getElementById('cuOrigin').value;
+  const d = document.getElementById('cuDest').value;
+  const filter = document.getElementById('cuVehicleFilter').value;
+  const resContent = document.getElementById('cuResContent');
+  const resRoute = document.getElementById('cuResRoute');
+  const resFooter = document.getElementById('cuResFooter');
+  const reportBtn = document.getElementById('cuReportBtn');
+
+  if(!o || !d || o === d) {
+    resContent.innerHTML = `<p style="text-align:center;color:#a7f3d0;padding:20px 0;">${i18n[currentLang].selectPrompt}</p>`;
+    resRoute.innerText = i18n[currentLang].selectRoute;
+    resFooter.style.display = 'none';
+    reportBtn.style.display = 'none';
+    lastCalcData = null;
+    return;
+  }
+
+  resRoute.innerText = `${o} ➔ ${d}`;
+
+  let html = '';
+  const vehicles = ['Rickshaw', 'E-Car', 'CNG'];
+  let hasAnyMatch = false;
+  let bestOverallData = null;
+
+  const vName = {
+    Rickshaw: i18n[currentLang].rickshaw,
+    'E-Car': i18n[currentLang].ecar,
+    CNG: i18n[currentLang].cng
+  };
+  const vIcon = {Rickshaw:'🛺', 'E-Car':'🚗', CNG:'🛵'};
+
+  vehicles.forEach(v => {
+    if (filter !== 'all' && filter !== v) return;
+
+    let bestBaseFare = null;
+    let usedHub = null;
+    let isDirect = false;
+
+    // 1. Direct Check
+    const directFare = getFare(o, d, v);
+    if (directFare !== null) {
+      bestBaseFare = directFare;
+      isDirect = true;
+    } else {
+      // 2. Fallback to Hubs
+      HUBS.forEach(hub => {
+        if (hub === o || hub === d) return;
+        const f1 = getFare(o, hub, v);
+        const f2 = getFare(hub, d, v);
+        if (f1 !== null && f2 !== null) {
+          const total = f1 + f2;
+          if (bestBaseFare === null || total < bestBaseFare) {
+            bestBaseFare = total;
+            usedHub = hub;
+          }
+        }
+      });
+    }
+
+    if (bestBaseFare !== null) {
+      hasAnyMatch = true;
+      
+      // Save for Report
+      if (!bestOverallData) {
+        bestOverallData = { origin: o, destination: d, vehicle: v, fare: bestBaseFare };
+      }
+
+      // Apply Pax rules
+      let totalFare = bestBaseFare;
+      let surcharge = 0;
+      let extraPax = paxCount - 2;
+
+      if (v === 'Rickshaw') {
+        if (extraPax > 0) {
+          if (bestBaseFare <= 25) surcharge = extraPax * 5;
+          else surcharge = extraPax * 10;
+          totalFare += surcharge;
+        }
+      } else {
+        totalFare = bestBaseFare * paxCount;
+      }
+
+      let breakdownHtml = '';
+      const viaText = isDirect ? '' : `<span class="cu-via-badge">${i18n[currentLang].via}: ${usedHub}</span>`;
+      
+      if (v === 'Rickshaw' && extraPax > 0) {
+        breakdownHtml = `
+          <div class="cu-res-details">
+            <span><span>${i18n[currentLang].baseFare} ${viaText}</span> <span>${bestBaseFare}৳</span></span>
+            <span><span>${i18n[currentLang].surcharge} (${extraPax} pax)</span> <span>+${surcharge}৳</span></span>
+          </div>
+        `;
+      } else if (v !== 'Rickshaw') {
+        breakdownHtml = `
+          <div class="cu-res-details">
+            <span><span>${i18n[currentLang].perPerson} (${paxCount}) ${viaText}</span> <span>${bestBaseFare}৳</span></span>
+          </div>
+        `;
+      } else {
+         breakdownHtml = `
+          <div class="cu-res-details">
+            <span><span>${i18n[currentLang].baseFare} ${viaText}</span> <span>${bestBaseFare}৳</span></span>
+          </div>
+        `;
+      }
+
+      html += `
+        <div class="cu-res-item">
+          <div class="cu-res-top">
+            <span class="cu-res-vehicle">${vIcon[v]} ${vName[v]}</span>
+            <div class="cu-res-price">${totalFare}<small>৳</small></div>
+          </div>
+          ${breakdownHtml}
+        </div>
+      `;
+    }
+  });
+
+  if (!hasAnyMatch) {
+    resContent.innerHTML = `<p style="text-align:center;color:#fca5a5;padding:20px 0;">${i18n[currentLang].notFound}</p>`;
+    resFooter.style.display = 'none';
+    reportBtn.style.display = 'none';
+    lastCalcData = null;
+  } else {
+    resContent.innerHTML = html;
+    resFooter.style.display = 'flex';
+    reportBtn.style.display = 'flex';
+    lastCalcData = bestOverallData;
+  }
+}
+
+/* ═══ Search Table ═══ */
+function renderTable(filter = '') {
+  const q = filter.toLowerCase().trim();
+  const tbody = document.getElementById('cuTableBody');
+  const countEl = document.getElementById('cuCount');
+  if(!tbody) return;
+
+  const rows = [];
+  CU_FARES.forEach(x => {
+    x.d.forEach(d => {
+      if(q && !(x.o.toLowerCase().includes(q) || d.toLowerCase().includes(q) || x.v.toLowerCase().includes(q))) return;
+      rows.push({o:x.o, d:d, v:x.v, f:x.f});
+    });
+  });
+
+  if(rows.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:24px;color:#94a3b8;">${i18n[currentLang].notFound}</td></tr>`;
+    countEl.innerText = currentLang === 'bn' ? '০টি' : '0 items';
+    return;
+  }
+
+  const vName = {
+    Rickshaw: i18n[currentLang].rickshaw,
+    'E-Car': i18n[currentLang].ecar,
+    CNG: i18n[currentLang].cng
+  };
+  const vIcon = {Rickshaw:'🛺', 'E-Car':'🚗', CNG:'🛵'};
+  const vClass = {Rickshaw:'cu-veh-rickshaw', 'E-Car':'cu-veh-ecar', CNG:'cu-veh-cng'};
+
+  tbody.innerHTML = rows.map(r => `
+    <tr>
+      <td><strong>${r.o}</strong> <br><span style="color:var(--text-muted);font-size:0.8rem;">➔ ${r.d}</span></td>
+      <td><span class="cu-veh-badge ${vClass[r.v]}">${vIcon[r.v]} ${vName[r.v]}</span></td>
+      <td class="cu-fare-cell">${r.f}৳</td>
+    </tr>
+  `).join('');
+
+  countEl.innerText = currentLang === 'bn' ? `${rows.length}টি` : `${rows.length} items`;
+}
+
+/* ═══ Report Modal Logic ═══ */
+function openReport() {
+  document.getElementById('cuReportModal').classList.add('active');
+  document.body.classList.add('modal-open');
+  
+  if(lastCalcData) {
+    document.getElementById('repOrigin').value = lastCalcData.origin;
+    document.getElementById('repDest').value = lastCalcData.destination;
+    document.getElementById('repOfficialFare').value = lastCalcData.fare;
+    
+    const vBn = {Rickshaw:'রিকশা', 'E-Car':'ই-কার', CNG:'সিএনজি'}[lastCalcData.vehicle];
+    Array.from(document.getElementById('repVehicle').options).forEach(o => {
+      if(o.value === vBn) document.getElementById('repVehicle').value = vBn;
+    });
+  }
+  
+  const dt = document.getElementById('repTime');
+  if(!dt.value) {
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    dt.value = now.toISOString().slice(0, 16);
+  }
+}
+
+function closeReport() {
+  document.getElementById('cuReportModal').classList.remove('active');
+  document.body.classList.remove('modal-open');
+}
+
+/* ═══ Image Compression ═══ */
+function compressImg(file, maxW=800, q=0.7) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const c = document.createElement("canvas");
+        let w = img.width, h = img.height;
+        if(w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+        c.width = w; c.height = h;
+        c.getContext("2d").drawImage(img, 0, 0, w, h);
+        c.toBlob(b => b ? res(new File([b], "driver.jpg", {type: "image/jpeg"})) : rej(new Error("compress")), "image/jpeg", q);
+      };
+      img.onerror = rej;
+      img.src = e.target.result;
+    };
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+/* ═══ Submit Report ═══ */
+document.getElementById('cuReportForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const status = document.getElementById('cuReportStatus');
+  const btn = document.getElementById('cuSubmitBtn');
+  
+  status.className = "cu-status loading";
+  status.textContent = currentLang === 'bn' ? "⏳ জমা হচ্ছে..." : "⏳ Submitting...";
+  btn.disabled = true;
+
+  try {
+    const fd = new FormData(form);
+    fd.append("timestamp", new Date().toISOString());
+    
+    const photo = fd.get("driverPhoto");
+    let hasPhoto = false;
+    if(photo && photo.size > 0) {
+      try {
+        fd.set("driverPhoto", await compressImg(photo), "driver.jpg");
+        hasPhoto = true;
+      } catch(err) { console.warn(err); hasPhoto = true; }
+    } else {
+      fd.delete("driverPhoto");
+    }
+
+    if(CU_CONFIG.formspreeId && CU_CONFIG.formspreeId !== "YOUR_FORMSPREE_ID") {
+      const res = await fetch("https://formspree.io/f/" + CU_CONFIG.formspreeId, {
+        method: "POST", body: fd, headers: {Accept: "application/json"}
+      });
+      if(!res.ok) throw new Error("Formspree Error");
+    }
+
+    const payload = {}; 
+    for(const [k, v] of fd.entries()) if(typeof v === "string") payload[k] = v;
+    
+    const waMsg = currentLang === 'bn' ? 
+      ("🚨 নতুন ভাড়া রিপোর্ট\n\n" +
+      "👤 যাত্রী: " + payload.reporterName + "\n" +
+      "📞 মোবাইল: " + (payload.reporterPhone || "নেই") + "\n\n" +
+      "📍 রুট: " + payload.origin + " → " + payload.destination + "\n" +
+      "🚗 যানবাহন: " + payload.vehicle + (payload.vehicleNumber ? " (" + payload.vehicleNumber + ")" : "") + "\n" +
+      "✅ নির্ধারিত: " + payload.officialFare + "৳\n" +
+      "❌ দাবিকৃত: " + payload.demandedFare + "৳\n\n" +
+      "🧑‍✈️ চালক: " + payload.driverName + (payload.driverPhone ? " (" + payload.driverPhone + ")" : "") + "\n" +
+      "🕒 সময়: " + (payload.incidentTime || "-") + "\n" +
+      "🌤️ আবহাওয়া: " + (payload.weather || "-") + "\n" +
+      "📷 ছবি: " + (hasPhoto ? "সংযুক্ত" : "নেই") + "\n\n" +
+      "📝 " + (payload.description || "বিবরণ নেই")) 
+      : 
+      ("🚨 New Fare Report\n\n" +
+      "👤 Passenger: " + payload.reporterName + "\n" +
+      "📞 Mobile: " + (payload.reporterPhone || "N/A") + "\n\n" +
+      "📍 Route: " + payload.origin + " → " + payload.destination + "\n" +
+      "🚗 Vehicle: " + payload.vehicle + (payload.vehicleNumber ? " (" + payload.vehicleNumber + ")" : "") + "\n" +
+      "✅ Official: " + payload.officialFare + "৳\n" +
+      "❌ Demanded: " + payload.demandedFare + "৳\n\n" +
+      "🧑‍✈️ Driver: " + payload.driverName + (payload.driverPhone ? " (" + payload.driverPhone + ")" : "") + "\n" +
+      "🕒 Time: " + (payload.incidentTime || "-") + "\n" +
+      "🌤️ Weather: " + (payload.weather || "-") + "\n" +
+      "📷 Photo: " + (hasPhoto ? "Attached" : "No") + "\n\n" +
+      "📝 " + (payload.description || "No description"));
+
+    const wa = encodeURIComponent(waMsg);
+
+    status.className = "cu-status success";
+    status.innerHTML = currentLang === 'bn' ? 
+      `✅ রিপোর্ট সফলভাবে জমা হয়েছে!<br><br><a href="https://wa.me/${CU_CONFIG.whatsappNumber}?text=${wa}" target="_blank" style="display:inline-block;background:#25d366;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:700;">📱 WhatsApp-এ পাঠান</a>` :
+      `✅ Report submitted successfully!<br><br><a href="https://wa.me/${CU_CONFIG.whatsappNumber}?text=${wa}" target="_blank" style="display:inline-block;background:#25d366;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:700;">📱 Send via WhatsApp</a>`;
+    
+    form.reset();
+    document.getElementById('cuPhotoPreview').style.display = 'none';
+  } catch(err) {
+    console.error(err);
+    status.className = "cu-status error";
+    status.textContent = currentLang === 'bn' ? "❌ জমা দিতে সমস্যা হয়েছে। ইন্টারনেট চেক করুন।" : "❌ Failed to submit. Please check your internet.";
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+/* ═══ Init ═══ */
+document.addEventListener('DOMContentLoaded', () => {
+  initDropdowns();
+  
+  document.getElementById('cuOrigin').addEventListener('change', calculateFare);
+  document.getElementById('cuDest').addEventListener('change', calculateFare);
+  document.getElementById('cuVehicleFilter').addEventListener('change', calculateFare);
+  document.getElementById('cuSearch').addEventListener('input', (e) => renderTable(e.target.value));
+  
+  document.getElementById('cuPhotoInput').addEventListener('change', function() {
+    const pv = document.getElementById('cuPhotoPreview');
+    if(this.files && this.files[0]) {
+      pv.src = URL.createObjectURL(this.files[0]);
+      pv.style.display = 'block';
+    } else {
+      pv.style.display = 'none';
+    }
+  });
+
+  document.getElementById('cuReportModal').addEventListener('click', (e) => {
+    if(e.target.id === 'cuReportModal') closeReport();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeReport();
+  });
+});
+</script>
+</body>
+</html>
