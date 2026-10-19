@@ -34,7 +34,10 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/utilities.css">
 
-  <!-- Highlighted Fare Calculator button styles -->
+  <!-- Prefetch the fare calculator for quicker load -->
+  <link rel="prefetch" href="/cucampusfare.html">
+
+  <!-- Highlighted Fare Calculator button styles + floating CTA -->
   <style>
     /* Prominent highlighted button for campus fare calculator */
     .btn--fare { 
@@ -43,36 +46,76 @@
       padding: 10px 18px;
       border-radius: 999px;
       font-weight: 700;
-      box-shadow: 0 8px 20px rgba(5,150,105,0.18);
+      box-shadow: 0 10px 30px rgba(16,185,129,0.16);
       display: inline-block;
-      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+      transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease, opacity .12s ease;
       text-decoration: none;
+      position: relative;
+      overflow: visible;
     }
-    .btn--fare:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(5,150,105,0.22); }
+    .btn--fare:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 40px rgba(16,185,129,0.22); }
     /* Focus (accessibility) */
-    .btn--fare:focus { outline: 3px solid rgba(16,185,129,0.18); outline-offset: 4px; box-shadow: 0 10px 30px rgba(5,150,105,0.15); }
+    .btn--fare:focus { outline: 3px solid rgba(16,185,129,0.18); outline-offset: 4px; box-shadow: 0 14px 34px rgba(5,150,105,0.15); }
 
-    /* Subtle pulse to draw attention without being distracting */
-    .btn--pulse { position: relative; }
+    /* Strong initial attention animation */
+    @keyframes attention {
+      0% { transform: translateY(0) scale(1); box-shadow: 0 10px 30px rgba(16,185,129,0.15); }
+      30% { transform: translateY(-6px) scale(1.06); box-shadow: 0 22px 50px rgba(16,185,129,0.28); }
+      60% { transform: translateY(-2px) scale(1.02); box-shadow: 0 14px 36px rgba(16,185,129,0.20); }
+      100% { transform: translateY(0) scale(1); box-shadow: 0 10px 30px rgba(16,185,129,0.16); }
+    }
+    /* Gentle, continuous halo pulse */
     .btn--pulse::after {
       content: '';
       position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      width: 100%; height: 100%; border-radius: 999px;
-      box-shadow: 0 0 0 6px rgba(16,185,129,0.08);
-      animation: pulse 2.5s infinite ease-in-out;
+      width: 120%; height: 120%; border-radius: 999px;
+      box-shadow: 0 0 0 6px rgba(16,185,129,0.06);
+      animation: pulse 3.2s infinite ease-in-out;
       z-index: -1;
       pointer-events: none;
+      opacity: 0.9;
     }
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.12); }
-      70% { box-shadow: 0 0 0 12px rgba(16,185,129,0); }
+      60% { box-shadow: 0 0 0 18px rgba(16,185,129,0); }
       100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
     }
 
-    /* Make sure button stands out on smaller screens */
+    /* Floating CTA (mobile) */
+    .float-fare {
+      position: fixed;
+      right: 16px;
+      bottom: 88px; /* above existing float-btn */
+      z-index: 9999;
+      display: none; /* visible on small screens via media query */
+      background: linear-gradient(135deg,#059669,#10b981);
+      color: white;
+      padding: 12px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      box-shadow: 0 18px 40px rgba(16,185,129,0.22);
+      text-decoration: none;
+      transform: translateY(0);
+      transition: transform .18s ease, opacity .12s ease;
+    }
+    .float-fare:hover { transform: translateY(-6px); }
+    .float-fare:focus { outline: 3px solid rgba(16,185,129,0.14); outline-offset: 4px; }
+
+    /* Show floating CTA on small screens */
+    @media (max-width: 900px) {
+      .float-fare { display: inline-flex; align-items:center; gap:8px; }
+    }
+
+    /* Keep both float buttons from overlapping on very small screens */
+    @media (max-width: 480px) {
+      .float-fare { right: 12px; bottom: 90px; padding: 12px 12px; }
+      .float-btn { left: 12px; bottom: 12px; }
+    }
+
+    /* Ensure hero CTAs stack nicely on mobile */
     @media (max-width: 640px) {
-      .btn--fare { padding: 12px 16px; font-size: 0.95rem; }
       .hero__ctas { display:flex; flex-direction:column; gap:10px; align-items:center; }
+      .btn--fare { width: auto; }
     }
   </style>
 
@@ -130,6 +173,8 @@
         <li><a href="#committee" data-bn="কমিটি" data-en="Committee">কমিটি</a></li>
         <li><a href="#membership" data-bn="সদস্যপদ" data-en="Membership">সদস্যপদ</a></li>
         <li><a href="#contact" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a></li>
+        <!-- New: top-nav quick link to the fare calculator -->
+        <li><a href="cucampusfare.html" data-bn="ভাড়া" data-en="Fare Calculator" class="nav__fare">ভাড়া</a></li>
       </ul>
     </nav>
   </div>
@@ -152,8 +197,8 @@
       <div class="hero__ctas">
         <a href="#about" class="btn btn--gold" data-bn="আরও জানুন" data-en="Learn More">আরও জানুন →</a>
         <a href="#membership" class="btn btn--ghost" data-bn="সদস্য হোন" data-en="Join Us">সদস্য হোন</a>
-        <!-- Added: Highlighted Fare Calculator button linking to cucampusfare.html. Opens in new tab, accessible -->
-        <a href="cucampusfare.html" target="_blank" rel="noopener" class="btn--fare btn--pulse" aria-label="Open Fare Calculator (নতুন ট্যাবে খুলুন)" title="ভাড়া ক্যালকুলেটর — নতুন ট্যাবে খুলুন" data-bn="ভাড়া ক্যালকুলেটর" data-en="Fare Calculator">ভাড়া ক্যালকুলেটর →</a>
+        <!-- Hero: Highlighted Fare Calculator button linking to cucampusfare.html. Opens in new tab, accessible -->
+        <a id="heroFareBtn" href="cucampusfare.html" target="_blank" rel="noopener" class="btn--fare btn--pulse" aria-label="Open Fare Calculator (নতুন ট্যাবে খুলুন)" title="ভাড়া ক্যালকুলেটর — নতুন ট্যাবে খুলুন" data-bn="ভাড়া ক্যালকুলেটর" data-en="Fare Calculator">ভাড়া ক্যালকুলেটর →</a>
       </div>
     </div>
   </section>
@@ -177,69 +222,6 @@
           <img src="https://i.pinimg.com/736x/4d/ef/a2/4defa2b09c58f19b0c48ee95af27e1b0.jpg" alt="শিক্ষা" loading="lazy" decoding="async">
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ TABS ============ -->
-  <section class="section section--green" id="activities">
-    <div class="container">
-      <div class="section__head">
-        <span class="section__eyebrow" data-bn="আমাদের কার্যক্রম" data-en="Our Activities">আমাদের কার্যক্রম</span>
-        <h2 class="section__title" data-bn="যা আমরা করি" data-en="What We Do">যা আমরা করি</h2>
-      </div>
-      <div class="tabs">
-        <div class="tabs__nav" role="tablist">
-          <button class="tabs__btn active" data-bn="📚 শিক্ষা" data-en="📚 Education">📚 শিক্ষা</button>
-          <button class="tabs__btn" data-bn="🤝 সেবা" data-en="🤝 Service">🤝 সেবা</button>
-          <button class="tabs__btn" data-bn="🎉 দিবস" data-en="🎉 Events">🎉 দিবস</button>
-          <button class="tabs__btn" data-bn="🏆 ক্রীড়া" data-en="🏆 Sports">🏆 ক্রীড়া</button>
-        </div>
-        <div class="tabs__panel active">
-          <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=900&q=80" alt="শিক্ষা" loading="lazy" decoding="async">
-          <div>
-            <h3 data-bn="শিক্ষা ও গবেষণা" data-en="Education &amp; Research">শিক্ষা ও গবেষণা</h3>
-            <p data-bn="শিক্ষক-গবেষকদের জন্য সেমিনার, সিম্পোজিয়াম, প্রকাশনা সহায়তা ও ��[...]">শিক্ষক-গবেষকদের জন্য সেমিনার, সিম্পোজিয়াম, প্রকাশনা সহায়তা ও ক্যা[...]</p>
-            <a href="#news" class="btn btn--outline btn--sm" data-bn="বিস্তারিত" data-en="Details">বিস্তারিত →</a>
-          </div>
-        </div>
-        <div class="tabs__panel">
-          <img src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=900&q=80" alt="সেবা" loading="lazy" decoding="async">
-          <div>
-            <h3 data-bn="মানবসেবা" data-en="Humanitarian Service">মানবসেবা</h3>
-            <p data-bn="রক্তদান, চিকিৎসা সহায়তা, শীতবস্ত্র বিতরণ ও অসহায় শিক্ষার্থীদে[...]"></p>
-            <a href="#gallery" class="btn btn--outline btn--sm" data-bn="গ্যালারি দেখুন" data-en="View Gallery">গ্যালারি দেখুন →</a>
-          </div>
-        </div>
-        <div class="tabs__panel">
-          <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=900&q=80" alt="দিবস" loading="lazy" decoding="async">
-          <div>
-            <h3 data-bn="জাতীয় দিবস উদযাপন" data-en="National Day Celebrations">জাতীয় দিবস উদযাপন</h3>
-            <p data-bn="স্বাধীনতা দিবস, বিজয় দিবস, জাতীয় শোক দিবস ও শহীদ জিয়াউর রহমানে[...]"></p>
-            <a href="#events" class="btn btn--outline btn--sm" data-bn="ইভেন্ট দেখুন" data-en="View Events">ইভেন্ট দেখুন →</a>
-          </div>
-        </div>
-        <div class="tabs__panel">
-          <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80" alt="ক্রীড়া" loading="lazy" decoding="async">
-          <div>
-            <h3 data-bn="ক্রীড়া ও সাংস্কৃতিক" data-en="Sports &amp; Cultural">ক্রীড়া ও সাংস্কৃতিক</h3>
-            <p data-bn="বার্ষিক ক্রীড়া প্রতিযোগিতা, সাংস্কৃতিক সন্ধ্যা ও বিতর্ক প্রতি�[...]">বার্ষিক ক্রীড়া প্রতিযোগিতা, সাংস্কৃতিক সন্ধ্যা ও বিতর্ক প্রতিযোগ��[...]
-            </p>
-            <a href="#gallery" class="btn btn--outline btn--sm" data-bn="গ্যালারি দেখুন" data-en="View Gallery">গ্যালারি দেখুন →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ NEWS ============ -->
-  <section class="section" id="news">
-    <div class="container">
-      <div class="section__head">
-        <span class="section__eyebrow" data-bn="সংবাদ ও ব্লগ" data-en="News &amp; Blog">সংবাদ ও ব্লগ</span>
-        <h2 class="section__title" data-bn="সাম্প্রতিক খবর" data-en="Latest Updates">সাম্প্রতিক খবর</h2>
-        <p class="section__desc" data-bn="সংগঠনের সর্বশেষ কার্যক্রম, ঘোষণা ও সাফল্যের খবরাখবর।" data-en="Latest activities, announcements & achievements."></p>
-      </div>
-      <div class="news__grid" id="newsGrid"><!-- JS render --></div>
     </div>
   </section>
 
@@ -271,6 +253,8 @@
             <li><a href="#activities" data-bn="কার্যক্রম" data-en="Activities">কার্যক্রম</a></li>
             <li><a href="#news" data-bn="নিউজ" data-en="News">নিউজ</a></li>
             <li><a href="#events" data-bn="ইভেন্ট" data-en="Events">ইভেন্ট</a></li>
+            <!-- New: quick link in footer -->
+            <li><a href="cucampusfare.html" data-bn="ভাড়া ক্যালকুলেটর" data-en="Fare Calculator">ভাড়া ক্যালকুলেটর</a></li>
           </ul>
         </div>
         <div>
@@ -297,11 +281,27 @@
     </div>
   </footer>
 
-  <!-- ============ Floating + back-to-top (existing) ============ -->
+  <!-- Floating + back-to-top (existing) ============ -->
   <a href="chuti.html" class="float-btn">📅 <span data-bn="ছুটির তালিকা ২০২৬" data-en="Holiday List 2026">ছুটির তালিকা ২০২৬</span></a>
   <button class="back-top" id="backTop" aria-label="Back to top" type="button">↑</button>
 
+  <!-- Floating fare CTA (mobile) -->
+  <a href="cucampusfare.html" class="float-fare" target="_blank" rel="noopener" aria-label="Fare Calculator" title="ভাড়া ক্যালকুলেটর">🚌 ভাড়া ক্যালকুলেটর</a>
+
   <!-- Entry point -->
   <script type="module" src="js/main.js"></script>
+
+  <!-- Small script to trigger one-time attention animation (immediate but not looping) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const btn = document.getElementById('heroFareBtn');
+      if(!btn) return;
+      // Add attention animation class briefly
+      btn.style.animation = 'attention 1200ms cubic-bezier(.2,.9,.2,1) 1';
+      // ensure pulse remains via btn--pulse
+      // re-run a softer attention after 2.5s to catch delayed viewers
+      setTimeout(()=>{ btn.style.animation = 'attention 900ms cubic-bezier(.2,.9,.2,1) 1'; }, 2500);
+    });
+  </script>
 </body>
 </html>
