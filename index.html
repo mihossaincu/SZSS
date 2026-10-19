@@ -46,8 +46,12 @@
       box-shadow: 0 8px 20px rgba(5,150,105,0.18);
       display: inline-block;
       transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+      text-decoration: none;
     }
     .btn--fare:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(5,150,105,0.22); }
+    /* Focus (accessibility) */
+    .btn--fare:focus { outline: 3px solid rgba(16,185,129,0.18); outline-offset: 4px; box-shadow: 0 10px 30px rgba(5,150,105,0.15); }
+
     /* Subtle pulse to draw attention without being distracting */
     .btn--pulse { position: relative; }
     .btn--pulse::after {
@@ -148,8 +152,8 @@
       <div class="hero__ctas">
         <a href="#about" class="btn btn--gold" data-bn="আরও জানুন" data-en="Learn More">আরও জানুন →</a>
         <a href="#membership" class="btn btn--ghost" data-bn="সদস্য হোন" data-en="Join Us">সদস্য হোন</a>
-        <!-- Added: Highlighted Fare Calculator button linking to cucampusfare.html -->
-        <a href="cucampusfare.html" class="btn--fare btn--pulse" data-bn="ভাড়া ক্যালকুলেটর" data-en="Fare Calculator">ভাড়া ক্যালকুলেটর →</a>
+        <!-- Added: Highlighted Fare Calculator button linking to cucampusfare.html. Opens in new tab, accessible -->
+        <a href="cucampusfare.html" target="_blank" rel="noopener" class="btn--fare btn--pulse" aria-label="Open Fare Calculator (নতুন ট্যাবে খুলুন)" title="ভাড়া ক্যালকুলেটর — নতুন ট্যাবে খুলুন" data-bn="ভাড়া ক্যালকুলেটর" data-en="Fare Calculator">ভাড়া ক্যালকুলেটর →</a>
       </div>
     </div>
   </section>
@@ -210,7 +214,7 @@
           <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=900&q=80" alt="দিবস" loading="lazy" decoding="async">
           <div>
             <h3 data-bn="জাতীয় দিবস উদযাপন" data-en="National Day Celebrations">জাতীয় দিবস উদযাপন</h3>
-            <p data-bn="স্বাধীনতা দিবস, বিজয় দিবস, জাতীয় শোক দিবস ও শহীদ জিয়াউর রহমানে[...]">স্বাধীনতা দিবস, বিজয় দিবস, জাতীয় শোক দিবস ও শহীদ জিয়াউর রহমানের জন[...]</p>
+            <p data-bn="স্বাধীনতা দিবস, বিজয় দিবস, জাতীয় শোক দিবস ও শহীদ জিয়াউর রহমানে[...]"></p>
             <a href="#events" class="btn btn--outline btn--sm" data-bn="ইভেন্ট দেখুন" data-en="View Events">ইভেন্ট দেখুন →</a>
           </div>
         </div>
@@ -218,7 +222,8 @@
           <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80" alt="ক্রীড়া" loading="lazy" decoding="async">
           <div>
             <h3 data-bn="ক্রীড়া ও সাংস্কৃতিক" data-en="Sports &amp; Cultural">ক্রীড়া ও সাংস্কৃতিক</h3>
-            <p data-bn="বার্ষিক ক্রীড়া প্রতিযোগিতা, সাংস্কৃতিক সন্ধ্যা ও বিতর্ক প্রতি�[...]">বার্ষিক ক্রীড়া প্রতিযোগিতা, সাংস্কurous[...]</p>
+            <p data-bn="বার্ষিক ক্রীড়া প্রতিযোগিতা, সাংস্কৃতিক সন্ধ্যা ও বিতর্ক প্রতি�[...]">বার্ষিক ক্রীড়া প্রতিযোগিতা, সাংস্কৃতিক সন্ধ্যা ও বিতর্ক প্রতিযোগ��[...]
+            </p>
             <a href="#gallery" class="btn btn--outline btn--sm" data-bn="গ্যালারি দেখুন" data-en="View Gallery">গ্যালারি দেখুন →</a>
           </div>
         </div>
