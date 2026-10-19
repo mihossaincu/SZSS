@@ -26,14 +26,12 @@
   --text-muted: #64748b;
   --border: #e2e8f0;
   --accent: #f59e0b;
-  --danger: #ef4444;
-  --danger-hover: #dc2626;
   --radius-card: 20px;
   --radius-input: 12px;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
   --shadow-md: 0 6px 16px -2px rgba(0,0,0,0.08);
   --shadow-lg: 0 20px 30px -4px rgba(0,0,0,0.18);
-  --shadow-glow: 0 0 25px rgba(5, 150, 105, 0.28);
+  --shadow-glow: 0 0 25px rgba(5, 150, 105, 0.3);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -65,7 +63,7 @@ body { font-family: 'Hind Siliguri', sans-serif; background-color: var(--bg-body
 .cu-tab.active { background: var(--primary); color: white; box-shadow: var(--shadow-sm); }
 
 /* Containers */
-.cu-container { max-width: 720px; margin: 0 auto; padding: 0 16px; display: none; }
+.cu-container { max-width: 680px; margin: 0 auto; padding: 0 16px; display: none; }
 .cu-container.wide { max-width: 1040px; }
 .cu-container.active { display: block; animation: slideUp 0.3s ease; }
 @keyframes slideUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
@@ -78,9 +76,9 @@ body { font-family: 'Hind Siliguri', sans-serif; background-color: var(--bg-body
 
 .cu-field { margin-bottom: 14px; }
 .cu-field label { display: block; font-weight: 600; color: var(--text-main); margin-bottom: 6px; font-size: 0.86rem; }
-.cu-field select, .cu-field input, .cu-field textarea { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-input); font-size: 0.95rem; font-family: inherit; background: #f8fafc; color: var(--text-main); transition: all 0.2s; appearance: none; }
+.cu-field select, .cu-field input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-input); font-size: 0.95rem; font-family: inherit; background: #f8fafc; color: var(--text-main); transition: all 0.2s; appearance: none; }
 .cu-field select { background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; }
-.cu-field select:focus, .cu-field input:focus, .cu-field textarea:focus { outline: none; border-color: var(--primary); background-color: #fff; box-shadow: 0 0 0 3px var(--primary-light); }
+.cu-field select:focus, .cu-field input:focus { outline: none; border-color: var(--primary); background-color: #fff; box-shadow: 0 0 0 3px var(--primary-light); }
 .cu-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 @media (max-width: 480px) { .cu-row { grid-template-columns: 1fr; } }
 
@@ -93,7 +91,7 @@ body { font-family: 'Hind Siliguri', sans-serif; background-color: var(--bg-body
 .cu-counter button:hover { background: #e2e8f0; }
 .cu-counter input { flex: 1; text-align: center; border: none; background: transparent; font-size: 1.1rem; font-weight: 700; padding: 0; color: var(--text-main); }
 
-/* Primary Action View Button */
+/* View Fare Action Button */
 .cu-btn-view-fare { width: 100%; margin-top: 18px; padding: 15px; border: none; border-radius: 14px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; font-weight: 700; font-size: 1.05rem; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35); transition: all 0.2s; }
 .cu-btn-view-fare:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(5, 150, 105, 0.45); }
 
@@ -103,37 +101,42 @@ body { font-family: 'Hind Siliguri', sans-serif; background-color: var(--bg-body
 .cu-notice ul { padding-left: 18px; margin-top: 4px; }
 .cu-notice li { margin-bottom: 2px; }
 
-/* ═══ Fare Ticket Modal Popup (No Scrolling Needed!) ═══ */
-.cu-ticket-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(5px); z-index: 99998; padding: 16px; overflow-y: auto; align-items: center; justify-content: center; }
+/* ═══ Clean Popup Modal Ticket (No extra clutter, Only Fare + Developer Credit) ═══ */
+.cu-ticket-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(6px); z-index: 99999; padding: 16px; overflow-y: auto; align-items: center; justify-content: center; }
 .cu-ticket-modal.active { display: flex; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-.cu-ticket-box { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); color: white; border-radius: 24px; max-width: 500px; width: 100%; margin: auto; padding: 24px; box-shadow: var(--shadow-glow); position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); animation: zoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+.cu-ticket-box { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); color: white; border-radius: 24px; max-width: 500px; width: 100%; margin: auto; padding: 26px 24px 20px; box-shadow: var(--shadow-glow); position: relative; overflow: hidden; border: 1.5px solid rgba(255,255,255,0.2); animation: zoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
 @keyframes zoomIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
 
-.cu-modal-close-ticket { position: absolute; right: 18px; top: 18px; background: rgba(255,255,255,0.2); border: none; color: white; width: 34px; height: 34px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.cu-modal-close-ticket { position: absolute; right: 16px; top: 16px; background: rgba(255,255,255,0.2); border: none; color: white; width: 34px; height: 34px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
 .cu-modal-close-ticket:hover { background: rgba(255,255,255,0.35); }
 
-.cu-ticket-header { text-align: center; border-bottom: 2px dashed rgba(255,255,255,0.22); padding-bottom: 14px; margin-bottom: 16px; padding-right: 30px; }
+.cu-ticket-header { text-align: center; border-bottom: 2px dashed rgba(255,255,255,0.25); padding-bottom: 14px; margin-bottom: 16px; padding-right: 28px; }
 .cu-ticket-header h3 { font-size: 1.15rem; font-weight: 700; color: #a7f3d0; margin-bottom: 2px; }
-.cu-ticket-header p { font-size: 1rem; font-weight: 700; color: #ffffff; }
+.cu-ticket-header p { font-size: 1.02rem; font-weight: 700; color: #ffffff; }
 .cu-distance-pill { display: inline-flex; align-items: center; gap: 4px; background: rgba(0,0,0,0.25); padding: 3px 12px; border-radius: 14px; font-size: 0.78rem; margin-top: 6px; color: #fde047; }
 
-.cu-res-item { background: rgba(255,255,255,0.14); backdrop-filter: blur(8px); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.15); }
+.cu-res-item { background: rgba(255,255,255,0.14); backdrop-filter: blur(8px); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.16); }
 .cu-res-top { display: flex; justify-content: space-between; align-items: center; }
 .cu-res-vehicle { font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
 .cu-res-price { font-size: 1.85rem; font-weight: 800; color: #fde047; line-height: 1; display: flex; align-items: baseline; gap: 2px; }
 .cu-res-price small { font-size: 0.9rem; font-weight: 600; color: white; }
 
 .cu-transit-path { margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.2); font-size: 0.78rem; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
-.cu-step-node { background: rgba(0,0,0,0.25); padding: 2px 8px; border-radius: 6px; font-weight: 600; color: #fff; }
+.cu-step-node { background: rgba(0,0,0,0.28); padding: 2px 8px; border-radius: 6px; font-weight: 600; color: #fff; }
 .cu-step-arrow { color: #fde047; font-weight: bold; }
 .cu-res-details { font-size: 0.76rem; color: #a7f3d0; margin-top: 6px; display: flex; flex-direction: column; gap: 2px; }
 .cu-res-details span { display: flex; justify-content: space-between; }
 
-.cu-btn-report { width: 100%; margin-top: 14px; padding: 13px; border: none; border-radius: 12px; background: linear-gradient(135deg, var(--danger), var(--danger-hover)); color: white; font-weight: 700; font-size: 0.95rem; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); }
-.cu-btn-report:hover { transform: translateY(-2px); }
+/* Dedicated Developer Credit Box inside Ticket */
+.cu-ticket-dev-credit { margin-top: 18px; padding-top: 14px; border-top: 2px dashed rgba(255,255,255,0.25); text-align: center; font-size: 0.82rem; color: #e2e8f0; }
+.cu-ticket-dev-credit strong { color: #ffffff; font-weight: 700; }
+.cu-ticket-dev-credit p { margin: 2px 0; }
+.cu-ticket-dev-credit .cu-tdc-dept { font-size: 0.76rem; color: #a7f3d0; }
+.cu-ticket-dev-credit .cu-tdc-org { font-size: 0.76rem; color: #fef08a; margin-top: 4px; }
 
-/* Table View */
+/* Directory Table */
 .cu-search-wrap { position: relative; margin-bottom: 16px; }
 .cu-search-wrap input { padding-left: 42px; border-radius: 28px; }
 .cu-search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: var(--text-muted); }
@@ -153,11 +156,11 @@ body { font-family: 'Hind Siliguri', sans-serif; background-color: var(--bg-body
 .cu-hubs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 14px; }
 .cu-hub-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
 .cu-hub-card h4 { font-size: 0.95rem; color: var(--primary-dark); display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
-.cu-hub-card p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; }
+.cu-hub-card p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px; }
 .cu-hub-routes { font-size: 0.78rem; display: flex; flex-wrap: wrap; gap: 4px; }
 .cu-hub-tag { background: #e2e8f0; padding: 2px 6px; border-radius: 4px; }
 
-/* Interactive Map */
+/* Map */
 #cuMapContainer { width: 100%; height: 500px; border-radius: 16px; border: 1.5px solid var(--border); }
 
 /* Footer */
@@ -176,22 +179,6 @@ body { font-family: 'Hind Siliguri', sans-serif; background-color: var(--bg-body
 .cu-org-tag { text-align: center; font-size: 0.84rem; color: var(--text-muted); margin-top: 14px; }
 .cu-org-tag strong { color: var(--primary-hover); }
 
-/* Incident Modal */
-.cu-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); z-index: 99999; padding: 16px; overflow-y: auto; align-items: center; justify-content: center; }
-.cu-modal.active { display: flex; animation: fadeIn 0.2s ease; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.cu-modal-box { background: var(--surface); border-radius: var(--radius-card); max-width: 520px; width: 100%; margin: auto; box-shadow: var(--shadow-lg); overflow: hidden; }
-.cu-modal-head { padding: 16px 20px; background: #f8fafc; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-.cu-modal-head h3 { font-size: 1.05rem; font-weight: 700; }
-.cu-modal-close { background: #e2e8f0; border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.cu-modal-body { padding: 20px; }
-.cu-note { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; color: #1e40af; margin-bottom: 16px; }
-.cu-submit { width: 100%; padding: 13px; border: none; border-radius: var(--radius-input); background: var(--primary); color: white; font-weight: 700; font-size: 0.95rem; font-family: inherit; cursor: pointer; margin-top: 10px; }
-.cu-submit:hover { background: var(--primary-hover); }
-.cu-status { padding: 12px; border-radius: 10px; margin-top: 12px; text-align: center; font-weight: 600; font-size: 0.88rem; display: none; }
-.cu-status.success { background: #d1fae5; color: #065f46; display: block; }
-.cu-status.error { background: #fee2e2; color: #991b1b; display: block; }
-.cu-status.loading { background: #dbeafe; color: #1e40af; display: block; }
 body.modal-open { overflow: hidden; }
 </style>
 </head>
@@ -204,7 +191,7 @@ body.modal-open { overflow: hidden; }
       <div class="cu-brand-icon">🚖</div>
       <div class="cu-brand-text">
         <h1 data-i18n="title">চট্টগ্রাম বিশ্ববিদ্যালয় অভ্যন্তরীণ ভাড়া সহকারী</h1>
-        <p data-i18n="subtitle">সংশোধিত বাহন নিয়মাবলী ও পপআপ স্মার্ট ক্যালকুলেটর</p>
+        <p data-i18n="subtitle">সংশোধিত বাহন নীতিমালা ও তাৎক্ষণিক পপআপ টিকেট</p>
       </div>
     </div>
     <div class="cu-header-actions">
@@ -218,7 +205,7 @@ body.modal-open { overflow: hidden; }
 <div class="cu-tabs-wrapper">
   <nav class="cu-tabs">
     <button class="cu-tab active" onclick="switchTab('calc')" id="tab-calc"><span data-i18n="tabCalc">🧮 ক্যালকুলেটর</span></button>
-    <button class="cu-tab" onclick="switchTab('hubs')" id="tab-hubs"><span data-i18n="tabHubs">🏛️ ৫টি হাব ও বাহন</span></button>
+    <button class="cu-tab" onclick="switchTab('hubs')" id="tab-hubs"><span data-i18n="tabHubs">🏛️ হাব ও বাহন নিয়ম</span></button>
     <button class="cu-tab" onclick="switchTab('map')" id="tab-map"><span data-i18n="tabMap">🗺️ ম্যাপ</span></button>
     <button class="cu-tab" onclick="switchTab('search')" id="tab-search"><span data-i18n="tabSearch">📋 সম্পূর্ণ তালিকা</span></button>
   </nav>
@@ -260,35 +247,34 @@ body.modal-open { overflow: hidden; }
       <div class="cu-field">
         <label data-i18n="vehicle">যানবাহনের ধরন</label>
         <select id="cuVehicleFilter">
-          <option value="all" data-i18n="allVeh">সব যানবাহন</option>
+          <option value="all" data-i18n="allVeh">সব অনুমোদিত বাহন</option>
           <option value="Rickshaw" data-i18n="rickshaw">🛺 ব্যাটারী চালিত অটো রিক্সা</option>
-          <option value="E-Car" data-i18n="ecar">🚗 ই-কার (টমটম)</option>
+          <option value="E-Car" data-i18n="ecar">🚗 ই-কার</option>
           <option value="CNG" data-i18n="cng">🛵 সিএনজি</option>
         </select>
       </div>
     </div>
 
-    <!-- View Fare Button triggers Popup (No scrolling required!) -->
+    <!-- Direct Trigger Button for Popup Ticket -->
     <button type="button" class="cu-btn-view-fare" onclick="showFarePopup()">
       <span>🎫</span> <span data-i18n="btnViewFare">ভাড়া ও রুট দেখুন (পপআপ টিকেট)</span>
     </button>
 
     <div class="cu-notice">
-      <strong data-i18n="noticeTitle">⚠️ ক্যাম্পাস বাহন চলাচল নির্দেশিকা:</strong>
+      <strong data-i18n="noticeTitle">⚠️ চবি ক্যাম্পাস বাহন নীতিমালা:</strong>
       <ul>
-        <li><strong>১ নং গেট:</strong> শুধু সিএনজি ও অটো রিক্সা (ই-কার চলে না)।</li>
-        <li><strong>জিরো পয়েন্ট:</strong> সিএনজি শুধু ১ নং গেট, বিজ্ঞান ও জীববিজ্ঞান পর্যন্ত সীমাবদ্ধ।</li>
-        <li><strong>আবাসিক হলসমূহ:</strong> শুধু অটো রিক্সা ও ই-কার চলাচল করে।</li>
-        <li><strong>উত্তর ও দক্ষিণ ক্যাম্পাস জোন:</strong> ই-কার ও সিএনজি চলে না, কেবল ব্যাটারী চালিত অটো রিক্সা।</li>
+        <li><strong>সিএনজি:</strong> শুধুমাত্র ১ নং গেট থেকে জীববিজ্ঞান/মেরিন সায়েন্স করিডোর ও এর স্টপেজগুলোতে চলে।</li>
+        <li><strong>ই-কার:</strong> জিরো পয়েন্ট থেকে ১ নং গেট ছাড়া ক্যাম্পাসের সমস্ত অভ্যন্তরীণ রুটে চলে।</li>
+        <li><strong>ব্যাটারী চালিত অটো রিক্সা:</strong> ১ নং গেটসহ ক্যাম্পাসের সমস্ত রুটে অবাধে চলাচল করে।</li>
       </ul>
     </div>
   </div>
 </main>
 
-<!-- ================= 🎫 POPUP TICKET MODAL (No Scroll Required) ================= -->
+<!-- ================= 🎫 POPUP FARE TICKET (Strictly Fare + Developer Credit) ================= -->
 <div class="cu-ticket-modal" id="cuTicketModal">
   <div class="cu-ticket-box">
-    <button class="cu-modal-close-ticket" onclick="closeFarePopup()">✕</button>
+    <button class="cu-modal-close-ticket" onclick="closeFarePopup()" title="বন্ধ করুন">✕</button>
     
     <div class="cu-ticket-header">
       <h3 data-i18n="fareDetails">ভাড়ার বিবরণ ও অনুমোদিত টিকেট</h3>
@@ -298,15 +284,14 @@ body.modal-open { overflow: hidden; }
       </div>
     </div>
     
+    <!-- Dynamic Vehicle Fare List -->
     <div id="cuPopContent"></div>
-    
-    <button class="cu-btn-report" id="cuPopReportBtn" onclick="openReportFromPopup()">
-      ⚠️ <span data-i18n="reportBtn">অতিরিক্ত ভাড়ার অভিযোগ জানান</span>
-    </button>
 
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; font-size:0.78rem; color:#a7f3d0; font-weight:600;">
-      <span>✅ চ.বি. প্রশাসন নির্ধারিত হার</span>
-      <span>SZSS চবি শাখা</span>
+    <!-- Dedicated Developer Credit at Bottom of the Ticket -->
+    <div class="cu-ticket-dev-credit">
+      <p>👨‍💻 সফটওয়্যার বাস্তবায়ন: <strong>মোঃ ইমাম হোসাইন</strong></p>
+      <p class="cu-tdc-dept">🎓 দর্শন বিভাগ | চট্টগ্রাম বিশ্ববিদ্যালয়</p>
+      <p class="cu-tdc-org">উদ্যোগ ও সার্বিক পরিচালনায়: <strong>শহীদ জিয়া স্মৃতি সংসদ (SZSS)</strong>, চবি শাখা</p>
     </div>
   </div>
 </div>
@@ -315,54 +300,40 @@ body.modal-open { overflow: hidden; }
 <main class="cu-container wide" id="content-hubs">
   <div class="cu-card">
     <div class="cu-card-header">
-      <h2 class="cu-card-title">🏛️ ৫টি প্রধান হাব ও যানবাহন নিয়ামাবলী</h2>
-      <span class="cu-tag">Campus Transit</span>
+      <h2 class="cu-card-title">🏛️ ক্যাম্পাস ট্রানজিট হাব ও যানবাহন নীতিমালা</h2>
+      <span class="cu-tag">Campus Rules</span>
     </div>
 
     <div class="cu-hubs-grid">
       <div class="cu-hub-card">
-        <h4>১. ১ নং গেট (মহাসড়ক হাব)</h4>
-        <p style="color:#b91c1c; font-weight:600;">🚫 ই-কার (টমটম) নেই</p>
-        <p>শুধুমাত্র সিএনজি ও ব্যাটারী চালিত অটো রিক্সা চলাচল করে।</p>
-        <div class="cu-hub-routes">
-          <span class="cu-hub-tag">রেলগেট (~১.২ কিমি)</span>
-          <span class="cu-hub-tag">জিরো পয়েন্ট (~২.৭ কিমি)</span>
-          <span class="cu-hub-tag">চাকসু চত্বর (~৩.৫ কিমি)</span>
-          <span class="cu-hub-tag">বিজ্ঞান অনুষদ</span>
-          <span class="cu-hub-tag">জীববিজ্ঞান অনুষদ (~৪ কিমি)</span>
-          <span class="cu-hub-tag">২ নং গেট (~২.৫ কিমি)</span>
-        </div>
+        <h4>১. ১ নং গেট (মহাসড়ক সংযোগ হাব)</h4>
+        <p style="color:#047857; font-weight:600;">অনুমোদিত: সিএনজি ও অটো রিক্সা</p>
+        <p style="color:#b91c1c; font-weight:600;">🚫 ই-কার সম্পূর্ণ নিষিদ্ধ</p>
+        <p>এখান থেকে সিএনজি শুধু মেইন রোডে জীববিজ্ঞান অনুষদ পর্যন্ত যায়। অটো রিক্সা সব রুটে যেতে পারে।</p>
       </div>
 
       <div class="cu-hub-card">
-        <h4>২. জিরো পয়েন্ট (সেন্ট্রাল হাব)</h4>
-        <p style="color:#047857; font-weight:600;">অটো রিক্সা + ই-কার + সিএনজি (সীমিত)</p>
-        <p>সিএনজি শুধুমাত্র ১ নং গেট ও জীববিজ্ঞান অনুষদ পর্যন্ত মেইন রোডে চলে। অন্যান্য হল বা অভ্যন্তরীণ রাস্তায় সিএনজি চলে না।</p>
-        <div class="cu-hub-routes">
-          <span class="cu-hub-tag">প্রশাসনিক ও লাইব্রেরি</span>
-          <span class="cu-hub-tag">শহীদ মিনার</span>
-          <span class="cu-hub-tag">সমাজবিজ্ঞান ও নতুন কলা</span>
-          <span class="cu-hub-tag">বিজ্ঞান ও জীববিজ্ঞান</span>
-          <span class="cu-hub-tag">আবাসিক হলসমূহ</span>
-        </div>
+        <h4>২. জিরো পয়েন্ট (কেন্দ্রীয় ট্রানজিট হাব)</h4>
+        <p style="color:#047857; font-weight:600;">অনুমোদিত: অটো রিক্সা ও ই-কার (সমস্ত রুটে)</p>
+        <p>১ নং গেট ছাড়া ক্যাম্পাসের সমস্ত অভ্যন্তরীণ হল, অনুষদ ও দক্ষিণ-উত্তর ক্যাম্পাসে ই-কার ও অটো রিক্সা চলে।</p>
       </div>
 
       <div class="cu-hub-card">
-        <h4>৩. আবাসিক হলসমূহ বলয়</h4>
-        <p style="color:#047857; font-weight:600;">অটো রিক্সা ও ই-কার অনুমোদিত</p>
-        <p>সোহরাওয়ার্দী, আলাওল, রহমান, রব, প্রীতিলতা, শামসুন নাহার, বিজয় ২৪, খালেদা জিয়া, ফয়জুন্নেসা, ফরহাদ হোসেন ও অতীশ দীপংকর হল। সিএনজি চলাচল করে না।</p>
+        <h4>৩. ১ নং গেট ➔ জীববিজ্ঞান করিডোর (সিএনজি রুট)</h4>
+        <p style="color:#047857; font-weight:600;">অনুমোদিত: সিএনজি</p>
+        <p>স্টপেজ: ১ নং গেট ➔ রেলগেট ➔ জিরো পয়েন্ট ➔ শহীদ মিনার ➔ চাকসু ➔ বিজ্ঞান অনুষদ ➔ মেরিন সায়েন্স ➔ জীববিজ্ঞান অনুষদ। এর বাইরে সিএনজি চলে না।</p>
       </div>
 
       <div class="cu-hub-card">
-        <h4>৪. দক্ষিণ ও উত্তর ক্যাম্পাস জোন</h4>
-        <p style="color:#b91c1c; font-weight:600;">🚫 ই-কার ও সিএনজি চলে না</p>
-        <p>নীপবন স্কুল, দক্ষিণ ক্যাম্পাস মসজিদ, গ্রীন হাউজ, ফরেস্ট্রি, এসই ৯-৩১, টিচার্স কোয়ার্টার, খেলার মাঠ ও বোটানিক্যাল গার্ডেনে <strong>শুধুমাত্র ব্যাটারী চালিত অটো রিক্সা</strong> চলে।</p>
+        <h4>৪. আবাসিক হলসমূহ ও অনুষদ বলয়</h4>
+        <p style="color:#047857; font-weight:600;">অনুমোদিত: ই-কার ও অটো রিক্সা</p>
+        <p>সমস্ত ছাত্র ও ছাত্রী হল, নতুন ও পুরাতন কলা, সমাজবিজ্ঞান ও লাইব্রেরি রুটে নিয়মিত ই-কার ও অটো রিক্সা সেবা চালু থাকে।</p>
       </div>
 
       <div class="cu-hub-card">
-        <h4>৫. শহীদ মিনার ও ২ নং গেট হাব</h4>
-        <p style="color:#047857; font-weight:600;">অটো রিক্সা ও ই-কার সংযোগ</p>
-        <p>একাডেমিক জোন, কলা ও সমাজবিজ্ঞান বলয় সংযোগকারী ট্রানজিট পয়েন্ট।</p>
+        <h4>৫. দক্ষিণ ও উত্তর ক্যাম্পাস বলয়</h4>
+        <p style="color:#047857; font-weight:600;">অনুমোদিত: অটো রিক্সা ও ই-কার</p>
+        <p>নীপবন স্কুল, দক্ষিণ ক্যাম্পাস মসজিদ, ফরেস্ট্রি, টিচার্স কোয়ার্টার, খেলার মাঠ ও বোটানিক্যাল গার্ডেন।</p>
       </div>
     </div>
   </div>
@@ -426,122 +397,59 @@ body.modal-open { overflow: hidden; }
   </p>
 </div>
 
-<!-- ================= Overcharging Incident Modal ================= -->
-<div class="cu-modal" id="cuReportModal">
-  <div class="cu-modal-box">
-    <div class="cu-modal-head">
-      <h3 data-i18n="reportTitle">⚠️ অতিরিক্ত ভাড়া রিপোর্ট দাখিল</h3>
-      <button class="cu-modal-close" onclick="closeReport()">✕</button>
-    </div>
-    <div class="cu-modal-body">
-      <div class="cu-note" data-i18n="reportNote">🔒 আপনার তথ্য গোপন থাকবে। অভিযোগ নিষ্পত্তির জন্য চবি প্রক্টরিয়াল বডি ও ছাত্র প্রতিনিধিদের সহায়তায় ব্যবহৃত হবে।</div>
-      <form id="cuReportForm">
-        <div class="cu-field"><label data-i18n="repName">আপনার নাম *</label><input type="text" name="reporterName" required></div>
-        <div class="cu-field"><label data-i18n="repPhone">আপনার মোবাইল নম্বর (ঐচ্ছিক)</label><input type="tel" name="reporterPhone"></div>
-        <div class="cu-row">
-          <div class="cu-field"><label data-i18n="repOrigin">কোথা থেকে *</label><input type="text" name="origin" id="repOrigin" required></div>
-          <div class="cu-field"><label data-i18n="repDest">কোথায় *</label><input type="text" name="destination" id="repDest" required></div>
-        </div>
-        <div class="cu-row">
-          <div class="cu-field">
-            <label data-i18n="repVehicle">যানবাহন *</label>
-            <select name="vehicle" id="repVehicle" required>
-              <option value="রিকশা">🛺 অটো রিক্সা</option>
-              <option value="ই-কার">🚗 ই-কার (টমটম)</option>
-              <option value="সিএনজি">🛵 সিএনজি</option>
-            </select>
-          </div>
-          <div class="cu-field"><label data-i18n="repVehNum">গাড়ির নম্বর (যদি থাকে)</label><input type="text" name="vehicleNumber" placeholder="যেমন: চট্ট-১১-XXXX"></div>
-        </div>
-        <div class="cu-row">
-          <div class="cu-field"><label data-i18n="repOfficial">নির্ধারিত ভাড়া (৳) *</label><input type="number" name="officialFare" id="repOfficialFare" required></div>
-          <div class="cu-field"><label data-i18n="repDemanded">দাবিকৃত অতিরিক্ত ভাড়া (৳) *</label><input type="number" name="demandedFare" required></div>
-        </div>
-        <div class="cu-field"><label data-i18n="repTime">ঘটনার তারিখ ও সময় *</label><input type="datetime-local" name="incidentTime" id="repTime" required></div>
-        <div class="cu-field">
-          <label data-i18n="repWeather">আবহাওয়া *</label>
-          <select name="weather" required>
-            <option value="স্বাভাবিক/রোদ">☀️ স্বাভাবিক / রোদ</option>
-            <option value="মেঘলা">⛅ মেঘলা</option>
-            <option value="বৃষ্টি">🌧️ বৃষ্টি</option>
-            <option value="রাত">🌙 রাত</option>
-          </select>
-        </div>
-        <div class="cu-field"><label data-i18n="repDriver">চালকের নাম *</label><input type="text" name="driverName" required></div>
-        <div class="cu-field"><label data-i18n="repDriverPhone">চালকের মোবাইল (ঐচ্ছিক)</label><input type="tel" name="driverPhone"></div>
-        <div class="cu-field">
-          <label data-i18n="repDesc">অভিযোগের বিস্তারিত বিবরণ</label>
-          <textarea name="description" rows="2"></textarea>
-        </div>
-        <button type="submit" class="cu-submit" id="cuSubmitBtn" data-i18n="submitBtn">📩 অভিযোগ রিপোর্ট পাঠান</button>
-        <div class="cu-status" id="cuReportStatus"></div>
-      </form>
-    </div>
-  </div>
-</div>
-
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <script>
-/* ═══ Configuration ═══ */
-const CU_CONFIG = { 
-  formspreeId: "YOUR_FORMSPREE_ID", 
-  whatsappNumber: "8801817457813"
-};
-
 /* ═══ i18n Translations ═══ */
 const i18n = {
   bn: {
-    title: "চট্টগ্রাম বিশ্ববিদ্যালয় অভ্যন্তরীণ ভাড়া সহকারী", subtitle: "সংশোধিত বাহন নিয়মাবলী ও পপআপ স্মার্ট ক্যালকুলেটর", badge: "অফিসিয়াল ও ক্যাম্পাস ভেরিফায়েড",
-    tabCalc: "🧮 ক্যালকুলেটর", tabHubs: "🏛️ ৫টি হাব ও বাহন", tabMap: "🗺️ ম্যাপ", tabSearch: "📋 সম্পূর্ণ তালিকা",
+    title: "চট্টগ্রাম বিশ্ববিদ্যালয় অভ্যন্তরীণ ভাড়া সহকারী", subtitle: "সংশোধিত বাহন নীতিমালা ও তাৎক্ষণিক পপআপ টিকেট", badge: "অফিসিয়াল ও ক্যাম্পাস ভেরিফায়েড",
+    tabCalc: "🧮 ক্যালকুলেটর", tabHubs: "🏛️ হাব ও বাহন নিয়ম", tabMap: "🗺️ ম্যাপ", tabSearch: "📋 সম্পূর্ণ তালিকা",
     routeSelect: "📍 রুট নির্বাচন করুন", swapBtn: "রুট অদলবদল (Swap)",
     origin: "কোথা থেকে (Origin)", dest: "কোথায় (Destination)", selectOpt: "-- নির্বাচন করুন --",
-    pax: "যাত্রী সংখ্যা", vehicle: "যানবাহনের ধরন", allVeh: "সব যানবাহন", rickshaw: "🛺 ব্যাটারী চালিত অটো রিক্সা", ecar: "🚗 ই-কার (টমটম)", cng: "🛵 সিএনজি",
-    noticeTitle: "⚠️ ক্যাম্পাস বাহন চলাচল নির্দেশিকা:",
+    pax: "যাত্রী সংখ্যা", vehicle: "যানবাহনের ধরন", allVeh: "সব অনুমোদিত বাহন", rickshaw: "🛺 ব্যাটারী চালিত অটো রিক্সা", ecar: "🚗 ই-কার", cng: "🛵 সিএনজি",
+    noticeTitle: "⚠️ চবি ক্যাম্পাস বাহন নীতিমালা:",
     btnViewFare: "ভাড়া ও রুট দেখুন (পপআপ টিকেট)", fareDetails: "ভাড়ার বিবরণ ও অনুমোদিত টিকেট",
     sameRoute: "⚠️ যাত্রা ও গন্তব্য একই স্থান হতে পারে না!", selectPrompt: "অনুগ্রহ করে যাত্রার স্থান ও গন্তব্য নির্বাচন করুন",
-    reportBtn: "অতিরিক্ত ভাড়ার অভিযোগ জানান", fullList: "📋 সম্পূর্ণ ভাড়ার তালিকা ও ডাটাবেস", searchPlaceholder: "স্থান বা যানবাহন খুঁজুন...",
+    fullList: "📋 সম্পূর্ণ ভাড়ার তালিকা ও ডাটাবেস", searchPlaceholder: "স্থান বা যানবাহন খুঁজুন...",
     thRoute: "রুট (কোথা থেকে ➔ কোথায়)", thVehicle: "অনুমোদিত যানবাহন", thFare: "ভাড়া",
-    reportTitle: "⚠️ অতিরিক্ত ভাড়া রিপোর্ট দাখিল", reportNote: "🔒 আপনার তথ্য গোপন থাকবে। অভিযোগ নিষ্পত্তির জন্য চবি প্রক্টরিয়াল বডি ও ছাত্র প্রতিনিধিদের সহায়তায় ব্যবহৃত হবে।",
-    repName: "আপনার নাম *", repPhone: "আপনার মোবাইল নম্বর (ঐচ্ছিক)", repOrigin: "কোথা থেকে *", repDest: "কোথায় *",
-    repVehicle: "যানবাহন *", repVehNum: "গাড়ির নম্বর (যদি থাকে)", repOfficial: "নির্ধারিত ভাড়া (৳) *", repDemanded: "দাবিকৃত অতিরিক্ত ভাড়া (৳) *",
-    repTime: "ঘটনার তারিখ ও সময় *", repWeather: "আবহাওয়া *", repDriver: "চালকের নাম *", repDriverPhone: "চালকের মোবাইল (ঐচ্ছিক)",
-    repDesc: "অভিযোগের বিস্তারিত বিবরণ", submitBtn: "📩 অভিযোগ রিপোর্ট পাঠান", baseFare: "বেস ভাড়া", surcharge: "অতিরিক্ত যাত্রী সারচার্জ", perPerson: "জনপ্রতি",
-    via: "ভায়া", notFound: "❌ এই রুটের সরাসরি বা হাবভিত্তিক সংযোগ তালিকাভুক্ত নেই অথবা নির্বাচিত যানবাহন এই রুটে নিষিদ্ধ।"
+    baseFare: "বেস ভাড়া", surcharge: "অতিরিক্ত যাত্রী সারচার্জ", perPerson: "জনপ্রতি",
+    via: "ভায়া", notFound: "❌ এই রুটে নির্বাচিত যানবাহন চলাচল করে না অথবা সরাসরি সংযোগ নেই।"
   },
   en: {
-    title: "CU Transport Fare & Route Assistant", subtitle: "Live Campus Policies with Instant Popup Ticket", badge: "Official & Campus Verified",
-    tabCalc: "🧮 Calculator", tabHubs: "🏛️ 5 Hubs & Vehicles", tabMap: "🗺️ Map", tabSearch: "📋 Complete Directory",
+    title: "CU Transport Fare & Route Assistant", subtitle: "Official Vehicle Policies with Instant Popup Ticket", badge: "Official & Campus Verified",
+    tabCalc: "🧮 Calculator", tabHubs: "🏛️ Hubs & Rules", tabMap: "🗺️ Map", tabSearch: "📋 Complete Directory",
     routeSelect: "📍 Select Route", swapBtn: "Swap Route",
     origin: "From (Origin)", dest: "To (Destination)", selectOpt: "-- Select Location --",
-    pax: "Passengers", vehicle: "Vehicle Type", allVeh: "All Vehicles", rickshaw: "🛺 Auto Rickshaw", ecar: "🚗 E-Car (Tomtom)", cng: "🛵 CNG",
-    noticeTitle: "⚠️ Campus Transit Guidelines:",
+    pax: "Passengers", vehicle: "Vehicle Type", allVeh: "All Allowed Vehicles", rickshaw: "🛺 Auto Rickshaw", ecar: "🚗 E-Car", cng: "🛵 CNG",
+    noticeTitle: "⚠️ CU Campus Transit Rules:",
     btnViewFare: "View Fare & Route (Popup Ticket)", fareDetails: "Fare Details & Approved Ticket",
     sameRoute: "⚠️ Origin and Destination cannot be the same!", selectPrompt: "Please select origin and destination first",
-    reportBtn: "Report Overcharging Incident", fullList: "📋 Complete Fare Directory & Database", searchPlaceholder: "Search location or vehicle...",
-    thRoute: "Route (Origin ➔ Destination)", thVehicle: "Approved Vehicle", thFare: "Fare",
-    reportTitle: "⚠️ Overcharging Incident Report", reportNote: "🔒 Privacy protected. Used for administration actions.",
-    repName: "Your Name *", repPhone: "Your Phone (Optional)", repOrigin: "From *", repDest: "To *",
-    repVehicle: "Vehicle *", repVehNum: "Vehicle Number (Optional)", repOfficial: "Official Fare (৳) *", repDemanded: "Demanded Fare (৳) *",
-    repTime: "Date & Time *", repWeather: "Weather *", repDriver: "Driver Name *", repDriverPhone: "Driver Phone (Optional)",
-    repDesc: "Description", submitBtn: "📩 Submit Incident Report", baseFare: "Base Fare", surcharge: "Extra Pax Surcharge", perPerson: "per person",
-    via: "via", notFound: "❌ No valid direct or hub transit found or selected vehicle not allowed on this route."
+    fullList: "📋 Complete Fare Directory & Database", searchPlaceholder: "Search location or vehicle...",
+    thRoute: "Route (Origin ➔ Destination)", thVehicle: "Allowed Vehicle", thFare: "Fare",
+    baseFare: "Base Fare", surcharge: "Extra Pax Surcharge", perPerson: "per person",
+    via: "via", notFound: "❌ The selected vehicle does not operate on this route or no valid transit found."
   }
 };
 
 let currentLang = 'bn';
 let paxCount = 1;
-let currentTicketData = null;
 
-/* ═══ Master 5 Hubs ═══ */
+/* ═══ 1. সিএনজি করিডোর (শুধুমাত্র ১ নং গেট থেকে জীববিজ্ঞান/মেরিন সায়েন্স করিডোর) ═══ */
+const CNG_CORRIDOR = new Set([
+  '১ নং গেট', 'রেলগেট', 'জিরো পয়েন্ট', 'শহীদ মিনার', 
+  'চাকসু চত্বর', 'বিজ্ঞান অনুষদ', 'মেরিন সায়েন্স অনুষদ', 'জীববিজ্ঞান অনুষদ'
+]);
+
+/* ═══ ৫টি প্রধান হাব ═══ */
 const HUBS = ['১ নং গেট', 'জিরো পয়েন্ট', 'শহীদ মিনার', 'চাকসু চত্বর', '২ নং গেট'];
 
-/* Estimated Distances */
+/* আনুমানিক সড়ক দূরত্ব (কিমি) */
 const DISTANCES = {
-  "১ নং গেট|রেলগেট": 1.2, "১ নং গেট|জিরো পয়েন্ট": 2.7, "১ নং গেট|চাকসু চত্বর": 3.5, "১ নং গেট|বিজ্ঞান অনুষদ": 3.6, "১ নং গেট|জীববিজ্ঞান অনুষদ": 4.0, "১ নং গেট|২ নং গেট": 2.5,
+  "১ নং গেট|রেলগেট": 1.2, "১ নং গেট|জিরো পয়েন্ট": 2.7, "১ নং গেট|চাকসু চত্বর": 3.5, "১ নং গেট|বিজ্ঞান অনুষদ": 3.6, "১ নং গেট|মেরিন সায়েন্স অনুষদ": 3.8, "১ নং গেট|জীববিজ্ঞান অনুষদ": 4.0, "১ নং গেট|২ নং গেট": 2.5,
   "জিরো পয়েন্ট|প্রশাসনিক ভবন ও কেন্দ্রীয় লাইব্রেরি": 0.8, "জিরো পয়েন্ট|শহীদ মিনার": 0.7, "জিরো পয়েন্ট|সমাজবিজ্ঞান অনুষদ": 0.9, "জিরো পয়েন্ট|শহীদ হৃদয় তরুয়া ভবন (নতুন কলা)": 1.2,
-  "জিরো পয়েন্ট|চাকসু চত্বর": 1.1, "জিরো পয়েন্ট|বিজ্ঞান অনুষদ": 1.3, "জিরো পয়েন্ট|জীববিজ্ঞান অনুষদ": 1.8, "জিরো পয়েন্ট|মেরিন সায়েন্স অনুষদ": 1.5, "জিরো পয়েন্ট|আইন অনুষদ ও মেডিকেল সেন্টার": 2.0,
+  "জিরো পয়েন্ট|চাকসু চত্বর": 1.1, "জিরো পয়েন্ট|বিজ্ঞান অনুষদ": 1.3, "জিরো পয়েন্ট|মেরিন সায়েন্স অনুষদ": 1.5, "জিরো পয়েন্ট|জীববিজ্ঞান অনুষদ": 1.8, "জিরো পয়েন্ট|আইন অনুষদ ও মেডিকেল সেন্টার": 2.0,
   "জিরো পয়েন্ট|সোহরাওয়ার্দী হল": 0.6, "জিরো পয়েন্ট|আলাওল হল ও এ এফ রহমান হল": 0.9, "জিরো পয়েন্ট|শহীদ আবদুর রব হল": 1.2, "জিরো পয়েন্ট|প্রীতিলতা হল": 1.0,
   "জিরো পয়েন্ট|শামসুন নাহার হল ও বিজয় ২৪ হল": 1.1, "জিরো পয়েন্ট|বেগম খালেদা জিয়া হল (পাহাড়ের চূড়া) ও নবাব ফয়জুন্নেসা হল": 1.4, "জিরো পয়েন্ট|শহীদ ফরহাদ হোসেন হল ও অতীশ দীপংকর হল": 1.6,
   "জিরো পয়েন্ট|নীপবন স্কুল ও দক্ষিণ ক্যাম্পাস মসজিদ": 0.8, "জিরো পয়েন্ট|গ্রীন হাউজ ও ফরেস্ট্রি (IFESU)": 1.5, "জিরো পয়েন্ট|এসই ৯-৩১ ও টিচার্স কোয়ার্টার (১-৫)": 1.3,
@@ -555,26 +463,28 @@ const DISTANCES = {
   "২ নং গেট|দক্ষিণ ক্যাম্পাস মসজিদ, নীপবন স্কুল ও চবি ল্যাবরেটরি স্কুল": 0.8, "২ নং গেট|কেন্দ্রীয় খেলার মাঠ, জিমনেসিয়াম ও বোটানিক্যাল গার্ডেন": 2.1
 };
 
-/* ═══ Verified Database Strictly Enforcing Restrictions ═══
-   - ১ নং গেট: NO E-Car. Only Rickshaw & CNG.
-   - জিরো পয়েন্ট: CNG ONLY on Main Road to 1 No Gate, Science, Biology. NO CNG to halls or south campus.
-   - South/North Campus Zones: NO E-Car, NO CNG. Strictly Rickshaw only.
-*/
+/* ═══ মাস্টার ভাড়ার ডাটাবেস ═══ */
 const CU_FARES = [
-  /* ১ নং গেট (NO E-Car here!) */
+  /* ১ নং গেট (শুধুমাত্র সিএনজি ও অটো রিক্সা, ই-কার সম্পূর্ণ নিষিদ্ধ) */
   {"o":"১ নং গেট","d":["রেলগেট"],"v":"Rickshaw","f":15},
+  {"o":"১ নং গেট","d":["রেলগেট"],"v":"CNG","f":5},
   {"o":"১ নং গেট","d":["জিরো পয়েন্ট"],"v":"Rickshaw","f":30},
   {"o":"১ নং গেট","d":["জিরো পয়েন্ট"],"v":"CNG","f":7},
   {"o":"১ নং গেট","d":["চাকসু চত্বর"],"v":"Rickshaw","f":45},
   {"o":"১ নং গেট","d":["চাকসু চত্বর"],"v":"CNG","f":14},
   {"o":"১ নং গেট","d":["বিজ্ঞান অনুষদ"],"v":"Rickshaw","f":45},
   {"o":"১ নং গেট","d":["বিজ্ঞান অনুষদ"],"v":"CNG","f":14},
+  {"o":"১ নং গেট","d":["মেরিন সায়েন্স অনুষদ"],"v":"Rickshaw","f":45},
+  {"o":"১ নং গেট","d":["মেরিন সায়েন্স অনুষদ"],"v":"CNG","f":15},
   {"o":"১ নং গেট","d":["জীববিজ্ঞান অনুষদ"],"v":"Rickshaw","f":50},
   {"o":"১ নং গেট","d":["জীববিজ্ঞান অনুষদ"],"v":"CNG","f":15},
   {"o":"১ নং গেট","d":["২ নং গেট"],"v":"Rickshaw","f":30},
-  {"o":"১ নং গেট","d":["২ নং গেট"],"v":"CNG","f":10},
 
-  /* জিরো পয়েন্ট (CNG strictly limited to 1 No Gate, Science, Biology) */
+  /* জিরো পয়েন্ট (১ নং গেট ছাড়া সমস্ত রুটে ই-কার ও অটো রিক্সা চলে; সিএনজি শুধু বিজ্ঞান/জীববিজ্ঞান রুটে) */
+  {"o":"জিরো পয়েন্ট","d":["বিজ্ঞান অনুষদ"],"v":"CNG","f":7},
+  {"o":"জিরো পয়েন্ট","d":["মেরিন সায়েন্স অনুষদ"],"v":"CNG","f":8},
+  {"o":"জিরো পয়েন্ট","d":["জীববিজ্ঞান অনুষদ"],"v":"CNG","f":8},
+
   {"o":"জিরো পয়েন্ট","d":["প্রশাসনিক ভবন ও কেন্দ্রীয় লাইব্রেরি"],"v":"Rickshaw","f":15},
   {"o":"জিরো পয়েন্ট","d":["প্রশাসনিক ভবন ও কেন্দ্রীয় লাইব্রেরি"],"v":"E-Car","f":5},
   {"o":"জিরো পয়েন্ট","d":["শহীদ মিনার"],"v":"Rickshaw","f":10},
@@ -587,13 +497,12 @@ const CU_FARES = [
   {"o":"জিরো পয়েন্ট","d":["চাকসু চত্বর"],"v":"E-Car","f":7},
   {"o":"জিরো পয়েন্ট","d":["বিজ্ঞান অনুষদ"],"v":"Rickshaw","f":15},
   {"o":"জিরো পয়েন্ট","d":["বিজ্ঞান অনুষদ"],"v":"E-Car","f":7},
-  {"o":"জিরো পয়েন্ট","d":["বিজ্ঞান অনুষদ"],"v":"CNG","f":7},
-  {"o":"জিরো পয়েন্ট","d":["জীববিজ্ঞান অনুষদ"],"v":"Rickshaw","f":25},
-  {"o":"জিরো পয়েন্ট","d":["জীববিজ্ঞান অনুষদ"],"v":"E-Car","f":8},
-  {"o":"জিরো পয়েন্ট","d":["জীববিজ্ঞান অনুষদ"],"v":"CNG","f":8},
   {"o":"জিরো পয়েন্ট","d":["মেরিন সায়েন্স অনুষদ"],"v":"Rickshaw","f":20},
   {"o":"জিরো পয়েন্ট","d":["মেরিন সায়েন্স অনুষদ"],"v":"E-Car","f":8},
+  {"o":"জিরো পয়েন্ট","d":["জীববিজ্ঞান অনুষদ"],"v":"Rickshaw","f":25},
+  {"o":"জিরো পয়েন্ট","d":["জীববিজ্ঞান অনুষদ"],"v":"E-Car","f":8},
   {"o":"জিরো পয়েন্ট","d":["আইন অনুষদ ও মেডিকেল সেন্টার"],"v":"Rickshaw","f":30},
+  {"o":"জিরো পয়েন্ট","d":["আইন অনুষদ ও মেডিকেল সেন্টার"],"v":"E-Car","f":8},
   {"o":"জিরো পয়েন্ট","d":["সোহরাওয়ার্দী হল"],"v":"Rickshaw","f":10},
   {"o":"জিরো পয়েন্ট","d":["সোহরাওয়ার্দী হল"],"v":"E-Car","f":5},
   {"o":"জিরো পয়েন্ট","d":["আলাওল হল ও এ এফ রহমান হল"],"v":"Rickshaw","f":15},
@@ -608,20 +517,29 @@ const CU_FARES = [
   {"o":"জিরো পয়েন্ট","d":["বেগম খালেদা জিয়া হল (পাহাড়ের চূড়া) ও নবাব ফয়জুন্নেসা হল"],"v":"E-Car","f":5},
   {"o":"জিরো পয়েন্ট","d":["শহীদ ফরহাদ হোসেন হল ও অতীশ দীপংকর হল"],"v":"Rickshaw","f":25},
   {"o":"জিরো পয়েন্ট","d":["শহীদ ফরহাদ হোসেন হল ও অতীশ দীপংকর হল"],"v":"E-Car","f":8},
+  {"o":"জিরো পয়েন্ট","d":["২ নং গেট"],"v":"Rickshaw","f":15},
+  {"o":"জিরো পয়েন্ট","d":["২ নং গেট"],"v":"E-Car","f":7},
 
-  /* দক্ষিণ ও উত্তর ক্যাম্পাস জোন (NO E-CAR, NO CNG - Strictly Auto Rickshaw only) */
+  /* জিরো পয়েন্ট থেকে দক্ষিণ ও উত্তর ক্যাম্পাস (ই-কার ও অটো রিক্সা উভয়ই চলে) */
   {"o":"জিরো পয়েন্ট","d":["নীপবন স্কুল ও দক্ষিণ ক্যাম্পাস মসজিদ"],"v":"Rickshaw","f":10},
+  {"o":"জিরো পয়েন্ট","d":["নীপবন স্কুল ও দক্ষিণ ক্যাম্পাস মসজিদ"],"v":"E-Car","f":5},
   {"o":"জিরো পয়েন্ট","d":["গ্রীন হাউজ ও ফরেস্ট্রি (IFESU)"],"v":"Rickshaw","f":20},
+  {"o":"জিরো পয়েন্ট","d":["গ্রীন হাউজ ও ফরেস্ট্রি (IFESU)"],"v":"E-Car","f":8},
   {"o":"জিরো পয়েন্ট","d":["এসই ৯-৩১ ও টিচার্স কোয়ার্টার (১-৫)"],"v":"Rickshaw","f":20},
+  {"o":"জিরো পয়েন্ট","d":["এসই ৯-৩১ ও টিচার্স কোয়ার্টার (১-৫)"],"v":"E-Car","f":7},
   {"o":"জিরো পয়েন্ট","d":["কেন্দ্রীয় খেলার মাঠ ও জিমনেসিয়াম"],"v":"Rickshaw","f":20},
+  {"o":"জিরো পয়েন্ট","d":["কেন্দ্রীয় খেলার মাঠ ও জিমনেসিয়াম"],"v":"E-Car","f":10},
   {"o":"জিরো পয়েন্ট","d":["বোটানিক্যাল গার্ডেন ও ইসলামিয়া কলোনী"],"v":"Rickshaw","f":30},
+  {"o":"জিরো পয়েন্ট","d":["বোটানিক্যাল গার্ডেন ও ইসলামিয়া কলোনী"],"v":"E-Car","f":10},
   {"o":"জিরো পয়েন্ট","d":["উত্তর ক্যাম্পাস মসজিদ"],"v":"Rickshaw","f":30},
+  {"o":"জিরো পয়েন্ট","d":["উত্তর ক্যাম্পাস মসজিদ"],"v":"E-Car","f":8},
 
   /* শহীদ মিনার */
   {"o":"শহীদ মিনার","d":["চাকসু চত্বর"],"v":"Rickshaw","f":10},
   {"o":"শহীদ মিনার","d":["সমাজবিজ্ঞান অনুষদ ও পুরাতন কলা"],"v":"Rickshaw","f":10},
   {"o":"শহীদ মিনার","d":["বিজ্ঞান অনুষদ ও জীববিজ্ঞান অনুষদ"],"v":"Rickshaw","f":15},
   {"o":"শহীদ মিনার","d":["বিজ্ঞান অনুষদ ও জীববিজ্ঞান অনুষদ"],"v":"E-Car","f":5},
+  {"o":"শহীদ মিনার","d":["বিজ্ঞান অনুষদ ও জীববিজ্ঞান অনুষদ"],"v":"CNG","f":5},
   {"o":"শহীদ মিনার","d":["সোহরাওয়ার্দী হল"],"v":"Rickshaw","f":15},
   {"o":"শহীদ মিনার","d":["সোহরাওয়ার্দী হল"],"v":"E-Car","f":5},
   {"o":"শহীদ মিনার","d":["প্রীতিলতা ও শামসুন নাহার হল"],"v":"Rickshaw","f":10},
@@ -632,20 +550,18 @@ const CU_FARES = [
   /* চাকসু চত্বর */
   {"o":"চাকসু চত্বর","d":["বিজ্ঞান অনুষদ ও মেরিন সায়েন্স অনুষদ"],"v":"Rickshaw","f":10},
   {"o":"চাকসু চত্বর","d":["বিজ্ঞান অনুষদ ও মেরিন সায়েন্স অনুষদ"],"v":"E-Car","f":5},
+  {"o":"চাকসু চত্বর","d":["বিজ্ঞান অনুষদ ও মেরিন সায়েন্স অনুষদ"],"v":"CNG","f":5},
   {"o":"চাকসু চত্বর","d":["শহীদ হৃদয় তরুয়া ভবন (কলা অনুষদ)"],"v":"Rickshaw","f":10},
   {"o":"চাকসু চত্বর","d":["শাহ আমানত হল, আলাওল হল ও এ এফ রহমান হল"],"v":"Rickshaw","f":20},
   {"o":"চাকসু চত্বর","d":["বেগম খালেদা জিয়া হল ও নবাব ফয়জুন্নেসা হল"],"v":"Rickshaw","f":20},
   {"o":"চাকসু চত্বর","d":["বেগম খালেদা জিয়া হল ও নবাব ফয়জুন্নেসা হল"],"v":"E-Car","f":5},
   {"o":"চাকসু চত্বর","d":["শহীদ আবদুর রব হল"],"v":"Rickshaw","f":15},
   {"o":"চাকসু চত্বর","d":["শহীদ ফরহাদ হোসেন হল ও অতীশ দীপংকর হল"],"v":"Rickshaw","f":20},
-  /* চাকসু থেকে দক্ষিণ ক্যাম্পাস/ফরেস্ট্রি (NO E-Car) */
   {"o":"চাকসু চত্বর","d":["কেন্দ্রীয় খেলার মাঠ ও জিমনেসিয়াম"],"v":"Rickshaw","f":25},
   {"o":"চাকসু চত্বর","d":["দক্ষিণ ক্যাম্পাস (নীপবন ও ল্যাবরেটরি স্কুল)"],"v":"Rickshaw","f":30},
   {"o":"চাকসু চত্বর","d":["ফরেস্ট্রি (IFESU)"],"v":"Rickshaw","f":35},
 
   /* ২ নং গেট */
-  {"o":"২ নং গেট","d":["জিরো পয়েন্ট"],"v":"Rickshaw","f":15},
-  {"o":"২ নং গেট","d":["জিরো পয়েন্ট"],"v":"E-Car","f":7},
   {"o":"২ নং গেট","d":["সোহরাওয়ার্দী হল, আলাওল হল ও এ এফ রহমান হল"],"v":"Rickshaw","f":15},
   {"o":"২ নং গেট","d":["সোহরাওয়ার্দী হল, আলাওল হল ও এ এফ রহমান হল"],"v":"E-Car","f":5},
   {"o":"২ নং গেট","d":["সমাজবিজ্ঞান অনুষদ ও শহীদ মিনার"],"v":"Rickshaw","f":20},
@@ -656,17 +572,41 @@ const CU_FARES = [
   {"o":"২ নং গেট","d":["কেন্দ্রীয় খেলার মাঠ, জিমনেসিয়াম ও বোটানিক্যাল গার্ডেন"],"v":"Rickshaw","f":30}
 ];
 
-/* Campus Landmarks Coordinates */
+/* Campus Landmarks */
 const CAMPUS_POINTS = [
-  { name: "১ নং গেট", lat: 22.4598, lng: 91.7892, type: "hub", desc: "প্রধান প্রবেশদ্বার (সিএনজি ও রিকশা)" },
-  { name: "জিরো পয়েন্ট", lat: 22.4716, lng: 91.7877, type: "hub", desc: "কেন্দ্রীয় মোড় (রিকশা, ই-কার ও সিএনজি)" },
-  { name: "শহীদ মিনার", lat: 22.4705, lng: 91.7905, type: "hub", desc: "একাডেমিক জোন" },
-  { name: "চাকসু চত্বর", lat: 22.4729, lng: 91.7865, type: "hub", desc: "ক্যাফেটেরিয়া ও বিজ্ঞান লিঙ্ক" },
+  { name: "১ নং গেট", lat: 22.4598, lng: 91.7892, type: "hub", desc: "প্রধান প্রবেশদ্বার (সিএনজি ও অটো রিক্সা)" },
+  { name: "জিরো পয়েন্ট", lat: 22.4716, lng: 91.7877, type: "hub", desc: "কেন্দ্রীয় মোড় (অটো রিক্সা ও ই-কার হাব)" },
+  { name: "শহীদ মিনার", lat: 22.4705, lng: 91.7905, type: "hub", desc: "একাডেমিক জোন ও লাইব্রেরি সংযোগ" },
+  { name: "চাকসু চত্বর", lat: 22.4729, lng: 91.7865, type: "hub", desc: "ক্যাফেটেরিয়া ও বিজ্ঞান অনুষদ লিঙ্ক" },
   { name: "২ নং গেট", lat: 22.4682, lng: 91.7938, type: "hub", desc: "দক্ষিণ ক্যাম্পাস সংযোগ" }
 ];
 
-/* Helper & Transit Functions */
+/* ═══ যানবাহন নীতি ও বৈধতা যাচাই লজিক ═══ */
+function isVehicleAllowed(origin, dest, vehicle) {
+  // ১. ১ নং গেট বা রেলগেটে ই-কার সম্পূর্ণ নিষিদ্ধ
+  if (vehicle === 'E-Car') {
+    if (origin === '১ নং গেট' || dest === '১ নং গেট' || origin === 'রেলগেট' || dest === 'রেলগেট') {
+      return false;
+    }
+    return true; // বাকি সমস্ত ক্যাম্পাসে ই-কার চলে
+  }
+
+  // ২. সিএনজি শুধুমাত্র ১ নং গেট থেকে জীববিজ্ঞান করিডোরের স্টপেজে চলবে
+  if (vehicle === 'CNG') {
+    return CNG_CORRIDOR.has(origin) && CNG_CORRIDOR.has(dest);
+  }
+
+  // ৩. অটো রিক্সা সমস্ত রুটে চলবে
+  if (vehicle === 'Rickshaw') {
+    return true;
+  }
+
+  return false;
+}
+
 function getDirectFare(o, d, v) {
+  if (!isVehicleAllowed(o, d, v)) return null;
+
   const match = CU_FARES.find(x => 
     x.v === v && 
     ((x.o === o && x.d.includes(d)) || (x.o === d && x.d.includes(o)))
@@ -682,7 +622,10 @@ function getDistanceEst(p1, p2) {
   return null;
 }
 
+/* ৫টি হাবের মাধ্যমে ন্যূনতম ভাড়ার রুট নির্ধারণ */
 function findOptimalTransit(origin, dest, vehicle) {
+  if (!isVehicleAllowed(origin, dest, vehicle)) return null;
+
   const direct = getDirectFare(origin, dest, vehicle);
   if (direct !== null) {
     const dist = getDistanceEst(origin, dest) || 1.2;
@@ -692,6 +635,8 @@ function findOptimalTransit(origin, dest, vehicle) {
   let best = null;
   HUBS.forEach(hub => {
     if (hub === origin || hub === dest) return;
+    if (!isVehicleAllowed(origin, hub, vehicle) || !isVehicleAllowed(hub, dest, vehicle)) return;
+
     const f1 = getDirectFare(origin, hub, vehicle);
     const f2 = getDirectFare(hub, dest, vehicle);
     if (f1 !== null && f2 !== null) {
@@ -741,7 +686,7 @@ function swapLocations() {
   d.value = temp;
 }
 
-/* ═══ SHOW POPUP TICKET (No scrolling down!) ═══ */
+/* ═══ 🎫 SHOW POPUP FARE TICKET (Strictly Fare + Developer Credit Only) ═══ */
 function showFarePopup() {
   const o = document.getElementById('cuOrigin').value;
   const d = document.getElementById('cuDest').value;
@@ -751,7 +696,6 @@ function showFarePopup() {
   const popContent = document.getElementById('cuPopContent');
   const popDistBadge = document.getElementById('cuPopDistanceBadge');
   const popDistVal = document.getElementById('cuPopDistVal');
-  const popReportBtn = document.getElementById('cuPopReportBtn');
 
   if(!o || !d) {
     alert(i18n[currentLang].selectPrompt);
@@ -768,7 +712,6 @@ function showFarePopup() {
   let html = '';
   const vehicles = ['Rickshaw', 'E-Car', 'CNG'];
   let hasAnyMatch = false;
-  let bestOverallData = null;
   let detectedDistance = null;
 
   const vName = {
@@ -786,10 +729,6 @@ function showFarePopup() {
 
     hasAnyMatch = true;
     detectedDistance = routeData.distance;
-
-    if (!bestOverallData) {
-      bestOverallData = { origin: o, destination: d, vehicle: v, fare: routeData.fare };
-    }
 
     let totalFare = routeData.fare;
     let surcharge = 0;
@@ -850,8 +789,6 @@ function showFarePopup() {
   if (!hasAnyMatch) {
     popContent.innerHTML = `<p style="text-align:center;color:#fca5a5;padding:18px 0;line-height:1.5;">${i18n[currentLang].notFound}</p>`;
     popDistBadge.style.display = 'none';
-    popReportBtn.style.display = 'none';
-    currentTicketData = null;
   } else {
     popContent.innerHTML = html;
     if(detectedDistance) {
@@ -860,8 +797,6 @@ function showFarePopup() {
     } else {
       popDistBadge.style.display = 'none';
     }
-    popReportBtn.style.display = 'flex';
-    currentTicketData = bestOverallData;
   }
 
   modal.classList.add('active');
@@ -873,38 +808,7 @@ function closeFarePopup() {
   document.body.classList.remove('modal-open');
 }
 
-/* ═══ Incident Reporting Modal ═══ */
-function openReportFromPopup() {
-  closeFarePopup();
-  document.getElementById('cuReportModal').classList.add('active');
-  document.body.classList.add('modal-open');
-  
-  if(currentTicketData) {
-    document.getElementById('repOrigin').value = currentTicketData.origin;
-    document.getElementById('repDest').value = currentTicketData.destination;
-    document.getElementById('repOfficialFare').value = currentTicketData.fare;
-    
-    const vBn = {Rickshaw:'রিকশা', 'E-Car':'ই-কার', CNG:'সিএনজি'}[currentTicketData.vehicle];
-    const repVeh = document.getElementById('repVehicle');
-    Array.from(repVeh.options).forEach(o => {
-      if(o.value === vBn) repVeh.value = vBn;
-    });
-  }
-  
-  const dt = document.getElementById('repTime');
-  if(!dt.value) {
-    const now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    dt.value = now.toISOString().slice(0, 16);
-  }
-}
-
-function closeReport() {
-  document.getElementById('cuReportModal').classList.remove('active');
-  document.body.classList.remove('modal-open');
-}
-
-/* ═══ Navigation Tabs ═══ */
+/* ═══ Tabs & Language ═══ */
 function switchTab(tab) {
   document.querySelectorAll('.cu-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.cu-container').forEach(c => c.classList.remove('active'));
@@ -940,7 +844,7 @@ function updateLanguage() {
   });
 }
 
-/* ═══ Full Table Render ═══ */
+/* ═══ সম্পূর্ণ তালিকা রেন্ডার ═══ */
 function renderTable(filter = '') {
   const q = filter.toLowerCase().trim();
   const tbody = document.getElementById('cuTableBody');
@@ -1007,71 +911,17 @@ function setMapRoute(locName) {
   document.getElementById('cuDest').value = locName;
 }
 
-/* ═══ Report Form Handler ═══ */
-document.getElementById('cuReportForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const form = e.target;
-  const status = document.getElementById('cuReportStatus');
-  const btn = document.getElementById('cuSubmitBtn');
-  
-  status.className = "cu-status loading";
-  status.textContent = "⏳ অভিযোগ প্রসেস হচ্ছে...";
-  btn.disabled = true;
-
-  try {
-    const fd = new FormData(form);
-    const payload = {};
-    for(const [k, v] of fd.entries()) payload[k] = v;
-
-    if(CU_CONFIG.formspreeId && CU_CONFIG.formspreeId !== "YOUR_FORMSPREE_ID") {
-      await fetch("https://formspree.io/f/" + CU_CONFIG.formspreeId, {
-        method: "POST", body: fd, headers: {Accept: "application/json"}
-      });
-    }
-
-    const waMsg = 
-      "🚨 *চ.বি. অতিরিক্ত ভাড়া অভিযোগ রিপোর্ট*\n\n" +
-      "👤 *অভিযোগকারী:* " + payload.reporterName + "\n" +
-      "📞 *মোবাইল:* " + (payload.reporterPhone || "দেওয়া হয়নি") + "\n\n" +
-      "📍 *রুট:* " + payload.origin + " ➔ " + payload.destination + "\n" +
-      "🚗 *যানবাহন:* " + payload.vehicle + (payload.vehicleNumber ? " (" + payload.vehicleNumber + ")" : "") + "\n" +
-      "✅ *নির্ধারিত ভাড়া:* " + payload.officialFare + "৳\n" +
-      "❌ *দাবিকৃত ভাড়া:* " + payload.demandedFare + "৳\n\n" +
-      "🧑‍✈️ *চালক:* " + payload.driverName + (payload.driverPhone ? " (" + payload.driverPhone + ")" : "") + "\n" +
-      "🕒 *সময়:* " + (payload.incidentTime || "-") + "\n" +
-      "🌤️ *আবহাওয়া:* " + (payload.weather || "-") + "\n" +
-      "📝 *বিবরণ:* " + (payload.description || "নেই");
-
-    const wa = encodeURIComponent(waMsg);
-
-    status.className = "cu-status success";
-    status.innerHTML = `✅ রিপোর্ট সফলভাবে তৈরি হয়েছে!<br><br><a href="https://wa.me/${CU_CONFIG.whatsappNumber}?text=${wa}" target="_blank" style="display:inline-block;background:#25d366;color:#fff;padding:10px 20px;border-radius:24px;text-decoration:none;font-weight:700;">📱 হটলাইন WhatsApp-এ পাঠান</a>`;
-    form.reset();
-  } catch(err) {
-    status.className = "cu-status error";
-    status.textContent = "❌ জমা দিতে ত্রুটি হয়েছে। ইন্টারনেট সংযোগ পরীক্ষা করুন।";
-  } finally {
-    btn.disabled = false;
-  }
-});
-
 /* ═══ Initialization ═══ */
 document.addEventListener('DOMContentLoaded', () => {
   initDropdowns();
   document.getElementById('cuSearch').addEventListener('input', (e) => renderTable(e.target.value));
   
-  // Close modals on outside click or Esc
+  // Close popup modal on background click or Esc key
   document.getElementById('cuTicketModal').addEventListener('click', (e) => {
     if(e.target.id === 'cuTicketModal') closeFarePopup();
   });
-  document.getElementById('cuReportModal').addEventListener('click', (e) => {
-    if(e.target.id === 'cuReportModal') closeReport();
-  });
   document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') {
-      closeFarePopup();
-      closeReport();
-    }
+    if(e.key === 'Escape') closeFarePopup();
   });
 });
 </script>
