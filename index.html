@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>শহীদ জিয়া স্মৃতি সংসদ | চট্টগ্রাম বিশ্ববিদ্যালয় শাখা</title>
-  <meta name="description" content="শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় শাখা – শহী��[...]">
+  <title>শহীদ জিয়া স্মৃতি সংসদ | চট্টগ্রাম বিশ্ববিদ্যালয় ইউনিট</title>
+  <meta name="description" content="শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় ইউনিট – জাতীয়তাবাদে উদ্বুদ্ধ শিক্ষক, কর্মকর্তা ও কর্মচারীদের সংগঠন।">
   <link rel="canonical" href="https://szsscu.org/">
-  <meta property="og:title" content="শহীদ জিয়া স্মৃতি সংসদ – চট্টগ্রাম বিশ্ববিদ্যালয় শাখা">
-  <meta property="og:description" content="শহীদ প্রেসিডেন্ট জিয়াউর রহমানরে আজীবন স্মৃতি সংরক্ষণ পর��[...]">
+  <meta property="og:title" content="শহীদ জিয়া স্মৃতি সংসদ – চট্টগ্রাম বিশ্ববিদ্যালয় ইউনিট">
+  <meta property="og:description" content="জাতীয়তাবাদে উদ্বুদ্ধ শিক্ষক, কর্মকর্তা ও কর্মচারীদের সংগঠন।">
   <meta property="og:type" content="website">
   <meta property="og:image" content="logo.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -26,7 +26,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Anek+Bangla:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="s[...]">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Anek+Bangla:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
@@ -34,100 +34,15 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/utilities.css">
 
-  <!-- Prefetch the fare calculator for quicker load -->
-  <link rel="prefetch" href="/cucampusfare.html">
-
-  <!-- Highlighted Fare Calculator button styles + floating CTA -->
-  <style>
-    /* Prominent highlighted button for campus fare calculator */
-    .btn--fare { 
-      background: linear-gradient(135deg,#059669,#10b981);
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-weight: 700;
-      box-shadow: 0 10px 30px rgba(16,185,129,0.16);
-      display: inline-block;
-      transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease, opacity .12s ease;
-      text-decoration: none;
-      position: relative;
-      overflow: visible;
-    }
-    .btn--fare:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 40px rgba(16,185,129,0.22); }
-    /* Focus (accessibility) */
-    .btn--fare:focus { outline: 3px solid rgba(16,185,129,0.18); outline-offset: 4px; box-shadow: 0 14px 34px rgba(5,150,105,0.15); }
-
-    /* Strong initial attention animation */
-    @keyframes attention {
-      0% { transform: translateY(0) scale(1); box-shadow: 0 10px 30px rgba(16,185,129,0.15); }
-      30% { transform: translateY(-6px) scale(1.06); box-shadow: 0 22px 50px rgba(16,185,129,0.28); }
-      60% { transform: translateY(-2px) scale(1.02); box-shadow: 0 14px 36px rgba(16,185,129,0.20); }
-      100% { transform: translateY(0) scale(1); box-shadow: 0 10px 30px rgba(16,185,129,0.16); }
-    }
-    /* Gentle, continuous halo pulse */
-    .btn--pulse::after {
-      content: '';
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      width: 120%; height: 120%; border-radius: 999px;
-      box-shadow: 0 0 0 6px rgba(16,185,129,0.06);
-      animation: pulse 3.2s infinite ease-in-out;
-      z-index: -1;
-      pointer-events: none;
-      opacity: 0.9;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.12); }
-      60% { box-shadow: 0 0 0 18px rgba(16,185,129,0); }
-      100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
-    }
-
-    /* Floating CTA (mobile) */
-    .float-fare {
-      position: fixed;
-      right: 16px;
-      bottom: 88px; /* above existing float-btn */
-      z-index: 9999;
-      display: none; /* visible on small screens via media query */
-      background: linear-gradient(135deg,#059669,#10b981);
-      color: white;
-      padding: 12px 14px;
-      border-radius: 999px;
-      font-weight: 800;
-      box-shadow: 0 18px 40px rgba(16,185,129,0.22);
-      text-decoration: none;
-      transform: translateY(0);
-      transition: transform .18s ease, opacity .12s ease;
-    }
-    .float-fare:hover { transform: translateY(-6px); }
-    .float-fare:focus { outline: 3px solid rgba(16,185,129,0.14); outline-offset: 4px; }
-
-    /* Show floating CTA on small screens */
-    @media (max-width: 900px) {
-      .float-fare { display: inline-flex; align-items:center; gap:8px; }
-    }
-
-    /* Keep both float buttons from overlapping on very small screens */
-    @media (max-width: 480px) {
-      .float-fare { right: 12px; bottom: 90px; padding: 12px 12px; }
-      .float-btn { left: 12px; bottom: 12px; }
-    }
-
-    /* Ensure hero CTAs stack nicely on mobile */
-    @media (max-width: 640px) {
-      .hero__ctas { display:flex; flex-direction:column; gap:10px; align-items:center; }
-      .btn--fare { width: auto; }
-    }
-  </style>
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় শাখা",
+    "name": "শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় ইউনিট",
     "alternateName": "SZSS CU Unit",
     "url": "https://szsscu.org",
     "logo": "https://szsscu.org/logo.png",
-    "description": "শহীদ প্রেসিডেন্ট জিয়াউর রহমানরে আজীবন স্মৃতি সংরক্ষণ পরিষদ।"
+    "description": "জাতীয়তাবাদে উদ্বুদ্ধ শিক্ষক, কর্মকর্তা ও কর্মচারীদের সংগঠন।"
   }
   </script>
 </head>
@@ -140,7 +55,7 @@
   <div class="container">
     <div class="topbar-left">
       <a href="mailto:contact@szsscu.org">📧 contact@szsscu.org</a>
-      <a href="tel:+8801000000000">📞 +৮৮০ ১৮১৫ ৬৪৩১৫৯</a>
+      <a href="tel:+8801000000000">📞 +৮৮০ ১০০০-০০০০০০</a>
     </div>
     <div class="lang-toggle" role="group" aria-label="Language">
       <button class="active" aria-pressed="true">বাংলা</button>
@@ -153,11 +68,11 @@
 <header class="header">
   <div class="container header__inner">
     <a href="./" class="header__brand">
-      <img src="css/logo.png" alt="লোগো" class="header__logo"
-           onerror="this.onerror=null;this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfrAT_zGyE5LT-N6_1tucIUyZnlZe25B87BwTKVUXZUg&s=10';">
+      <img src="logo.png" alt="লোগো" class="header__logo"
+           onerror="this.onerror=null;this.src='https://placehold.co/64x64/006a4e/ffffff?text=SZSS';">
       <div class="header__title">
         <h1 data-bn="শহীদ জিয়া স্মৃতি সংসদ" data-en="Shaheed Zia Smriti Sangsad">শহীদ জিয়া স্মৃতি সংসদ</h1>
-        <p data-bn="চট্টগ্রাম বিশ্ববিদ্যালয় শাখা" data-en="University of Chittagong Unit">চট্টগ্রাম বিশ্ববিদ্যালয় শাখা</p>
+        <p data-bn="চট্টগ্রাম বিশ্ববিদ্যালয় ইউনিট" data-en="University of Chittagong Unit">চট্টগ্রাম বিশ্ববিদ্যালয় ইউনিট</p>
       </div>
     </a>
 
@@ -173,8 +88,6 @@
         <li><a href="#committee" data-bn="কমিটি" data-en="Committee">কমিটি</a></li>
         <li><a href="#membership" data-bn="সদস্যপদ" data-en="Membership">সদস্যপদ</a></li>
         <li><a href="#contact" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a></li>
-        <!-- New: top-nav quick link to the fare calculator -->
-        <li><a href="cucampusfare.html" data-bn="ভাড়া" data-en="Fare Calculator" class="nav__fare">ভাড়া</a></li>
       </ul>
     </nav>
   </div>
@@ -188,17 +101,15 @@
     <div class="hero__overlay"></div>
     <div class="container hero__content">
       <span class="hero__pre" data-bn="জাতীয়তাবাদে উদ্বুদ্ধ" data-en="Inspired by Nationalism">জাতীয়তাবাদে উদ্বুদ্ধ</span>
-      <h2 class="hero__title" data-bn="শিক্ষা, সেবা ও দেশপ্রেমের <span>প্ল্যাটফর্ম</span>" data-en="A platform for <span>education, service & patriotism</span>">
+      <h2 class="hero__title" data-bn="শিক্ষা, সেবা ও দেশপ্রেমের <span>প্ল্যাটফর্ম</span>" data-en="A platform for <span>education, service &amp; patriotism</span>">
         শিক্ষা, সেবা ও দেশপ্রেমের <span>প্ল্যাটফর্ম</span>
       </h2>
-      <p class="hero__desc" data-bn="শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় শাখা — শি��[...]" data-en="Shaheed Zia Smriti Sangsad, CU Branch — teachers, staff & students united for the cause.">
-        শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় শাখা — শিক্ষক, কর্মক��[...] 
+      <p class="hero__desc" data-bn="শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় ইউনিট — শিক্ষক, কর্মকর্তা ও কর্মচারীদের ঐক্যবদ্ধ জাতীয়তাবাদী সংগঠন।" data-en="Shaheed Zia Smriti Sangsad, University of Chittagong Unit — a united nationalist organization of teachers, officers, and employees.">
+        শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় ইউনিট — শিক্ষক, কর্মকর্তা ও কর্মচারীদের ঐক্যবদ্ধ জাতীয়তাবাদী সংগঠন।
       </p>
       <div class="hero__ctas">
         <a href="#about" class="btn btn--gold" data-bn="আরও জানুন" data-en="Learn More">আরও জানুন →</a>
         <a href="#membership" class="btn btn--ghost" data-bn="সদস্য হোন" data-en="Join Us">সদস্য হোন</a>
-        <!-- Hero: Highlighted Fare Calculator button linking to cucampusfare.html. Opens in same tab (standard) -->
-        <a id="heroFareBtn" href="cucampusfare.html" class="btn--fare btn--pulse" aria-label="Open Fare Calculator" title="ভাড়া ক্যালকুলেটর" data-bn="ভাড়া ক্যালকুলেটর" data-en="Fare Calculator">ভাড়া ক্যালকুলেটর →</a>
       </div>
     </div>
   </section>
@@ -209,9 +120,13 @@
       <div class="about__grid">
         <div class="about__text">
           <span class="section__eyebrow" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</span>
-          <h2 class="section__title" style="text-align:left;" data-bn="জাতীয়তাবাদী আদর্শে ঐক্যবদ্ধ" data-en="United under Nationalist Ideals">[...]</h2>
-          <p data-bn="শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় শাখা হলো চট্টগ��[...]">শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় শাখা হলো চট্টগ্রাম[...]</p>
-          <p data-bn="শহীদ রাষ্ট্রপতি জিয়াউর রহমানের আদর্শ, মুক্তিযুদ্ধের চেতনা ও বা��[...]">শহীদ রাষ্ট্রপতি জিয়াউর রহমানের আদর্শ, মুক্তিযুদ্ধের চেতনা ও বাংলাদ[...]</p>
+          <h2 class="section__title" style="text-align:left;" data-bn="জাতীয়তাবাদী আদর্শে ঐক্যবদ্ধ" data-en="United under Nationalist Ideals">জাতীয়তাবাদী আদর্শে ঐক্যবদ্ধ</h2>
+          <p data-bn="শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় ইউনিট হলো চট্টগ্রাম বিশ্ববিদ্যালয়ের <strong>জাতীয়তাবাদে উদ্বুদ্ধ শিক্ষক, কর্মকর্তা ও কর্মচারীদের</strong> একটি সংগঠন।" data-en="Shaheed Zia Smriti Sangsad, University of Chittagong Unit is an organization of <strong>nationalist-inspired teachers, officers and employees</strong>.">
+            শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় ইউনিট হলো চট্টগ্রাম বিশ্ববিদ্যালয়ের <strong>জাতীয়তাবাদে উদ্বুদ্ধ শিক্ষক, কর্মকর্তা ও কর্মচারীদের</strong> একটি সংগঠন।
+          </p>
+          <p data-bn="শহীদ রাষ্ট্রপতি জিয়াউর রহমানের আদর্শ, মুক্তিযুদ্ধের চেতনা ও বাংলাদেশ জাতীয়তাবাদী দলের নীতিতে উদ্বুদ্ধ হয়ে আমরা ক্যাম্পাসে শিক্ষা, সেবা, সততা ও দেশপ্রেমের চর্চা করি।" data-en="Inspired by the ideals of Shaheed President Ziaur Rahman, the spirit of the Liberation War, and BNP principles, we practice education, service, honesty, and patriotism.">
+            শহীদ রাষ্ট্রপতি জিয়াউর রহমানের আদর্শ, মুক্তিযুদ্ধের চেতনা ও বাংলাদেশ জাতীয়তাবাদী দলের নীতিতে উদ্বুদ্ধ হয়ে আমরা ক্যাম্পাসে শিক্ষা, সেবা, সততা ও দেশপ্রেমের চর্চা করি।
+          </p>
           <div class="about__stats">
             <div class="stat"><b>৩৫০+</b><span data-bn="সদস্য" data-en="Members">সদস্য</span></div>
             <div class="stat"><b>২৫+</b><span data-bn="বছরের পথচলা" data-en="Years">বছরের পথচলা</span></div>
@@ -219,89 +134,386 @@
           </div>
         </div>
         <div class="about__img">
-          <img src="https://i.pinimg.com/736x/4d/ef/a2/4defa2b09c58f19b0c48ee95af27e1b0.jpg" alt="শিক্ষা" loading="lazy" decoding="async">
+          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=900&q=80" alt="শিক্ষা" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- rest of the file remains unchanged... -->
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer">
+  <!-- ============ TABS ============ -->
+  <section class="section section--green" id="activities">
     <div class="container">
-      <div class="footer__grid">
-        <div>
-          <div class="footer__brand">
-            <img src="css/logo.png" alt="লোগো" onerror="this.onerror=null;this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfrAT_zGyE5LT-N6_1tucIUyZnlZe25B87BwTKVUXZUg&s=10';">
-            <div>
-              <h3 data-bn="শহীদ জিয়া স্মৃতি সংসদ" data-en="Shaheed Zia Smriti Sangsad">শহীদ জিয়া স্মৃতি সংসদ</h3>
-              <p data-bn="চট্ট�[...]" data-en="University of Chittagong Unit">চট্টগ্রাম বিশ্ববিদ্যালয় শাখা</p>
-            </div>
-          </div>
-          <p data-bn="জাতীয়তাবাদে উদ্বুদ্ধ শিক্ষক, কর্মকর্তা ও কর্মচারীদের ঐক্যবদ্ধ ��[...]">জাতীয়তাবাদে উদ্বুদ্ধ শিক্ষক, কর্মকর্তা ও কর্মচারীদের ঐক্যবদ্ধ সংগঠ[...]</p>
-          <div class="footer__social">
-            <a href="#" aria-label="Facebook" rel="noopener noreferrer">f</a>
-            <a href="#" aria-label="YouTube" rel="noopener noreferrer">▶</a>
-            <a href="#" aria-label="Twitter" rel="noopener noreferrer">𝕏</a>
-          </div>
-        </div>
-        <div>
-          <h4 data-bn="দ্রুত লিংক" data-en="Quick Links">দ্রুত লিংক</h4>
-          <ul>
-            <li><a href="#about" data-bn="পরিচিতি" data-en="About">পরিচিতি</a></li>
-            <li><a href="#activities" data-bn="কার্যক্রম" data-en="Activities">কার্যক্রম</a></li>
-            <li><a href="#news" data-bn="নিউজ" data-en="News">নিউজ</a></li>
-            <li><a href="#events" data-bn="ইভেন্ট" data-en="Events">ইভেন্ট</a></li>
-            <!-- New: quick link in footer -->
-            <li><a href="cucampusfare.html" data-bn="ভাড়া ক্যালকুলেটর" data-en="Fare Calculator">ভাড়া ক্যালকুলেটর</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 data-bn="সংগঠন" data-en="Organization">সংগঠন</h4>
-          <ul>
-            <li><a href="#committee" data-bn="কমিটি" data-en="Committee">কমিটি</a></li>
-            <li><a href="#membership" data-bn="সদস্যপদ" data-en="Membership">সদস্যপদ</a></li>
-            <li><a href="#scholarship" data-bn="বৃত্তি" data-en="Scholarship">বৃত্তি</a></li>
-            <li><a href="#gallery" data-bn="গ্যালারি" data-en="Gallery">গ্যালারি</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</h4>
-          <ul>
-            <li>📧 contact@szsscu.org</li>
-            <li>📞 +৮৮০ ১০০০-০০০০০০</li>
-            <li>📍 চট্টগ্রাম বিশ্ববিদ্যালয়</li>
-          </ul>
-        </div>
+      <div class="section__head">
+        <span class="section__eyebrow" data-bn="আমাদের কার্যক্রম" data-en="Our Activities">আমাদের কার্যক্রম</span>
+        <h2 class="section__title" data-bn="যা আমরা করি" data-en="What We Do">যা আমরা করি</h2>
       </div>
-      <div class="footer__bottom">
-        <p>© ২০২৬ <a href="#">শহীদ জিয়া স্মৃতি সংসদ</a>, চট্টগ্রাম বিশ্ববিদ্যালয় শাখা। <span[...]</p>
+      <div class="tabs">
+        <div class="tabs__nav" role="tablist">
+          <button class="tabs__btn active" data-bn="📚 শিক্ষা" data-en="📚 Education">📚 শিক্ষা</button>
+          <button class="tabs__btn" data-bn="🤝 সেবা" data-en="🤝 Service">🤝 সেবা</button>
+          <button class="tabs__btn" data-bn="🎉 দিবস" data-en="🎉 Events">🎉 দিবস</button>
+          <button class="tabs__btn" data-bn="🏆 ক্রীড়া" data-en="🏆 Sports">🏆 ক্রীড়া</button>
+        </div>
+        <div class="tabs__panel active">
+          <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=900&q=80" alt="শিক্ষা" loading="lazy" decoding="async">
+          <div>
+            <h3 data-bn="শিক্ষা ও গবেষণা" data-en="Education &amp; Research">শিক্ষা ও গবেষণা</h3>
+            <p data-bn="শিক্ষক-গবেষকদের জন্য সেমিনার, সিম্পোজিয়াম, প্রকাশনা সহায়তা ও ক্যারিয়ার উন্নয়ন কর্মশালা।" data-en="Seminars, symposiums, publication support and career development workshops for educators.">
+              শিক্ষক-গবেষকদের জন্য সেমিনার, সিম্পোজিয়াম, প্রকাশনা সহায়তা ও ক্যারিয়ার উন্নয়ন কর্মশালা।
+            </p>
+            <a href="#news" class="btn btn--outline btn--sm" data-bn="বিস্তারিত" data-en="Details">বিস্তারিত →</a>
+          </div>
+        </div>
+        <div class="tabs__panel">
+          <img src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=900&q=80" alt="সেবা" loading="lazy" decoding="async">
+          <div>
+            <h3 data-bn="মানবসেবা" data-en="Humanitarian Service">মানবসেবা</h3>
+            <p data-bn="রক্তদান, চিকিৎসা সহায়তা, শীতবস্ত্র বিতরণ ও অসহায় শিক্ষার্থীদের পাশে দাঁড়ানো।" data-en="Blood donation, medical assistance, winter clothes distribution, and supporting underprivileged students.">
+              রক্তদান, চিকিৎসা সহায়তা, শীতবস্ত্র বিতরণ ও অসহায় শিক্ষার্থীদের পাশে দাঁড়ানো।
+            </p>
+            <a href="#gallery" class="btn btn--outline btn--sm" data-bn="গ্যালারি দেখুন" data-en="View Gallery">গ্যালারি দেখুন →</a>
+          </div>
+        </div>
+        <div class="tabs__panel">
+          <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=900&q=80" alt="দিবস" loading="lazy" decoding="async">
+          <div>
+            <h3 data-bn="জাতীয় দিবস উদযাপন" data-en="National Day Celebrations">জাতীয় দিবস উদযাপন</h3>
+            <p data-bn="স্বাধীনতা দিবস, বিজয় দিবস, জাতীয় শোক দিবস ও শহীদ জিয়াউর রহমানের জন্মদিন পালন।" data-en="Observing Independence Day, Victory Day, National Mourning Day, and Shaheed Zia's birthday.">
+              স্বাধীনতা দিবস, বিজয় দিবস, জাতীয় শোক দিবস ও শহীদ জিয়াউর রহমানের জন্মদিন পালন।
+            </p>
+            <a href="#events" class="btn btn--outline btn--sm" data-bn="ইভেন্ট দেখুন" data-en="View Events">ইভেন্ট দেখুন →</a>
+          </div>
+        </div>
+        <div class="tabs__panel">
+          <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80" alt="ক্রীড়া" loading="lazy" decoding="async">
+          <div>
+            <h3 data-bn="ক্রীড়া ও সাংস্কৃতিক" data-en="Sports &amp; Cultural">ক্রীড়া ও সাংস্কৃতিক</h3>
+            <p data-bn="বার্ষিক ক্রীড়া প্রতিযোগিতা, সাংস্কৃতিক সন্ধ্যা ও বিতর্ক প্রতিযোগিতা।" data-en="Annual sports, cultural evenings, and debate competitions.">
+              বার্ষিক ক্রীড়া প্রতিযোগিতা, সাংস্কৃতিক সন্ধ্যা ও বিতর্ক প্রতিযোগিতা।
+            </p>
+            <a href="#gallery" class="btn btn--outline btn--sm" data-bn="গ্যালারি দেখুন" data-en="View Gallery">গ্যালারি দেখুন →</a>
+          </div>
+        </div>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <!-- ============ Floating + back-to-top (existing) ============ -->
-  <a href="chuti.html" class="float-btn">📅 <span data-bn="ছুটির তালিকা ২০২৬" data-en="Holiday List 2026">ছুটির তালিকা ২০২৬</span></a>
-  <button class="back-top" id="backTop" aria-label="Back to top" type="button">↑</button>
+  <!-- ============ NEWS ============ -->
+  <section class="section" id="news">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow" data-bn="সংবাদ ও ব্লগ" data-en="News &amp; Blog">সংবাদ ও ব্লগ</span>
+        <h2 class="section__title" data-bn="সাম্প্রতিক খবর" data-en="Latest Updates">সাম্প্রতিক খবর</h2>
+        <p class="section__desc" data-bn="সংগঠনের সর্বশেষ কার্যক্রম, ঘোষণা ও সাফল্যের খবরাখবর।" data-en="Latest activities, announcements and achievements of the organization.">সংগঠনের সর্বশেষ কার্যক্রম, ঘোষণা ও সাফল্যের খবরাখবর।</p>
+      </div>
+      <div class="news__grid" id="newsGrid"><!-- JS render --></div>
+    </div>
+  </section>
 
-  <!-- Floating fare CTA (mobile) -->
-  <a href="cucampusfare.html" class="float-fare" aria-label="Fare Calculator" title="ভাড়া ক্যালকুলেটর">🚌 ভাড়া ক্যালকুলেটর</a>
+  <!-- ============ GALLERY ============ -->
+  <section class="section section--soft" id="gallery">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow" data-bn="ফটো গ্যালারি" data-en="Photo Gallery">ফটো গ্যালারি</span>
+        <h2 class="section__title" data-bn="স্মৃতির অ্যালবাম" data-en="Album of Memories">স্মৃতির অ্যালবাম</h2>
+        <p class="section__desc" data-bn="ছবিতে ক্লিক করলে বড় করে দেখতে পারবেন।" data-en="Click any photo to view it larger.">ছবিতে ক্লিক করলে বড় করে দেখতে পারবেন।</p>
+      </div>
+      <div class="gallery__grid" id="galleryGrid"><!-- JS render --></div>
+    </div>
+  </section>
 
-  <!-- Entry point -->
-  <script type="module" src="js/main.js"></script>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lightbox__close" aria-label="Close" type="button">×</button>
+    <button class="lightbox__nav lightbox__prev" aria-label="Previous" type="button">‹</button>
+    <img src="" alt="" id="lightboxImg">
+    <button class="lightbox__nav lightbox__next" aria-label="Next" type="button">›</button>
+  </div>
 
-  <!-- Small script to trigger one-time attention animation (immediate but not looping) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      const btn = document.getElementById('heroFareBtn');
-      if(!btn) return;
-      // Add attention animation class briefly
-      btn.style.animation = 'attention 1200ms cubic-bezier(.2,.9,.2,1) 1';
-      // ensure pulse remains via btn--pulse
-      // re-run a softer attention after 2.5s to catch delayed viewers
-      setTimeout(()=>{ btn.style.animation = 'attention 900ms cubic-bezier(.2,.9,.2,1) 1'; }, 2500);
-    });
-  </script>
+  <!-- ============ EVENTS ============ -->
+  <section class="section" id="events">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow" data-bn="ইভেন্ট ক্যালেন্ডার" data-en="Event Calendar">ইভেন্ট ক্যালেন্ডার</span>
+        <h2 class="section__title" data-bn="আসন্ন কার্যক্রম" data-en="Upcoming Events">আসন্ন কার্যক্রম</h2>
+        <p class="section__desc" data-bn="সংগঠনের আসন্ন ইভেন্ট ও কার্যক্রমের সময়সূচি।" data-en="Schedule of upcoming events and programs.">সংগঠনের আসন্ন ইভেন্ট ও কার্যক্রমের সময়সূচি।</p>
+      </div>
+      <div class="events__list" id="eventsList"><!-- JS render --></div>
+    </div>
+  </section>
+
+  <!-- ============ COMMITTEE ============ -->
+  <section class="section section--green" id="committee">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow" data-bn="নেতৃত্ব" data-en="Leadership">নেতৃত্ব</span>
+        <h2 class="section__title" data-bn="কার্যনির্বাহী কমিটি" data-en="Executive Committee">কার্যনির্বাহী কমিটি</h2>
+        <p class="section__desc" data-bn="শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় শাখার কার্যনির্বাহী কমিটি।" data-en="Executive Committee of Shaheed Zia Smriti Sangsad, University of Chittagong Unit.">শহীদ জিয়া স্মৃতি সংসদ, চট্টগ্রাম বিশ্ববিদ্যালয় শাখার কার্যনির্বাহী কমিটি।</p>
+      </div>
+
+      <div class="committee__grid" id="committeeTop"><!-- JS render --></div>
+
+      <div class="committee__list-wrap">
+        <div class="committee__list-title" data-bn="পূর্ণাঙ্গ কার্যনির্বাহী কমিটি" data-en="Full Executive Committee">পূর্ণাঙ্গ কার্যনির্বাহী কমিটি</div>
+        <div style="overflow-x:auto;">
+          <table class="committee__table">
+            <thead>
+              <tr>
+                <th data-bn="পদ" data-en="Position">পদ</th>
+                <th data-bn="নাম" data-en="Name">নাম</th>
+                <th data-bn="অফিস / বিভাগ" data-en="Office / Department">অফিস / বিভাগ</th>
+                <th data-bn="মোবাইল" data-en="Mobile">মোবাইল</th>
+              </tr>
+            </thead>
+            <tbody id="committeeTableBody"><!-- JS render --></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUOTE ============ -->
+  <section class="quote">
+    <div class="container quote__inner">
+      <img class="quote__img" src="https://cu.ac.bd/assets/image/faculty_staff_users/662_NMLM88K8KU.jpg" alt="সভাপতি (ভারপ্রাপ্ত)" loading="lazy" decoding="async">
+      <div>
+        <div class="quote__mark">"</div>
+        <p class="quote__text" data-bn="শিক্ষা ও দেশপ্রেম হাত ধরে চলে। শিক্ষিত ও দায়িত্বশীল প্রজন্মই পারে একটি সমৃদ্ধ বাংলাদেশ গড়তে।" data-en="Education and patriotism go hand in hand. Only an educated and responsible generation can build a prosperous Bangladesh.">
+          শিক্ষা ও দেশপ্রেম হাত ধরে চলে। শিক্ষিত ও দায়িত্বশীল প্রজন্মই পারে একটি সমৃদ্ধ বাংলাদেশ গড়তে।
+        </p>
+        <div class="quote__attr">
+          — <span data-bn="প্রফেসর ড. আ.ন.ম. আব্দুল মাবুদ" data-en="Dr. A. N. M. Abdul Mabood">প্রফেসর ড. আ.ন.ম. আব্দুল মাবুদ</span>
+          <small data-bn="সভাপতি (ভারপ্রাপ্ত), শহীদ জিয়া স্মৃতি সংসদ" data-en="President (In-Charge), SZSS">সভাপতি (ভারপ্রাপ্ত), শহীদ জিয়া স্মৃতি সংসদ</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCHOLARSHIP ============ -->
+  <section class="scholarship" id="scholarship">
+    <div class="container scholarship__inner">
+      <div>
+        <span class="scholarship__eyebrow" data-bn="বৃত্তি প্রোগ্রাম" data-en="Scholarship Program">বৃত্তি প্রোগ্রাম</span>
+        <h2 class="scholarship__title" data-bn="মেধাবী ও অসচ্ছল শিক্ষার্থীদের <span>পাশে আমরা</span>" data-en="Standing beside <span>meritorious &amp; underprivileged students</span>">
+          মেধাবী ও অসচ্ছল শিক্ষার্থীদের <span>পাশে আমরা</span>
+        </h2>
+        <p class="scholarship__desc" data-bn="শিক্ষার্থীদের পড়াশোনায় উৎসাহ দিতে প্রতি বছর বৃত্তি প্রদান করা হয়। যোগ্যতা যাচাই করে নির্বাচিতদের নগদ অর্থ, বই ও শিক্ষা উপকরণ প্রদান করা হয়।" data-en="Every year, we provide scholarships to encourage students. Selected candidates receive cash, books and educational materials.">
+          শিক্ষার্থীদের পড়াশোনায় উৎসাহ দিতে প্রতি বছর বৃত্তি প্রদান করা হয়। যোগ্যতা যাচাই করে নির্বাচিতদের নগদ অর্থ, বই ও শিক্ষা উপকরণ প্রদান করা হয়।
+        </p>
+        <ul class="scholarship__list">
+          <li data-bn="মেধাবী ও আর্থিকভাবে অসচ্ছল শিক্ষার্থী অগ্রাধিকার পাবে" data-en="Priority for meritorious and financially underprivileged students">মেধাবী ও আর্থিকভাবে অসচ্ছল শিক্ষার্থী অগ্রাধিকার পাবে</li>
+          <li data-bn="সর্বনিম্ন GPA ৩.৫০ প্রয়োজন" data-en="Minimum GPA 3.50 required">সর্বনিম্ন GPA ৩.৫০ প্রয়োজন</li>
+          <li data-bn="বার্ষিক ৩০ জনকে বৃত্তি প্রদান" data-en="30 students receive scholarships annually">বার্ষিক ৩০ জনকে বৃত্তি প্রদান</li>
+          <li data-bn="নগদ অর্থ, বই ও শিক্ষা উপকরণ" data-en="Cash, books and educational materials">নগদ অর্থ, বই ও শিক্ষা উপকরণ</li>
+        </ul>
+        <a href="#membership" class="btn btn--gold" data-bn="আবেদন করুন" data-en="Apply Now">আবেদন করুন →</a>
+      </div>
+      <div class="scholarship__card">
+        <h3 data-bn="আবেদনের তথ্য" data-en="Application Info">আবেদনের তথ্য</h3>
+        <p><strong data-bn="আবেদনের শেষ তারিখ:" data-en="Deadline:">আবেদনের শেষ তারিখ:</strong> ৩০ অক্টোবর, ২০২৬</p>
+        <p><strong data-bn="বৃত্তির পরিমাণ:" data-en="Scholarship Amount:">বৃত্তির পরিমাণ:</strong> ১০,০০০ টাকা/বছর</p>
+        <p><strong data-bn="প্রয়োজনীয় কাগজপত্র:" data-en="Documents Required:">প্রয়োজনীয় কাগজপত্র:</strong> ট্রান্সক্রিপ্ট, আয়ের প্রমাণপত্র, ছবি</p>
+        <p><strong data-bn="আবেদন প্রক্রিয়া:" data-en="How to Apply:">আবেদন প্রক্রিয়া:</strong> নিচের ফর্ম পূরণ করুন</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MEMBERSHIP FORM ============ -->
+  <section class="section section--green" id="membership">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow" data-bn="সদস্যপদ" data-en="Membership">সদস্যপদ</span>
+        <h2 class="section__title" data-bn="সদস্য হওয়ার আবেদন" data-en="Membership Application">সদস্য হওয়ার আবেদন</h2>
+        <p class="section__desc" data-bn="নিচের ফর্ম পূরণ করে আমাদের সাথে যুক্ত হোন।" data-en="Fill out the form below to join us.">নিচের ফর্ম পূরণ করে আমাদের সাথে যুক্ত হোন।</p>
+      </div>
+
+      <form id="membership-form" class="form__wrap"
+            action="https://formspree.io/f/xljdwken" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="🎓 নতুন সদস্যপদ আবেদন — SZSS">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div data-fs-success class="form__alert form__alert--success"></div>
+        <div data-fs-error class="form__alert form__alert--error"></div>
+
+        <div class="form__row">
+          <div class="form__field">
+            <label data-bn="পূর্ণ নাম <span>*</span>" data-en="Full Name <span>*</span>">পূর্ণ নাম <span>*</span></label>
+            <input type="text" name="name" required data-fs-field autocomplete="name"
+                   data-bn-placeholder="আপনার নাম লিখুন" data-en-placeholder="Enter your name"
+                   placeholder="আপনার নাম লিখুন">
+            <span data-fs-error="name" class="form__field-error"></span>
+          </div>
+          <div class="form__field">
+            <label data-bn="ইমেইল <span>*</span>" data-en="Email <span>*</span>">ইমেইল <span>*</span></label>
+            <input type="email" name="email" required data-fs-field autocomplete="email"
+                   data-bn-placeholder="you@example.com" data-en-placeholder="you@example.com"
+                   placeholder="you@example.com">
+            <span data-fs-error="email" class="form__field-error"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__field">
+            <label data-bn="মোবাইল নম্বর <span>*</span>" data-en="Mobile Number <span>*</span>">মোবাইল নম্বর <span>*</span></label>
+            <input type="tel" name="phone" required data-fs-field autocomplete="tel"
+                   data-bn-placeholder="+৮৮০ ১XXXXXXXXX" data-en-placeholder="+880 1XXXXXXXXX"
+                   placeholder="+৮৮০ ১XXXXXXXXX">
+            <span data-fs-error="phone" class="form__field-error"></span>
+          </div>
+          <div class="form__field">
+            <label data-bn="পদবি <span>*</span>" data-en="Designation <span>*</span>">পদবি <span>*</span></label>
+            <select name="designation" required data-fs-field>
+              <option value="" data-bn="নির্বাচন করুন" data-en="Select">নির্বাচন করুন</option>
+              <option value="Teacher"  data-bn="শিক্ষক" data-en="Teacher">শিক্ষক</option>
+              <option value="Officer"  data-bn="কর্মকর্তা" data-en="Officer">কর্মকর্তা</option>
+              <option value="Employee" data-bn="কর্মচারী" data-en="Employee">কর্মচারী</option>
+              <option value="Retired"  data-bn="অবসরপ্রাপ্ত" data-en="Retired">অবসরপ্রাপ্ত</option>
+            </select>
+            <span data-fs-error="designation" class="form__field-error"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__field form__full">
+            <label data-bn="বিভাগ/অনুষদ" data-en="Department/Faculty">বিভাগ/অনুষদ</label>
+            <input type="text" name="department" data-fs-field
+                   data-bn-placeholder="যেমন: ইতিহাস বিভাগ" data-en-placeholder="e.g., Department of History"
+                   placeholder="যেমন: ইতিহাস বিভাগ">
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__field form__full">
+            <label data-bn="ঠিকানা" data-en="Address">ঠিকানা</label>
+            <textarea name="address" data-fs-field rows="3"
+                      data-bn-placeholder="আপনার বর্তমান ঠিকানা লিখুন" data-en-placeholder="Enter your current address"
+                      placeholder="আপনার বর্তমান ঠিকানা লিখুন"></textarea>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__field form__full">
+            <label data-bn="আবেদনের কারণ / মন্তব্য" data-en="Reason / Comments">আবেদনের কারণ / মন্তব্য</label>
+            <textarea name="message" data-fs-field rows="3"
+                      data-bn-placeholder="কেন আপনি সদস্য হতে চান?" data-en-placeholder="Why do you want to join?"
+                      placeholder="কেন আপনি সদস্য হতে চান?"></textarea>
+          </div>
+        </div>
+
+        <div class="form__submit">
+          <button type="submit" class="btn btn--primary" data-fs-submit-btn
+                  data-bn="আবেদন জমা দিন" data-en="Submit Application">আবেদন জমা দিন →</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ NEWSLETTER ============ -->
+  <section class="newsletter">
+    <div class="container newsletter__inner">
+      <div>
+        <h2 data-bn="যুক্ত থাকুন —<br><span>আমরা আপনার কাছে আসব</span>" data-en="Stay Connected —<br><span>We'll come to you</span>">
+          যুক্ত থাকুন —<br><span>আমরা আপনার কাছে আসব</span>
+        </h2>
+        <p data-bn="নতুন কার্যক্রম, সেমিনার, ইভেন্ট ও ঘোষণা সবার আগে পেতে সাবস্ক্রাইব করুন।" data-en="Subscribe to be the first to know about new programs, seminars, events and announcements.">
+          নতুন কার্যক্রম, সেমিনার, ইভেন্ট ও ঘোষণা সবার আগে পেতে সাবস্ক্রাইব করুন।
+        </p>
+      </div>
+      <div>
+        <form id="newsletter-form" action="https://formspree.io/f/xljdwken" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="📬 নতুন নিউজলেটার সাবস্ক্রিপশন — SZSS">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+          <input type="email" name="email" required data-fs-field
+                 data-bn-placeholder="আপনার ইমেইল লিখুন" data-en-placeholder="Enter your email"
+                 placeholder="আপনার ইমেইল লিখুন" aria-label="Email">
+          <button type="submit" data-fs-submit-btn
+                  data-bn="সাবস্ক্রাইব" data-en="Subscribe">সাবস্ক্রাইব</button>
+        </form>
+        <div data-fs-success class="newsletter__msg newsletter__msg--success"></div>
+        <div data-fs-error class="newsletter__msg newsletter__msg--error"></div>
+        <p class="form-note" data-bn="✔ আমরা আপনার তথ্য কারো সাথে শেয়ার করি না।" data-en="✔ We never share your information.">✔ আমরা আপনার তথ্য কারো সাথে শেয়ার করি না।</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</span>
+        <h2 class="section__title" data-bn="আমাদের সাথে যোগাযোগ করুন" data-en="Get in Touch">আমাদের সাথে যোগাযোগ করুন</h2>
+      </div>
+      <div class="contact__grid">
+        <div class="contact__card"><div class="contact__icon">📍</div><h4 data-bn="ঠিকানা" data-en="Address">ঠিকানা</h4><p data-bn="চট্টগ্রাম বিশ্ববিদ্যালয় ক্যাম্পাস" data-en="University of Chittagong Campus">চট্টগ্রাম বিশ্ববিদ্যালয় ক্যাম্পাস</p></div>
+        <div class="contact__card"><div class="contact__icon">📧</div><h4 data-bn="ইমেইল" data-en="Email">ইমেইল</h4><p><a href="mailto:contact@szsscu.org">contact@szsscu.org</a></p></div>
+        <div class="contact__card"><div class="contact__icon">📞</div><h4 data-bn="ফোন" data-en="Phone">ফোন</h4><p><a href="tel:+8801000000000">+৮৮০ ১০০০-০০০০০০</a></p></div>
+        <div class="contact__card"><div class="contact__icon">🌐</div><h4 data-bn="ফেসবুক" data-en="Facebook">ফেসবুক</h4><p><a href="#" rel="noopener noreferrer">facebook.com/szsscu</a></p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img src="logo.png" alt="লোগো" onerror="this.onerror=null;this.src='https://placehold.co/52x52/006a4e/ffffff?text=S';">
+          <div>
+            <h3 data-bn="শহীদ জিয়া স্মৃতি সংসদ" data-en="Shaheed Zia Smriti Sangsad">শহীদ জিয়া স্মৃতি সংসদ</h3>
+            <p data-bn="চট্টগ্রাম বিশ্ববিদ্যালয় শাখা" data-en="University of Chittagong Unit">চট্টগ্রাম বিশ্ববিদ্যালয় শাখা</p>
+          </div>
+        </div>
+        <p data-bn="জাতীয়তাবাদে উদ্বুদ্ধ শিক্ষক, কর্মকর্তা ও কর্মচারীদের ঐক্যবদ্ধ সংগঠন।" data-en="A united organization of nationalist-inspired teachers, officers and employees.">
+          জাতীয়তাবাদে উদ্বুদ্ধ শিক্ষক, কর্মকর্তা ও কর্মচারীদের ঐক্যবদ্ধ সংগঠন।
+        </p>
+        <div class="footer__social">
+          <a href="#" aria-label="Facebook" rel="noopener noreferrer">f</a>
+          <a href="#" aria-label="YouTube" rel="noopener noreferrer">▶</a>
+          <a href="#" aria-label="Twitter" rel="noopener noreferrer">𝕏</a>
+        </div>
+      </div>
+      <div>
+        <h4 data-bn="দ্রুত লিংক" data-en="Quick Links">দ্রুত লিংক</h4>
+        <ul>
+          <li><a href="#about" data-bn="পরিচিতি" data-en="About">পরিচিতি</a></li>
+          <li><a href="#activities" data-bn="কার্যক্রম" data-en="Activities">কার্যক্রম</a></li>
+          <li><a href="#news" data-bn="নিউজ" data-en="News">নিউজ</a></li>
+          <li><a href="#events" data-bn="ইভেন্ট" data-en="Events">ইভেন্ট</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-bn="সংগঠন" data-en="Organization">সংগঠন</h4>
+        <ul>
+          <li><a href="#committee" data-bn="কমিটি" data-en="Committee">কমিটি</a></li>
+          <li><a href="#membership" data-bn="সদস্যপদ" data-en="Membership">সদস্যপদ</a></li>
+          <li><a href="#scholarship" data-bn="বৃত্তি" data-en="Scholarship">বৃত্তি</a></li>
+          <li><a href="#gallery" data-bn="গ্যালারি" data-en="Gallery">গ্যালারি</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</h4>
+        <ul>
+          <li>📧 contact@szsscu.org</li>
+          <li>📞 +৮৮০ ১০০০-০০০০০০</li>
+          <li>📍 চট্টগ্রাম বিশ্ববিদ্যালয়</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© ২০২৬ <a href="#">শহীদ জিয়া স্মৃতি সংসদ</a>, চট্টগ্রাম বিশ্ববিদ্যালয় শাখা। <span data-bn="সর্বস্বত্ব সংরক্ষিত।" data-en="All rights reserved.">সর্বস্বত্ব সংরক্ষিত।</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating + back-to-top -->
+<a href="chuti.html" class="float-btn">📅 <span data-bn="ছুটির তালিকা ২০২৬" data-en="Holiday List 2026">ছুটির তালিকা ২০২৬</span></a>
+<button class="back-top" id="backTop" aria-label="Back to top" type="button">↑</button>
+
+<!-- Entry point -->
+<script type="module" src="js/main.js"></script>
 </body>
 </html>

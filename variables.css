@@ -1,0 +1,45 @@
+/* ============================================================
+   variables.css — Design Tokens
+   সাইটের সব রং, ছায়া, ফন্ট, স্পেসিং এখানে। কোনো রং বদলাতে
+   চাইলে শুধু এই ফাইলে বদলান — পুরো সাইটে প্রভাব পড়বে।
+   ============================================================ */
+:root {
+  /* Brand palette */
+  --green:        #006a4e;
+  --green-dark:   #004d38;
+  --green-light:  #e8f5e9;
+  --green-soft:   #f1f8f3;
+  --red:          #f42a41;
+  --red-dark:     #c81e34;
+  --gold:         #ffd700;
+  --gold-dark:    #e6c200;
+  --navy:         #0a1a2f;
+
+  /* Text & surface */
+  --text:         #1b1b1b;
+  --text-muted:   #5a6570;
+  --white:        #ffffff;
+  --bg:           #f8faf9;
+  --border:       #e2e8e5;
+
+  /* Effects */
+  --shadow-sm:    0 2px 8px rgba(0,0,0,.06);
+  --shadow-md:    0 8px 24px rgba(0,0,0,.10);
+  --shadow-lg:    0 16px 48px rgba(0,0,0,.14);
+  --radius:       12px;
+  --radius-lg:    20px;
+  --transition:   .25s cubic-bezier(.4,0,.2,1);
+
+  /* Fonts */
+  --font-body:    'Hind Siliguri', 'Inter', sans-serif;
+  --font-head:    'Anek Bangla', 'Hind Siliguri', sans-serif;
+
+  /* Layout */
+  --container:    1200px;
+  --header-h:     92px;
+}
+
+/* Mobile header height for scroll-margin */
+@media (max-width: 768px) {
+  :root { --header-h: 76px; }
+}
